@@ -6,9 +6,9 @@ import asyncio
 from tools.screen_utils import gc7_rules as gc7
 
 
-async def main(page: ft.Page):
+async def main(page: ft.Page, width=None):
     # gc7(page, 'LIGHT')
-    gc7(page)
+    gc7(page, width=width)
 
     # from examples.lv00_matrice import main as go
     # go(page)
@@ -76,7 +76,14 @@ async def main(page: ft.Page):
     # reactivTodo(page)
 
     # * [/] chat
-    from examples.lv23_chat import main
+    # from examples.lv23_chat import main
+    # main(page)
+    # ❌ Corr lv24_chat_uuu
+    # from examples.lv24_chat_uuu import main
+    # main(page)
+
+    from examples.lv30_solitaire import main
+    gc7(page, width=950)
     main(page)
 
     # from devs.lv00_dev import dev as dev
