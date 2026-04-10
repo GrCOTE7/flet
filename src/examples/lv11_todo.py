@@ -12,6 +12,7 @@ _DISABLED_COLOR = ft.Colors.GREY_600
 class Task(ft.Column):
 
     task_name: str = ""
+    completed: bool = False
     on_status_change: Callable[[], None] = field(default=lambda: None)
     on_delete: Callable[["Task"], None] = field(default=lambda task: None)
 
@@ -80,7 +81,7 @@ class Task(ft.Column):
         self.update()
 
     def status_changed(self, e):
-        self.completed = self.display_task.value
+        self.completed = bool(self.display_task.value)
         self.on_status_change()
 
     def delete_clicked(self, e):
@@ -172,8 +173,27 @@ class TodoApp(ft.Column):
         )
 
         # self.spacing = 7
-
         self.show_cli_tasks()
+
+        self.items_left = ft.Text("")
+
+        self.app_footer = ft.Row(
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            controls=[
+                self.items_left,
+                ft.OutlinedButton(
+                    content="Clear completed",
+                    on_click=self.clear_completed,
+                    style=ft.ButtonStyle(
+                        bgcolor=ft.Colors.BLACK,
+                        side=ft.BorderSide(1, _DISABLED_COLOR),
+                        shape=ft.RoundedRectangleBorder(radius=8),
+                        mouse_cursor=ft.MouseCursor.CLICK,
+                    )
+                ),
+            ],
+        )
 
         self.controls = [
             self.title_bar,
@@ -187,6 +207,7 @@ class TodoApp(ft.Column):
                     self.tasks,
                 ],
             ),
+            self.app_footer,
         ]
 
     async def add_clicked(self, e):
@@ -233,15 +254,21 @@ class TodoApp(ft.Column):
         self.show_cli_tasks()
         self.update()
 
+    def get_tasks(self) -> list[Task]:
+        return [task for task in self.tasks.controls if isinstance(task, Task)]
+
     def before_update(self):
+        active_count = sum(1 for t in self.get_tasks() if not t.completed)
+        self.items_left.value = f"{active_count} item{'s' if active_count > 1 else ''} left"
+
         # active_tab = self.filter.tabs[self.filter_tabs.selected_index]
         # status = getattr(active_tab, "label", "All") # OU
         status = self.filter.tabs[self.filter_tabs.selected_index].label  # type: ignore
-        for task in self.tasks.controls:
+        for task in self.get_tasks():
             task.visible = (
                 status == "All"
-                or (status == "Active" and not task.completed)  # type: ignore
-                or (status == "Completed" and task.completed)  # type: ignore
+                or (status == "Active" and not task.completed)
+                or (status == "Completed" and task.completed)
             )
             # if 'première' in str(getattr(task, "task_name", "")): task.visible=False
             # if isinstance(task, Task) and "première" in task.task_name: task.visible=False # La + PRO
@@ -252,9 +279,15 @@ class TodoApp(ft.Column):
         self.update()
 
     def show_cli_tasks(self):
-        print(f"\n📋 Toutes les Tâches ({len(self.tasks.controls)}):")
-        for i, task in enumerate(self.tasks.controls, 1):
-            print(f"   {i}. {getattr(task, 'task_name', '?')}")
+        tasks = self.get_tasks()
+        print(f"\n📋 Toutes les Tâches ({len(tasks)}):")
+        for i, task in enumerate(tasks, 1):
+            print(f"   {i}. {task.task_name}")
+
+    def clear_completed(self):
+        self.tasks.controls = [task for task in self.get_tasks() if not task.completed]
+        self.show_cli_tasks()
+        self.update()
 
 
 def main(page: ft.Page):
@@ -263,8 +296,8 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     page.title = "To-Do App #11 (+ Footer)"
-    todo = TodoApp(app_title=page.title)
     print("\npage.title:", page.title)
+    todo = TodoApp(app_title=page.title)
     page.update()
     page.add(todo)
 
@@ -278,21 +311,6 @@ def main(page: ft.Page):
         page.update()
 
     simu_saisie()
-
-
-@ft.component
-def Footer(active_tasks_number: int, clear_completed):
-    return ft.Row(
-        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-        vertical_alignment=ft.CrossAxisAlignment.CENTER,
-        controls=[
-            ft.Text(f"{active_tasks_number} items left"),
-            ft.OutlinedButton(
-                content="Clear completed",
-                on_click=clear_completed,
-            ),
-        ],
-    )
 
 
 if __name__ == "__main__":
