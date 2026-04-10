@@ -5,10 +5,11 @@ import datetime, time
 import asyncio
 from tools.screen_utils import gc7_rules as gc7
 
+
 async def main(page: ft.Page):
     # gc7(page, 'LIGHT')
     gc7(page)
-    
+
     # from examples.lv00_matrice import main as go
     # go(page)
 
@@ -64,7 +65,7 @@ async def main(page: ft.Page):
 
     # page.add(ft.Text('─'*49))
 
-    # ❌ Cf last todo in GH with footer
+    # * [ ] Cf last todo in GH with footer
     # from examples.lv10_todo import todo as finalTodo
     # finalTodo(page)
 
@@ -73,13 +74,13 @@ async def main(page: ft.Page):
     # ❌ V 12 à comprendre pour incorporer ici et cf autres (11 ?)
     # from examples.lv12_todo_reactive import todo as reactivTodo
     # reactivTodo(page)
-    
-    # * [/] chat
-    # from examples.lv23_chat import main
-    # main(page)
 
-    from devs.lv00_dev import dev as dev
-    dev(page)
+    # * [/] chat
+    from examples.lv23_chat import main
+    main(page)
+
+    # from devs.lv00_dev import dev as dev
+    # dev(page)
 
     if not page.controls:
         page.add(
