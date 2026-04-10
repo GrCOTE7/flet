@@ -1,3 +1,5 @@
+from enum import auto
+
 import flet as ft
 from dataclasses import dataclass
 import asyncio, random, time
@@ -72,22 +74,12 @@ def main(page: ft.Page):
     )
     new_message.expand = True
 
-    # def on_message(message: Message):
-    #     if message.msg_type == "chat_message":
-    #         # chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
-    #         m = ChatMessage(message)
-    #     elif message.msg_type == "login_message":
-    #         m = ft.Text(message.text, italic=True, color=ft.Colors.WHITE_54, size=14)
-    #     chat.controls.append(m)
-    #     page.update()
-
     def on_message(message: Message):
         if message.msg_type == "chat_message":
-            chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
+            m = ChatMessage(message)
         elif message.msg_type == "login_message":
-            chat.controls.append(
-                ft.Text(message.text, italic=True, color=ft.Colors.WHITE_54, size=14)
-            )
+            m = ft.Text(message.text, italic=True, color=ft.Colors.WHITE_54, size=14)
+        chat.controls.append(m)
         page.update()
 
     page.pubsub.subscribe(on_message)  # Broadcasting
@@ -151,9 +143,58 @@ def main(page: ft.Page):
 
     async def simuMsgs():
 
-        users = ["Alice", "Bob", "Charlie", "Diana"]
+        users = [
+            "1Alice",
+            "1Bob",
+            "1Charlie",
+            "1Diana",
+            
+            "2Alice",
+            "2Bob",
+            "2Charlie",
+            "2Diana",
+            
+            "3Alice",
+            "3Bob",
+            "3Charlie",
+            "3Diana",
+            
+            "4Alice",
+            "4Bob",
+            "4Charlie",
+            "4Diana",
+            
+            "5Alice",
+            "5Bob",
+            "5Charlie",
+            "5Diana",
+        ]
         messages = [
             "Hello everyone!",
+            "How's it going?",
+            "Anyone up for a game?",
+            "What's the plan for today?",
+            "Did you see the news?",
+            
+            "2 Hello everyone!",
+            "How's it going?",
+            "Anyone up for a game?",
+            "What's the plan for today?",
+            "Did you see the news?",
+            
+            "3 Hello everyone!",
+            "How's it going?",
+            "Anyone up for a game?",
+            "What's the plan for today?",
+            "Did you see the news?",
+            
+            "4 Hello everyone!",
+            "How's it going?",
+            "Anyone up for a game?",
+            "What's the plan for today?",
+            "Did you see the news?",
+            
+            "5 Hello everyone!",
             "How's it going?",
             "Anyone up for a game?",
             "What's the plan for today?",
@@ -164,7 +205,7 @@ def main(page: ft.Page):
         selected_messages = random.sample(messages, k=len(users))
 
         for user, text in zip(users, selected_messages):
-            await asyncio.sleep(random.randint(2, 5))
+            await asyncio.sleep(random.randint(1, 2))
             page.pubsub.send_all(
                 Message(
                     user=user,
@@ -183,8 +224,8 @@ def main(page: ft.Page):
         title,
         chat,
         ft.Container(
-            margin=ft.margin.only(top=5, bottom=5),
-            padding=ft.padding.only(top=6),
+            margin=ft.Margin.only(top=5, bottom=5),
+            padding=ft.Padding.only(top=6),
             content=ft.Row(
                 [
                     new_message,
