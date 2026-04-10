@@ -8,7 +8,6 @@ logging.basicConfig(level=logging.INFO)
 
 TaskID = ft.IdCounter()
 
-# ❌ Compréhension: Revenir sur cette version
 
 @ft.observable
 @dataclass
@@ -212,5 +211,6 @@ def Footer(active_tasks_number: int, clear_completed):
         ],
     )
 
+if __name__ == "__main__":
 
-ft.run(lambda page: page.render_views(TodoAppView))
+    ft.run(lambda page: page.render_views(TodoAppView))

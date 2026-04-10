@@ -6,7 +6,7 @@ import asyncio
 from tools.screen_utils import gc7_rules as gc7
 
 
-async def main(page: ft.Page, width=None):
+async def main(page: ft.Page, width: int = 392):
     # gc7(page, 'LIGHT')
     gc7(page, width=width)
 
@@ -67,11 +67,15 @@ async def main(page: ft.Page, width=None):
 
     # * [ ] Cf last todo in GH with footer
     # from examples.lv10_todo import todo as finalTodo
+    # # gc7(page, width=950)
     # finalTodo(page)
+    
+    from examples.lv11_todo import main as finalTodo
+    finalTodo(page)
 
     # ❌ Cf autres dans GH
 
-    # ❌ V 12 à comprendre pour incorporer ici et cf autres (11 ?)
+    # ❌ V 12 à comprendre pour incorporer ici et cf autres (11 ?) CONTAIN FOOTER
     # from examples.lv12_todo_reactive import todo as reactivTodo
     # reactivTodo(page)
 
@@ -83,9 +87,9 @@ async def main(page: ft.Page, width=None):
     # main(page)
 
     # from examples.lv30_stack_examples import main
-    from examples.lv30_solitaire import main
-    gc7(page, width=950)
-    main(page)
+    # * [ ] from examples.lv30_solitaire import main
+    # gc7(page, width=950)
+    # main(page)
 
     # from devs.lv00_dev import dev as dev
     # dev(page)
