@@ -82,6 +82,7 @@ async def main(page: ft.Page, width=None):
     # from examples.lv24_chat_uuu import main
     # main(page)
 
+    # from examples.lv30_stack_examples import main
     from examples.lv30_solitaire import main
     gc7(page, width=950)
     main(page)
