@@ -189,7 +189,7 @@ def Header():
     return ft.Row(
         [
             ft.Text(
-                value="Todos # 12 (Reactive)",
+                value="Todos",
                 theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
             )
         ],

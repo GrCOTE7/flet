@@ -67,16 +67,20 @@ async def main(page: ft.Page, width: int = 392):
 
     # * [ ] Cf last todo in GH with footer
     # from examples.lv10_todo import todo as finalTodo
-    # # gc7(page, width=950)
+    # gc7(page, width=950)
     # finalTodo(page)
-    
-    from examples.lv11_todo import main as finalTodo
+
+    from examples.lv11_todo import main as finalTodo # + Footer
+    finalTodo(page)
+
+    from examples.lv11_todo_official import main as finalTodo
     finalTodo(page)
 
     # ❌ Cf autres dans GH
 
     # ❌ V 12 à comprendre pour incorporer ici et cf autres (11 ?) CONTAIN FOOTER
-    # from examples.lv12_todo_reactive import todo as reactivTodo
+    # ⚠️  render_views prend le contrôle total de la page → ne pas mélanger avec page.add()
+    from examples.lv12_todo_reactive import main as reactivTodo
     # reactivTodo(page)
 
     # * [/] chat
@@ -110,6 +114,7 @@ async def main(page: ft.Page, width: int = 392):
             )
         )
 
+    return  # render_views incompatible avec page.controls / page.add() ci-dessous
 
 if __name__ == "__main__":
     print(datetime.datetime.now().strftime("%H:%M:%S"), "> ")
