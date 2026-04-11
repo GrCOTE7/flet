@@ -9,28 +9,59 @@ class Message:
 
 
 def main(page: ft.Page):
-    page.bgcolor = "#333333"
+    page.bgcolor = "#202020"
 
     chat = ft.Column()
-    new_message = ft.TextField()
+
+    new_message = ft.TextField(
+        value="Salut !",
+        border_color="#999999",
+        focused_border_color="#aaaaaa",
+        color=ft.Colors.GREY_300,
+    )
 
     def on_message(message: Message):
         chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
         page.update()
 
-    page.pubsub.subscribe(on_message)  # Broadcasting
+    page.pubsub.subscribe(on_message)
 
     def send_click(e):
         page.pubsub.send_all(
             Message(user=str(page.session.index), text=new_message.value)
         )
-        print(new_message.value)
         new_message.value = ""
+        page.update()
+
+    # --- Le container DOIT être créé AVANT on_resize ---
+    container = ft.Container(
+        width=page.window.width * 0.85,
+        # alignment=ft.alignment.center,
+        content=ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                new_message,
+                ft.Button(
+                    "Send",
+                    on_click=send_click,
+                    bgcolor="#cccccc",
+                    color=ft.Colors.GREY_900,
+                ),
+            ],
+        ),
+    )
+
+    # --- Resize dynamique ---
+    def on_resize(e):
+        container.width = page.window.width * 0.85
+        page.update()
+
+    page.on_resize = on_resize
 
     page.add(
-        ft.Text(value="Chat Ready.", size=18),
+        ft.Text(value="Chat #21 Ready.", size=18),
         chat,
-        ft.Row(controls=[new_message, ft.Button("Send", on_click=send_click)]),
+        container,  # ← maintenant la variable existe
     )
 
 

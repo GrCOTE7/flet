@@ -215,7 +215,6 @@ def Footer(active_tasks_number: int, clear_completed):
 def main(page: ft.Page):
     page.render_views(TodoAppView)
 
-
 if __name__ == "__main__":
 
     ft.run(main)

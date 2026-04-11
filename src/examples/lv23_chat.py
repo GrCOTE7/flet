@@ -99,7 +99,7 @@ def main(page: ft.Page):
     #     bgcolor="#111111", color=ft.Colors.WHITE, border_color="#777777"
     # )
     # new_message.expand = True
-    
+
     async def send_message_click(e):
         if new_message.value != "":
             page.pubsub.send_all(
