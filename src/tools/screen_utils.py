@@ -107,12 +107,11 @@ def make_zoomable_view(
     return controller.view
 
 
-def gc7_rules(
-    page: ft.Page, mode: str = "DARK", name: str = "Ready", width: int = 392
-):
+def gc7_rules(page: ft.Page, mode: str = "DARK", name: str = "Ready", width: int = 392):
     configure_window(page, width=width)
     page.theme_mode = ft.ThemeMode.LIGHT if mode == "LIGHT" else ft.ThemeMode.DARK
     page.title = f"GC7 - {name}"
+    page.bgcolor = "#252525"
 
     if page.platform is not None and page.platform.is_mobile():
         # Respecte la safe area : status bar, encoche, barre de navigation système

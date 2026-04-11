@@ -165,7 +165,7 @@ def main(page: ft.Page):
     page.overlay.append(welcome_dlg)
 
     # Simule le clic sur "Join chat" avec le champ deja rempli.
-    # join_chat_click(None)
+    # join_chat_click(None) # ❌ retrouver exemple de fonction pour auto login
 
     # Chat messages
     chat = ft.ListView(

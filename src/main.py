@@ -7,7 +7,7 @@ from tools.screen_utils import gc7_rules as gc7
 
 
 async def main(page: ft.Page, width: int = 392):
-    # gc7(page, width=width)
+    gc7(page, width=width)
     # gc7(page, mode="LIGHT", width=width)
 
     # from examples.lv00_matrice import main as go
@@ -65,7 +65,6 @@ async def main(page: ft.Page, width: int = 392):
 
     # page.add(ft.Text('─'*49))
 
-    # * [ ] Cf last todo in GH with footer
     # from examples.lv10_todo import todo as finalTodo
     # gc7(page, width=950)
     # finalTodo(page)
@@ -77,30 +76,31 @@ async def main(page: ft.Page, width: int = 392):
     # gc7(page, "LIGHT", width=600)
     # finalTodo(page)
 
-    # ❌ faire P.R. pour footer
-
-    # ❌ LV 12 à comprendre pour incorporer ici
+    # * [ ] LV 12 à comprendre pour incorporer ici
     # ⚠️  render_views prend le contrôle total de la page → ne pas mélanger avec page.add()
     # from examples.lv12_todo_reactive import main as reactivTodo
     # reactivTodo(page)
     # return  # render_views incompatible avec page.controls / page.add() ci-dessous
 
     # * [/] chat
+    # ❌  retrouver auto login + user name + msgs
     # from examples.lv20_chat import main  # Base
     # main(page)
+
     # from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
     # main(page)
-    # [/] 2verif from examples.lv22_chat import main  # Login
+    
+    # from examples.lv22_chat import main  # Login
     # main(page)
-    # from examples.lv23_chat import main  # ↑ User look
-    # main(page)
+    
+    from examples.lv23_chat import main  # ↑ User look ( + SIMU msgq & login) //2fix
+    main(page)
+
     # ❌ Corr lv24_chat_uuu et finir tuto
     # from examples.lv24_chat_uuu import main
     # main(page)
 
-    gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
-    page.bgcolor='#333333'
-
+    # gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
     # from examples.lv30_aastack_example_1 import main
     # from examples.lv30_aastack_example_2 import main  # 3 cards (Bleu-blanc-rouge)
     # from examples.lv30_aastack_example_3 import main  # A card on a tapis
@@ -108,11 +108,10 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv30_solitaire import main # GestureDetector
     # from examples.lv31_solitaire import main # drag a card
     # from examples.lv32_solitaire import main  # drag a card on a slot
-
-    from examples.lv33_solitaire import main  # drag a card on a slot else return back position
-
-    main(page)
-
+    #
+    # from examples.lv33_solitaire import main  # drag a card on a slot else return back position
+    # main(page)
+    #
     # from devs.lv00_dev import dev as dev
     # dev(page)
 
