@@ -175,6 +175,7 @@ class TodoApp(ft.Column):
         # self.spacing = 7
         self.show_cli_tasks()
 
+        self.width = 600
         self.items_left = ft.Text("")
 
         self.app_footer = ft.Row(
@@ -292,7 +293,7 @@ class TodoApp(ft.Column):
 
 def main(page: ft.Page):
 
-    page.bgcolor = "#202020"
+    # page.bgcolor = "#202020"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     page.title = "To-Do App #11 (+ Footer)"

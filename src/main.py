@@ -70,10 +70,13 @@ async def main(page: ft.Page, width: int = 392):
     # gc7(page, width=950)
     # finalTodo(page)
 
-    from examples.lv11_todo import main as finalTodo # + Footer
-    finalTodo(page)
+    from examples.lv11_todo import main as finalTodo  # + Footer
+    # finalTodo(page)
 
     from examples.lv11_todo_official import main as finalTodo
+    # gc7(page, "LIGHT", width=600)
+    # gc7(page, "LIGHT")
+
     finalTodo(page)
 
     # ❌ Cf autres dans GH
@@ -81,6 +84,7 @@ async def main(page: ft.Page, width: int = 392):
     # ❌ V 12 à comprendre pour incorporer ici et cf autres (11 ?) CONTAIN FOOTER
     # ⚠️  render_views prend le contrôle total de la page → ne pas mélanger avec page.add()
     from examples.lv12_todo_reactive import main as reactivTodo
+
     # reactivTodo(page)
 
     # * [/] chat
@@ -115,6 +119,7 @@ async def main(page: ft.Page, width: int = 392):
         )
 
     return  # render_views incompatible avec page.controls / page.add() ci-dessous
+
 
 if __name__ == "__main__":
     print(datetime.datetime.now().strftime("%H:%M:%S"), "> ")
