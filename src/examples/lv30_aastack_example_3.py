@@ -19,7 +19,11 @@ def main(page: ft.Page):
         content=ft.Container(bgcolor=ft.Colors.GREEN, width=70, height=100),
     )
 
-    page.add(ft.Stack(controls=[card], width=1000, height=500))
+    cards = ft.Stack(controls=[card], width=1000, height=500)
+
+    tapis = ft.Container(bgcolor="#133300", width=1000, height=500, content=cards)
+
+    page.add(tapis)
 
 
 if __name__ == "__main__":

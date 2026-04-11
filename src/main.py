@@ -101,9 +101,12 @@ async def main(page: ft.Page, width: int = 392):
     gc7(page, width=976)  # 976 pour // 2 l'écran de droite
     # from examples.lv30_aastack_example_1 import main
     # from examples.lv30_aastack_example_2 import main  # 3 cards (Bleu-blanc-rouge)
+    # from examples.lv30_aastack_example_3 import main  # A card on a tapis
+    
     # from examples.lv30_solitaire import main # GestureDetector
-
-    from examples.lv31_solitaire import main # drag
+    # from examples.lv31_solitaire import main # drag a card
+    
+    from examples.lv32_solitaire import main # drag a card on a slot
 
     main(page)
 
