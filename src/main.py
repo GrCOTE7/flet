@@ -7,8 +7,8 @@ from tools.screen_utils import gc7_rules as gc7
 
 
 async def main(page: ft.Page, width: int = 392):
-    # gc7(page, 'LIGHT')
-    gc7(page, width=width)
+    # gc7(page, width=width)
+    # gc7(page, mode="LIGHT", width=width)
 
     # from examples.lv00_matrice import main as go
     # go(page)
@@ -98,15 +98,18 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv24_chat_uuu import main
     # main(page)
 
-    gc7(page, width=976)  # 976 pour // 2 l'écran de droite
+    gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
+    page.bgcolor='#333333'
+
     # from examples.lv30_aastack_example_1 import main
     # from examples.lv30_aastack_example_2 import main  # 3 cards (Bleu-blanc-rouge)
     # from examples.lv30_aastack_example_3 import main  # A card on a tapis
-    
+
     # from examples.lv30_solitaire import main # GestureDetector
     # from examples.lv31_solitaire import main # drag a card
-    
-    from examples.lv32_solitaire import main # drag a card on a slot
+    # from examples.lv32_solitaire import main  # drag a card on a slot
+
+    from examples.lv33_solitaire import main  # drag a card on a slot else return back position
 
     main(page)
 
