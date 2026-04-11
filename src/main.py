@@ -88,21 +88,24 @@ async def main(page: ft.Page, width: int = 392):
     # * [/] chat
     # from examples.lv20_chat import main  # Base
     # main(page)
-    from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
-    main(page)
-    # from examples.lv22_chat import main  # Login
+    # from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
+    # main(page)
+    # [/] 2verif from examples.lv22_chat import main  # Login
     # main(page)
     # from examples.lv23_chat import main  # ↑ User look
     # main(page)
-
     # ❌ Corr lv24_chat_uuu et finir tuto
     # from examples.lv24_chat_uuu import main
     # main(page)
 
-    # from examples.lv30_stack_examples import main
-    # * [/] from examples.lv30_solitaire import main
-    # gc7(page, width=950)
-    # main(page)
+    gc7(page, width=976)  # 976 pour // 2 l'écran de droite
+    # from examples.lv30_aastack_example_1 import main
+    # from examples.lv30_aastack_example_2 import main  # 3 cards (Bleu-blanc-rouge)
+    # from examples.lv30_solitaire import main # GestureDetector
+
+    from examples.lv31_solitaire import main # drag
+
+    main(page)
 
     # from devs.lv00_dev import dev as dev
     # dev(page)
