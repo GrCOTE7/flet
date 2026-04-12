@@ -3,9 +3,10 @@ import flet as ft
 
 def main(page: ft.Page):
     page.bgcolor = "#333333"
+    page.title = "Flet Chat #20"
 
     chat = ft.Column()
-    new_message = ft.TextField(value="Salut !")
+    new_message = ft.TextField(value="Salut !", expand=True)
 
     def send_click(e):
         chat.controls.append(ft.Text(new_message.value))

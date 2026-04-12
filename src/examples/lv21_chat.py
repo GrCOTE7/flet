@@ -10,6 +10,7 @@ class Message:
 
 def main(page: ft.Page):
     page.bgcolor = "#202020"
+    page.title = "Flet Chat #21"
 
     chat = ft.Column()
 
@@ -18,6 +19,7 @@ def main(page: ft.Page):
         border_color="#999999",
         focused_border_color="#aaaaaa",
         color=ft.Colors.GREY_300,
+        expand=True,
     )
 
     def on_message(message: Message):
@@ -35,8 +37,6 @@ def main(page: ft.Page):
 
     # --- Le container DOIT être créé AVANT on_resize ---
     container = ft.Container(
-        width=page.window.width * 0.85,
-        # alignment=ft.alignment.center,
         content=ft.Row(
             alignment=ft.MainAxisAlignment.CENTER,
             controls=[
@@ -50,13 +50,6 @@ def main(page: ft.Page):
             ],
         ),
     )
-
-    # --- Resize dynamique ---
-    def on_resize(e):
-        container.width = page.window.width * 0.85
-        page.update()
-
-    page.on_resize = on_resize
 
     page.add(
         ft.Text(value="Chat #21 Ready.", size=18),

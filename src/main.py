@@ -33,6 +33,8 @@ async def main(page: ft.Page, width: int = 392):
     # from devs.lv05_nbre_x import game as game
     # game(page)
 
+    ################################### TODO ###################################
+
     # from examples.lv06_todo_simple import todo_list as todo6
     # todo6(page)
 
@@ -82,23 +84,23 @@ async def main(page: ft.Page, width: int = 392):
     # reactivTodo(page)
     # return  # render_views incompatible avec page.controls / page.add() ci-dessous
 
-    # * [/] chat
-    # ❌  retrouver auto login + user name + msgs
-    # from examples.lv20_chat import main  # Base
-    # main(page)
+    ################################### CHAT ###################################
 
+    # * [/] chat
+
+    # from examples.lv20_chat import main  # Base
     # from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
-    # main(page)
-    
-    # from examples.lv22_chat import main  # Login
-    # main(page)
-    
-    from examples.lv23_chat import main  # ↑ User look ( + SIMU msgq & login) //2fix
+    # from examples.lv22_chat import main  # Login ( + auto login )
+
+    from examples.lv23_chat import main  # Class + ↑ User msg look
+
+    # from examples.lv24_chat import main
+    # from examples.lv25_chat import main  # * [ ] SIMU login & msgs pour voir scrolling
+
+    # gc7(page, "LIGHT")
     main(page)
 
-    # ❌ Corr lv24_chat_uuu et finir tuto
-    # from examples.lv24_chat_uuu import main
-    # main(page)
+    ################################ SOLITAIRE  ################################
 
     # gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
     # from examples.lv30_aastack_example_1 import main

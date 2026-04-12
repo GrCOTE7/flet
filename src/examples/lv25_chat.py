@@ -1,9 +1,6 @@
+import flet as ft
 from dataclasses import dataclass
 
-import flet as ft
-
-# ❌  ERROR ? → P.R. !
-# ❌ corriger 23
 
 @dataclass
 class Message:  # noqa: B903
@@ -61,7 +58,7 @@ class ChatMessage(ft.Row):
 
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.STRETCH
-    page.title = "Flet Chat"
+    page.title = "Flet Chat #24"
 
     def join_chat_click(e):
         if not join_user_name.value:
@@ -157,3 +154,7 @@ def main(page: ft.Page):
             ]
         ),
     )
+
+
+if __name__ == "__main__":
+    ft.run(main)
