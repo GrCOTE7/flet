@@ -91,10 +91,10 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv20_chat import main  # Base
     # from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
     # from examples.lv22_chat import main  # Login ( + auto login )
-    from examples.lv23_chat import main  # Class + ↑ User msg look
-    # from examples.lv24_chat import main  # * [ ] SIMU login & msgs pour voir scrolling
+    # from examples.lv23_chat import main  # Class + ↑ User msg look
+    from examples.lv24_chat import main  # * [ ] SIMU login & msgs Scrolling auto
 
-    # gc7(page, "LIGHT")
+    gc7(page, "LIGHT")
     main(page)
 
     ################################ SOLITAIRE  ################################

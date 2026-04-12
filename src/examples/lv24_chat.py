@@ -1,8 +1,15 @@
+import asyncio
 import flet as ft
 from dataclasses import dataclass
 
+try:
+    from examples.lv24_simus import simulate_chat
+except ImportError:
+    from lv24_simus import simulate_chat
+
 # ❌  Simu login
 # ❌  Simu msgs avec lv24_simus.py
+
 
 @dataclass
 class Message:  # noqa: B903
@@ -59,6 +66,11 @@ class ChatMessage(ft.Row):
 
 
 def main(page: ft.Page):
+    AUTO_LOGIN = True
+    # AUTO_LOGIN = False
+    SIMULATE_USERS = True
+    # SIMULATE_USERS = False
+
     page.horizontal_alignment = ft.CrossAxisAlignment.STRETCH
     page.title = "Flet Chat #24"
 
@@ -88,7 +100,20 @@ def main(page: ft.Page):
                 )
             )
             new_message.value = ""
+            page.update()
             await new_message.focus()
+            page.run_task(scroll_to_end)
+
+    async def scroll_to_end():
+        # Retry with small delays to survive focus/layout races on the last message.
+        for delay in (0, 0.03, 0.08):
+            await asyncio.sleep(delay)
+            await chat.scroll_to(offset=-1, duration=80)
+
+    def append_chat_control(control: ft.Control):
+        chat.controls.append(control)
+        page.update()
+        page.run_task(scroll_to_end)
 
     def on_message(message: Message):
         if message.message_type == "chat_message":
@@ -100,14 +125,26 @@ def main(page: ft.Page):
                 color=ft.Colors.ON_SURFACE_VARIANT,
                 size=12,
             )
-        chat.controls.append(m)
-        page.update()
+        append_chat_control(m)
+
+    def publish_simulated_message(user_name: str, text: str, message_type: str):
+        page.pubsub.send_all(
+            Message(
+                user_name=user_name,
+                text=text,
+                message_type=message_type,
+            )
+        )
+
+    async def run_simulations():
+        await simulate_chat(publish_simulated_message)
 
     page.pubsub.subscribe(on_message)
 
     # A dialog asking for a user display name
     join_user_name = ft.TextField(
         label="Enter your name to join the chat",
+        value="Lionel" if AUTO_LOGIN else "",
         autofocus=True,
         on_submit=join_chat_click,
     )
@@ -124,10 +161,10 @@ def main(page: ft.Page):
     page.overlay.append(welcome_dlg)
 
     # Chat messages
-    chat = ft.ListView(
+    chat = ft.Column(
         expand=True,
         spacing=10,
-        auto_scroll=True,
+        scroll=ft.ScrollMode.AUTO,
     )
 
     # A new message entry form
@@ -162,6 +199,12 @@ def main(page: ft.Page):
             ]
         ),
     )
+
+    if AUTO_LOGIN and (join_user_name.value or "").strip():
+        join_chat_click(None)
+
+    if SIMULATE_USERS:
+        page.run_task(run_simulations)
 
 
 if __name__ == "__main__":
