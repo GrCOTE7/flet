@@ -48,6 +48,7 @@ def main(page: ft.Page):
     card = ft.GestureDetector(
         mouse_cursor=ft.MouseCursor.MOVE,
         drag_interval=5,
+        on_pan_start=start_drag,
         on_pan_update=drag,
         on_pan_end=drop,
         left=0,
