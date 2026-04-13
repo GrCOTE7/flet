@@ -3,6 +3,8 @@ from re import A
 import flet as ft
 import datetime, time
 import asyncio
+import importlib.util
+from pathlib import Path
 from tools.screen_utils import gc7_rules as gc7
 
 
@@ -33,7 +35,7 @@ async def main(page: ft.Page, width: int = 392):
     # from devs.lv05_nbre_x import game as game
     # game(page)
 
-    ################################### TODO ###################################
+    ################################### ToDo ###################################
 
     # from examples.lv06_todo_simple import todo_list as todo6
     # todo6(page)
@@ -99,22 +101,32 @@ async def main(page: ft.Page, width: int = 392):
 
     ################################ SOLITAIRE  ################################
 
-    # from examples.lv30_aa1_stack import main # 3 image blocs
-    # from examples.lv30_aa2_stack import main  # 3 cards (Bleu-blanc-rouge)
-    # from examples.lv30_aa3_stack import main  # A card on a tapis
+    # from examples.lv30_a1_stack import main  # 3 image blocs
+    # from examples.lv30_a2_stack import main  # 3 cards (Bleu-blanc-rouge)
+    # from examples.lv30_a3_stack import main  # A card on a tapis
 
     # gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
 
-    # from examples.lv30_solitaire import main # GestureDetector (on_tap)
-    # from examples.lv31_solitaire import main # drag a card
-    # from examples.lv32_solitaire import main # drag to slot
-    # from examples.lv33_solitaire import main # drag a card on a slot else return back position
-    from examples.lv34_solitaire import main  #
+    # from examples.lv30_solitaire import main  # GestureDetector (on_tap)
+    # from examples.lv31_solitaire import main  # drag a card
+    # from examples.lv32_solitaire import main  # drag to slot
+    # from examples.lv33_solitaire import main  # drag a card on a slot else return back position
+
+    # drag 2 cards with pans
+    # from examples.lv34_solitaire import main
+    
+    # drop in 3 slots
+    # from examples.lv35_solitaire import main
+    
+    # Fanned cards piles (Piles en éventail)
+    from examples.lv36_solitaire import main
 
     # gc7(page, width=976)
     # gc7(page, "LIGHT", width=976)
 
     main(page)
+
+    # ❌  Le seul qui corrige le pb de double clic → Le comprendre complètement à la fin - D:\flet_doc\sdk\python\examples\tutorials\solitaire_declarative\solitaire-final\main.py
 
     # from devs.lv00_dev import dev as dev
     # dev(page)

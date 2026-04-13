@@ -41,10 +41,15 @@ def main(page: ft.Page):
         e.control.update()
 
     def drop(e: ft.DragEndEvent):
-        if abs(e.control.top - slot.top) < 50 and abs(e.control.left - slot.left) < 35:
-            place(e.control, slot)
-        else:
-            bounce_back(solitaire, e.control)
+        for slot in slots:
+            if (
+                abs(e.control.top - slot.top) < 50
+                and abs(e.control.left - slot.left) < 35
+            ):
+                place(e.control, slot)
+                e.control.update()
+                return
+        bounce_back(solitaire, e.control)
         e.control.update()
 
     card1 = ft.GestureDetector(
@@ -79,18 +84,39 @@ def main(page: ft.Page):
         ),
     )
 
-    slot = ft.Container(
+    slot0 = ft.Container(
         border_radius=ft.BorderRadius.all(4),
         width=70,
         height=100,
-        left=250,
+        left=0,
+        top=0,
+        border=ft.Border.all(1),
+    )
+    slot1 = ft.Container(
+        border_radius=ft.BorderRadius.all(4),
+        width=70,
+        height=100,
+        left=190,
+        top=0,
+        border=ft.Border.all(1),
+    )
+    slot2 = ft.Container(
+        border_radius=ft.BorderRadius.all(4),
+        width=70,
+        height=100,
+        left=280,
         top=0,
         border=ft.Border.all(1),
     )
 
+    # Deal cards
+    place(card2, slot0)
+    place(card1, slot0)
+
     solitaire = Solitaire()
 
-    controls = [slot, card1, card2]
+    slots = [slot0, slot1, slot2]
+    controls = [*slots, card1, card2]
     page.add(ft.Stack(controls=controls, width=976, height=500))
 
 
