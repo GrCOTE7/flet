@@ -122,7 +122,10 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv36_main import main
 
     # Fanned cards piles (Piles en éventail)
-    from examples.lv37_main import main
+    # from examples.lv37_main import main
+    
+    # Solitaire setup
+    from examples.lv38_main import main
 
     # gc7(page, width=976)
     # gc7(page, "LIGHT", width=976)
