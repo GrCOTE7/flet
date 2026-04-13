@@ -1,124 +1,41 @@
 import flet as ft
+from examples.lv36_slot import Slot
+from examples.lv36_card import Card
+
+SOLITAIRE_WIDTH = 976
+SOLITAIRE_HEIGHT = 500
 
 
-class Solitaire:
+class Solitaire(ft.Stack):
+
     def __init__(self):
-        self.start_top = 0
-        self.start_left = 0
+        super().__init__()
 
+        self.controls = [ft.Container(expand=True, bgcolor=ft.Colors.TRANSPARENT)]
+        self.slots = []
+        self.cards = []
+        self.width = SOLITAIRE_WIDTH
+        self.height = SOLITAIRE_HEIGHT
 
-def main(page: ft.Page):
+    def did_mount(self):
+        self.create_card_deck()
+        self.create_slots()
+        self.deal_cards()
 
-    page.title = "More cards | Solitaire #34"
+    def create_card_deck(self):
+        card1 = Card(self, color="GREEN")
+        card2 = Card(self, color="YELLOW")
+        self.cards = [card1, card2]
 
-    def place(card, slot):
-        """place card to the slot"""
-        card.top = slot.top
-        card.left = slot.left
-        print("Placed!")
+    def create_slots(self):
+        self.slots.append(Slot(top=0, left=0))
+        self.slots.append(Slot(top=0, left=190))
+        self.slots.append(Slot(top=0, left=280))
+        self.controls.extend(self.slots)
+        self.update()
 
-    def bounce_back(game, card):
-        card.top = game.start_top
-        card.left = game.start_left
-        print("← Bounce back!")
-        page.update()
-
-    def move_on_top(card, controls):
-        """Moves draggable card to the top of the stack"""
-        controls.remove(card)
-        controls.append(card)
-        page.update()
-
-    def start_drag(e: ft.DragStartEvent):
-        move_on_top(e.control, controls)
-        solitaire.start_top = e.control.top
-        solitaire.start_left = e.control.left
-        e.control.update()
-
-    def drag(e: ft.DragUpdateEvent):
-        e.control.top = max(0, e.control.top + e.local_delta.y)
-        e.control.left = max(0, e.control.left + e.local_delta.x)
-        e.control.update()
-
-    def drop(e: ft.DragEndEvent):
-        for slot in slots:
-            if (
-                abs(e.control.top - slot.top) < 50
-                and abs(e.control.left - slot.left) < 35
-            ):
-                place(e.control, slot)
-                e.control.update()
-                return
-        bounce_back(solitaire, e.control)
-        e.control.update()
-
-    card1 = ft.GestureDetector(
-        mouse_cursor=ft.MouseCursor.MOVE,
-        drag_interval=5,
-        on_pan_start=start_drag,
-        on_pan_update=drag,
-        on_pan_end=drop,
-        left=0,
-        top=0,
-        content=ft.Container(
-            border_radius=ft.BorderRadius.all(4),
-            bgcolor=ft.Colors.GREEN,
-            width=70,
-            height=100,
-        ),
-    )
-
-    card2 = ft.GestureDetector(
-        mouse_cursor=ft.MouseCursor.MOVE,
-        drag_interval=5,
-        on_pan_start=start_drag,
-        on_pan_update=drag,
-        on_pan_end=drop,
-        left=90,
-        top=0,
-        content=ft.Container(
-            border_radius=ft.BorderRadius.all(4),
-            bgcolor=ft.Colors.YELLOW,
-            width=70,
-            height=100,
-        ),
-    )
-
-    slot0 = ft.Container(
-        border_radius=ft.BorderRadius.all(4),
-        width=70,
-        height=100,
-        left=0,
-        top=0,
-        border=ft.Border.all(1),
-    )
-    slot1 = ft.Container(
-        border_radius=ft.BorderRadius.all(4),
-        width=70,
-        height=100,
-        left=190,
-        top=0,
-        border=ft.Border.all(1),
-    )
-    slot2 = ft.Container(
-        border_radius=ft.BorderRadius.all(4),
-        width=70,
-        height=100,
-        left=280,
-        top=0,
-        border=ft.Border.all(1),
-    )
-
-    # Deal cards
-    place(card2, slot0)
-    place(card1, slot0)
-
-    solitaire = Solitaire()
-
-    slots = [slot0, slot1, slot2]
-    controls = [*slots, card1, card2]
-    page.add(ft.Stack(controls=controls, width=976, height=500))
-
-
-if __name__ == "__main__":
-    ft.run(main)
+    def deal_cards(self):
+        self.controls.extend(self.cards)
+        for card in self.cards:
+            card.place(self.slots[0])
+        self.update()

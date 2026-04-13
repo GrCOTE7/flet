@@ -9,7 +9,7 @@ class Solitaire:
 
 def main(page: ft.Page):
 
-    page.title = "More cards | Solitaire #34"
+    page.title = "More slots | Solitaire #35"
 
     def place(card, slot):
         """place card to the slot"""
