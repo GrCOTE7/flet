@@ -3,7 +3,7 @@ from examples.lv36_solitaire  import Solitaire
 
 def main(page: ft.Page):
 
-    title = "POO code - Solitaire #36"
+    title = "Fanned Piles - Solitaire #37"
     page.title = title.replace("-", "|")
     page.add(ft.Text(title, size=18, weight=ft.FontWeight.BOLD))
     page.bgcolor = ft.Colors.GREEN_900

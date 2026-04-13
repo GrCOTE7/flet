@@ -114,12 +114,15 @@ async def main(page: ft.Page, width: int = 392):
 
     # drag 2 cards with pans
     # from examples.lv34_solitaire import main
-    
+
     # drop in 3 slots
     # from examples.lv35_solitaire import main
-    
+
+    # Classes for better code structure (POO)
+    # from examples.lv36_main import main
+
     # Fanned cards piles (Piles en éventail)
-    from examples.lv36_main import main
+    from examples.lv37_main import main
 
     # gc7(page, width=976)
     # gc7(page, "LIGHT", width=976)
