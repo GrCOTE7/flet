@@ -14,9 +14,14 @@ def main(page: ft.Page):
         mouse_cursor=ft.MouseCursor.MOVE,
         drag_interval=5,
         on_pan_update=drag,
-        left=0,
-        top=0,
-        content=ft.Container(bgcolor=ft.Colors.GREEN, width=70, height=100),
+        left=10,
+        top=10,
+        content=ft.Container(
+            border_radius=ft.BorderRadius.all(4),
+            bgcolor=ft.Colors.GREEN,
+            width=70,
+            height=100,
+        ),
     )
 
     cards = ft.Stack(controls=[card], width=1000, height=500)

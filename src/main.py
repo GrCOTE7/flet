@@ -92,25 +92,28 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv21_chat import main  # Add pubsub.subscribe ( Broadcasting)
     # from examples.lv22_chat import main  # Login ( + auto login )
     # from examples.lv23_chat import main  # Class + ↑ User msg look
-    from examples.lv24_chat import main  # * [ ] SIMU login & msgs Scrolling auto
+    # from examples.lv24_chat import main  # SIMU login & msgs Scrolling auto
 
-    gc7(page, "LIGHT")
-    main(page)
+    # gc7(page, "LIGHT")
+    # main(page)
+
 
     ################################ SOLITAIRE  ################################
 
-    # gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
-    # from examples.lv30_aastack_example_1 import main
-    # from examples.lv30_aastack_example_2 import main  # 3 cards (Bleu-blanc-rouge)
-    # from examples.lv30_aastack_example_3 import main  # A card on a tapis
+    # from examples.lv30_aa1_stack import main # 3 image blocs
+    # from examples.lv30_aa2_stack import main  # 3 cards (Bleu-blanc-rouge)
+    # from examples.lv30_aa3_stack import main  # A card on a tapis
 
-    # from examples.lv30_solitaire import main # GestureDetector
+    # gc7(page, mode="LIGHT", width=976)  # 976 pour // 2 l'écran de droite
+    # from examples.lv30_solitaire import main # GestureDetector (on_tap)
     # from examples.lv31_solitaire import main # drag a card
-    # from examples.lv32_solitaire import main  # drag a card on a slot
-    #
-    # from examples.lv33_solitaire import main  # drag a card on a slot else return back position
-    # main(page)
-    #
+    # from examples.lv32_solitaire import main  # drag to slot
+    from examples.lv33_solitaire import main  # drag a card on a slot else return back position
+    # gc7(page, width=976)
+    # gc7(page, "LIGHT", width=976)
+    
+    main(page)
+    
     # from devs.lv00_dev import dev as dev
     # dev(page)
 
@@ -129,8 +132,7 @@ async def main(page: ft.Page, width: int = 392):
                 ],
             )
         )
-
-
+    
 if __name__ == "__main__":
     print(datetime.datetime.now().strftime("%H:%M:%S"), "> ")
     ft.run(main)

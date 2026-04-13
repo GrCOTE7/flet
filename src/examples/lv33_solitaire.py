@@ -6,8 +6,10 @@ import flet as ft
 
 def main(page: ft.Page):
 
+    page.title = "Drag on slot or back | Solitaire #33"
+
     def drop(e: ft.DragEndEvent):
-        if abs(e.control.top - slot.top) < 80 and abs(e.control.left - slot.left) < 56:
+        if abs(e.control.top - slot.top) < 50 and abs(e.control.left - slot.left) < 35:
             place(e.control, slot)
         e.control.update()
 
@@ -30,18 +32,24 @@ def main(page: ft.Page):
         on_pan_end=drop,
         left=0,
         top=0,
-        content=ft.Container(bgcolor=ft.Colors.GREEN, width=70, height=100),
+        content=ft.Container(
+            border_radius=ft.BorderRadius.all(4),
+            bgcolor=ft.Colors.GREEN,
+            width=70,
+            height=100,
+        ),
     )
 
     slot = ft.Container(
+        border_radius=ft.BorderRadius.all(4),
         width=70,
         height=100,
-        left=200,
+        left=250,
         top=0,
         border=ft.Border.all(1),
     )
 
-    page.add(ft.Stack(controls=[slot, card], width=1000, height=500))
+    page.add(ft.Stack(controls=[slot, card], width=976, height=500))
 
 
 if __name__ == "__main__":

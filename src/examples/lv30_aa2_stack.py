@@ -9,8 +9,8 @@ def card(i):
     ccc = list(_CC.keys())  # ["BLUE", "WHITE", "RED"]
 
     card = ft.GestureDetector(
-        left=i * 100,
-        top=0,
+        left=i * 35, # 100
+        top=i* 35, # 0
         content=ft.Container(bgcolor=_CC[ccc[i]], width=card_w, height=100),
         on_tap=lambda e: print(f"Tap {ccc[i]}"),
     )
