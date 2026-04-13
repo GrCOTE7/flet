@@ -1,6 +1,6 @@
 import flet as ft
-from examples.lv36_slot import Slot
-from examples.lv36_card import Card
+from examples.lv37_slot import Slot
+from examples.lv37_card import Card
 
 SOLITAIRE_WIDTH = 392  # 976
 SOLITAIRE_HEIGHT = 500
@@ -25,7 +25,8 @@ class Solitaire(ft.Stack):
     def create_card_deck(self):
         card1 = Card(self, color="GREEN")
         card2 = Card(self, color="YELLOW")
-        self.cards = [card1, card2]
+        card3 = Card(self, color="RED")
+        self.cards = [card1, card2, card3]
 
     def create_slots(self):
         self.slots.append(Slot(top=0, left=0))

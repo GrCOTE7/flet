@@ -1,5 +1,5 @@
 import flet as ft
-from examples.lv36_solitaire  import Solitaire
+from examples.lv37_solitaire  import Solitaire
 
 def main(page: ft.Page):
 
