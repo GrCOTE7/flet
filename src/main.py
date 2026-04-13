@@ -97,7 +97,6 @@ async def main(page: ft.Page, width: int = 392):
     # gc7(page, "LIGHT")
     # main(page)
 
-
     ################################ SOLITAIRE  ################################
 
     # from examples.lv30_aa1_stack import main # 3 image blocs
@@ -108,12 +107,16 @@ async def main(page: ft.Page, width: int = 392):
     # from examples.lv30_solitaire import main # GestureDetector (on_tap)
     # from examples.lv31_solitaire import main # drag a card
     # from examples.lv32_solitaire import main  # drag to slot
-    from examples.lv33_solitaire import main  # drag a card on a slot else return back position
+    from examples.lv33_solitaire import (
+        main,
+    )  # drag a card on a slot else return back position
+    from examples.lv34_solitaire import main  #
+
     # gc7(page, width=976)
     # gc7(page, "LIGHT", width=976)
-    
+
     main(page)
-    
+
     # from devs.lv00_dev import dev as dev
     # dev(page)
 
@@ -132,7 +135,8 @@ async def main(page: ft.Page, width: int = 392):
                 ],
             )
         )
-    
+
+
 if __name__ == "__main__":
     print(datetime.datetime.now().strftime("%H:%M:%S"), "> ")
     ft.run(main)
