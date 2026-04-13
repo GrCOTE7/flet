@@ -18,4 +18,4 @@ class Slot(ft.Container):
         self.top = top
 
         self.border_radius = ft.BorderRadius.all(4)
-        self.border = ft.Border.all(2)
+        self.border = ft.Border.all(1)

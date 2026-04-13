@@ -2,7 +2,7 @@ import flet as ft
 from examples.lv36_slot import Slot
 from examples.lv36_card import Card
 
-SOLITAIRE_WIDTH = 976
+SOLITAIRE_WIDTH = 392  # 976
 SOLITAIRE_HEIGHT = 500
 
 
