@@ -6,7 +6,7 @@ SLOT_HEIGHT = 100
 
 class Slot(ft.Container):
 
-    def __init__(self, top, left):
+    def __init__(self, top, left, border):
 
         super().__init__()
 
@@ -17,5 +17,9 @@ class Slot(ft.Container):
         self.left = left
         self.top = top
 
-        self.border_radius = ft.BorderRadius.all(4)
-        self.border = ft.Border.all(1)
+        self.border = border
+        self.border_radius = ft.BorderRadius.all(6)
+
+    def get_top_card(self):
+        if len(self.pile) > 0:
+            return self.pile[-1]

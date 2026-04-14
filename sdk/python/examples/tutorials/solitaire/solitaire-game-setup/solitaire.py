@@ -10,20 +10,24 @@ from slot import Slot
 
 
 class Suite:
+    
     def __init__(self, suite_name, suite_color):
         self.name = suite_name
         self.color = suite_color
 
 
 class Rank:
+    
     def __init__(self, card_name, card_value):
         self.name = card_name
         self.value = card_value
 
 
 class Solitaire(ft.Stack):
+    
     def __init__(self):
         super().__init__()
+        
         self.controls = []
         self.width = SOLITAIRE_WIDTH
         self.height = SOLITAIRE_HEIGHT
@@ -63,8 +67,8 @@ class Solitaire(ft.Stack):
                 self.cards.append(Card(solitaire=self, suite=suite, rank=rank))
 
     def create_slots(self):
+        
         self.stock = Slot(top=0, left=0, border=ft.border.all(1))
-
         self.waste = Slot(top=0, left=100, border=None)
 
         self.foundations = []
@@ -88,6 +92,7 @@ class Solitaire(ft.Stack):
         self.update()
 
     def deal_cards(self):
+        
         random.shuffle(self.cards)
         self.controls.extend(self.cards)
 

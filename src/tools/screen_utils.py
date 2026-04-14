@@ -107,8 +107,8 @@ def make_zoomable_view(
     return controller.view
 
 
-def gc7_rules(page: ft.Page, mode: str = "DARK", name: str = "Ready", width: int = 392):
-    configure_window(page, width=width)
+def gc7_rules(page: ft.Page, mode: str = "DARK", name: str = "Ready", width: int = 392, height : int= 1088) -> None:
+    configure_window(page, width=width, height=height)
     page.theme_mode = ft.ThemeMode.LIGHT if mode == "LIGHT" else ft.ThemeMode.DARK
     page.title = f"GC7 - {name}"
     page.bgcolor = "#303030" if mode == "DARK" else "#EEEEEE"

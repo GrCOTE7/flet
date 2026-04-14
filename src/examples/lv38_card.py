@@ -8,11 +8,9 @@ CARD_OFFSET = 20
 
 class Card(ft.GestureDetector):
 
-    def __init__(self, solitaire, color):
+    def __init__(self, solitaire, suite, rank):
 
         super().__init__()
-
-        self.slot = None
 
         self.mouse_cursor = ft.MouseCursor.MOVE
         self.drag_interval = 5
@@ -20,27 +18,37 @@ class Card(ft.GestureDetector):
         self.on_pan_update = self.drag
         self.on_pan_end = self.drop
 
+        self.suite = suite
+        self.rank = rank
+
+        self.face_up = False
+
         self.left = None
         self.top = None
 
         self.solitaire = solitaire
         self.slot = None
-        self.card_offset = CARD_OFFSET
-
-        self.color = color
 
         self.content = ft.Container(
-            border_radius=ft.BorderRadius.all(4),
-            bgcolor=self.color,
             width=CARD_WIDTH,
             height=CARD_HEIGHT,
+            border_radius=ft.BorderRadius.all(6),
+            content=ft.Image(src="src/examples/assets/images/card_back0.png"),
         )
+
         self.draggable_pile = [self]
+
+    def turn_face_up(self):
+        """Reveals card"""
+        self.face_up = True
+        self.content.content.src = (
+            f"src/examples/assets/images/{self.rank.name}_{self.suite.name}.svg"
+        )
+        self.solitaire.update()
 
     def move_on_top(self):
         """Brings draggable card pile to the top of the stack"""
 
-        # for card in self.get_draggable_pile():
         for card in self.draggable_pile:
             self.solitaire.controls.remove(card)
             self.solitaire.controls.append(card)
@@ -49,14 +57,21 @@ class Card(ft.GestureDetector):
     def bounce_back(self):
         """Returns draggable pile to its original position"""
         for card in self.draggable_pile:
-            card.top = card.slot.top + card.slot.pile.index(card) * CARD_OFFSET
+            if card.slot in self.solitaire.tableau:
+                card.top = card.slot.top + card.slot.pile.index(card) * CARD_OFFSET
+            else:
+                card.top = card.slot.top
             card.left = card.slot.left
         self.solitaire.update()
 
     def place(self, slot):
         """Place draggable pile to the slot"""
+
         for card in self.draggable_pile:
-            card.top = slot.top + len(slot.pile) * CARD_OFFSET
+            if slot in self.solitaire.tableau:
+                card.top = slot.top + len(slot.pile) * CARD_OFFSET
+            else:
+                card.top = slot.top
             card.left = slot.left
 
             # remove card from it's original slot, if it exists

@@ -3,9 +3,9 @@ from solitaire import Solitaire
 
 
 def main(page: ft.Page):
-    solitaire = Solitaire()
 
+    solitaire = Solitaire()
     page.add(solitaire)
 
 
-ft.run(target=main, assets_dir="assets")
+ft.run(main, assets_dir="assets")
