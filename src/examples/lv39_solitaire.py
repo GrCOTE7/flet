@@ -1,6 +1,6 @@
 import flet as ft
-from examples.lv38_slot import Slot
-from examples.lv38_card import Card
+from examples.lv39_slot import Slot
+from examples.lv39_card import Card
 
 import random
 
