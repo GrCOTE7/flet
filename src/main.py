@@ -9,7 +9,7 @@ from tools.screen_utils import gc7_rules as gc7
 
 
 async def main(page: ft.Page, width: int = 392):
-    gc7(page, width=width)
+    gc7(page, mode="LIGHT", name="Cookbook", width=900, height=700)
     # gc7(page, mode="LIGHT", width=width)
 
     # from examples.lv00_matrice import main as go
@@ -123,17 +123,19 @@ async def main(page: ft.Page, width: int = 392):
 
     # Fanned cards piles (Piles en éventail)
     # from examples.lv37_main import main
-    
+
     # Solitaire setup
     # from examples.lv38_main import main
-    
-    # Solitaire rule
-    from examples.lv39_main import main
+
+    # * [/] Solitaire general rules
+    # from examples.lv39_main import main
+
+    from cookbook.main import main as cookbook_main
 
     # gc7(page, width=976)
     # gc7(page, "LIGHT", width=976)
 
-    main(page)
+    cookbook_main(page)
 
     # ❌  Le seul qui corrige le pb de double clic → Le comprendre complètement à la fin - D:\flet_doc\sdk\python\examples\tutorials\solitaire_declarative\solitaire-final\main.py
 
