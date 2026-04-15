@@ -11,7 +11,6 @@ class Lv99(ft.Container):
         self.content = ft.Text(
             "Ready.",
             color=ft.Colors.BLACK_87,
-            # color=ft.Colors.WHITE,
             size=18,
             weight=ft.FontWeight.BOLD,
             italic=True,
@@ -177,18 +176,52 @@ class Lv04(ft.Container):
 
 
 class Lv05(ft.Container):
-    def __init__(self, radius: int = 7):
-        super().__init__()
 
-        self.padding = ft.Padding.symmetric(vertical=3, horizontal=10)
-        self.border_radius = radius
-        self.bgcolor = ft.Colors.LIGHT_GREEN_ACCENT_400
-        self.content = ft.Text(
-            "Ready. "+str(radius),
-            color=ft.Colors.BLACK_87,
-            # color=ft.Colors.WHITE,
-            size=18,
-            weight=ft.FontWeight.BOLD,
-            italic=True,
-            font_family="Arial",
+    def __init__(self):
+        content = self.mySerie()
+        super().__init__(content=content)
+
+    def myCard(self, myLabel: str = ""):
+        return ft.Card(
+            shape=ft.ContinuousRectangleBorder(radius=10),
+            content=ft.Container(
+                padding=ft.Padding.symmetric(horizontal=7, vertical=-3),
+                border_radius=ft.BorderRadius.all(4),
+                bgcolor=ft.Colors.AMBER_100,
+                content=ft.Text(myLabel, color=ft.Colors.BLACK, size=24),
+            ),
+        )
+
+    def mySerie(self):
+        return ft.Row( # Try Column / Row
+            expand=True,
+            height=100,
+            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+            controls=[self.myCard(str(i)) for i in range(1, 6)],
+        )
+
+
+class Lv06(ft.Container):
+
+    def __init__(self):
+        content = self.myResponsiveSerie()
+        super().__init__(content=content)
+
+    def myCard(self, myLabel: str = ""):
+        return ft.Card(
+            shape=ft.ContinuousRectangleBorder(radius=10),
+            content=ft.Container(
+                padding=ft.Padding.symmetric(horizontal=7, vertical=-3),
+                border_radius=ft.BorderRadius.all(4),
+                bgcolor=ft.Colors.AMBER_100,
+                content=ft.Text(myLabel, color=ft.Colors.BLACK, size=24),
+            ),
+        )
+
+    def myResponsiveSerie(self):
+        return ft.Column(  # Try Column / Row
+            expand=True,
+            height=50,
+            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+            controls=[self.myCard(str(i)) for i in range(1, 7)],
         )

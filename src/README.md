@@ -8,22 +8,22 @@
 
 **Cookbooks à étudier :**
 
-* Layout basics (Row, Column, Container, Stack)
-* ResponsiveRow
-* Expand / Flexible / alignment / spacing
-* Padding / margin / border radius / shadows
+* [x] Layout basics (Row, Column, Container, Stack) 
+* [/] ResponsiveRow
+* [ ] Expand / Flexible / alignment / spacing
+* [ ] Padding / margin / border radius / shadows
 
 **À retenir :**
 
-* `expand=1` pour gérer l’espace
-* Différence entre `alignment` et `horizontal_alignment`
-* Quand utiliser `Stack`
-* Construire des layouts fluides et responsives
+* [x] `expand=1` pour gérer l’espace
+* [ ] Différence entre `alignment` et `horizontal_alignment`
+* [ ] Quand utiliser `Stack`
+* [ ] Construire des layouts fluides et responsives
 
 **À ignorer :**
 
-* Exemples trop complexes ou décoratifs
-* Styles exotiques (gradients, transforms)
+* [ ] Exemples trop complexes ou décoratifs
+* [ ] Styles exotiques (gradients, transforms)
 
 ### 🥈 Jour 2 — State & Events
 
@@ -31,21 +31,21 @@
 
 **Cookbooks à étudier :**
 
-* State management (sans FletX)
-* on_click / on_change / on_submit
-* page.update()
-* Timers, async, futures
+* [ ] State management (sans FletX)
+* [ ] on_click / on_change / on_submit
+* [ ] page.update()
+* [ ] Timers, async, futures
 
 **À retenir :**
 
-* Comment Flet gère l’état
-* Pourquoi `page.update()` devient vite lourd
-* Comment organiser un minimum la logique
+* [ ] Comment Flet gère l’état
+* [ ] Pourquoi `page.update()` devient vite lourd
+* [ ] Comment organiser un minimum la logique
 
 **À ignorer :**
 
-* Patterns bricolés de “global state”
-* Exemples trop verbeux
+* [ ] Patterns bricolés de “global state”
+* [ ] Exemples trop verbeux
 
 ### 🥉 Jour 3 — Navigation & Routing
 
@@ -53,19 +53,19 @@
 
 **Cookbooks à étudier :**
 
-* Navigation basics
-* Routes & parameters
-* Tabs / NavigationRail / AppBar navigation
+* [ ] Navigation basics
+* [ ] Routes & parameters
+* [ ] Tabs / NavigationRail / AppBar navigation
 
 **À retenir :**
 
-* `page.go("/route")`
-* Passer des paramètres
-* Structurer 2–3 pages
+* [ ] `page.go("/route")`
+* [ ] Passer des paramètres
+* [ ] Structurer 2–3 pages
 
 **À ignorer :**
 
-* Routing complexe (FletX le fera mieux)
+* [ ] Routing complexe (FletX le fera mieux)
 
 ### 🏅 Jour 4 — Controls avancés
 
@@ -73,21 +73,21 @@
 
 **Cookbooks à étudier :**
 
-* ListView / GridView
-* DataTable
-* Dialogs / Snackbars / BottomSheets
-* Tabs / ExpansionTile / NavigationRail
+* [ ] ListView / GridView
+* [ ] DataTable
+* [ ] Dialogs / Snackbars / BottomSheets
+* [ ] Tabs / ExpansionTile / NavigationRail
 
 **À retenir :**
 
-* Afficher des listes dynamiques
-* Créer des dialogues propres
-* Structurer des écrans complexes
+* [ ] Afficher des listes dynamiques
+* [ ] Créer des dialogues propres
+* [ ] Structurer des écrans complexes
 
 **À ignorer :**
 
-* Dashboards trop avancés
-* DataTables ultra*complexes
+* [ ] Dashboards trop avancés
+* [ ] DataTables ultra*complexes
 
 ### 🏆 Jour 5 — Files, Storage, HTTP, Async
 
@@ -95,23 +95,23 @@
 
 **Cookbooks à étudier :**
 
-* FilePicker / upload / download
-* Local storage (page.client_storage)
-* HTTP requests (GET/POST)
-* Async tasks
+* [ ] FilePicker / upload / download
+* [ ] Local storage (page.client_storage)
+* [ ] HTTP requests (GET/POST)
+* [ ] Async tasks
 
 **À retenir :**
 
-* Stockage local
-* Appels API
-* Gestion propre de l’async
+* [ ] Stockage local
+* [ ] Appels API
+* [ ] Gestion propre de l’async
 
 **À ignorer :**
 
-* Streaming avancé
-* Upload multi*fichiers complexes
+* [ ] Streaming avancé
+* [ ] Upload multi*fichiers complexes
 
-***
+---
 
 ### 🚀 Prochaines étapes (après les 5 jours)
 
@@ -121,22 +121,22 @@
 
 #### **Jours 6–7 : Construire ton prototype Flet**
 
-* 2–3 écrans
-* Navigation simple
-* Stockage local
-* Logique métier minimale
+* [ ] 2–3 écrans
+* [ ] Navigation simple
+* [ ] Stockage local
+* [ ] Logique métier minimale
 
 #### **Jours 8–10 : Migration vers FletX**
 
-* Installer FletX
-* Comprendre Rx (réactivité)
-* Créer controllers + services
-* Routing avancé
-* Structurer ton app proprement
-* Utiliser la CLI (`fletx new`, `fletx run`)
+* [ ] Installer FletX
+* [ ] Comprendre Rx (réactivité)
+* [ ] Créer controllers + services
+* [ ] Routing avancé
+* [ ] Structurer ton app proprement
+* [ ] Utiliser la CLI (`fletx new`, `fletx run`)
 
 À la fin du jour 10 :  
-➡️ Tu as une app structurée, propre, scalable, prête à être vendue.
+➡️ [ ] Tu as une app structurée, propre, scalable, prête à être vendue.
 
 ## Run the doc website
 
@@ -146,7 +146,7 @@ yarn start
 
 ## Run the app
 
-### uv * Alternative à pip + env + flet run
+### uv * [ ] Alternative à pip + env + flet run
 
 Outil **ultra‑rapide** et minimaliste pour installer, exécuter et gérer des environnements.
 
@@ -206,7 +206,7 @@ tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 
-* [ ] Voir la procédure exacte pour signer le fichier APK généré →  GgleStore
+* [ ] [ ] Voir la procédure exacte pour signer le fichier APK généré →  GgleStore
 
 Pour savoir quel Py est utilisé par uv
 

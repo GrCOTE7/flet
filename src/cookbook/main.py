@@ -8,6 +8,7 @@ def main(page: ft.Page):
 
     title = "Cookbook"
     gc7(page)
+    # gc7(page, mode='LIGHT')
     page.title = title.replace("-", "|")
     page.scroll = ft.ScrollMode.AUTO
     page.add(ft.Text(title, size=18, weight=ft.FontWeight.BOLD))
@@ -21,7 +22,9 @@ def main(page: ft.Page):
     lvs.append(Lv02())  # 3 blocs in a row with different expand values and colors
     lvs.append(Lv03())  # A counter
     lvs.append(Lv04())  # 3 blocs in a stack with different expand values and colors
-    lvs.append(Lv05())  #
+    lvs.append(Lv05())  # Row, Column, Container, Safearea, Stack
+    lvs.append(Lv06())  # ResponsiveRow
+    # lvs.append(Lv06())  #
     # page.add(*lvs)
     page.add(lvs[-1])
 
