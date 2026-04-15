@@ -1,7 +1,7 @@
 import flet as ft
 from tools.screen_utils import gc7_rules as gc7
 
-from .lv01 import *
+from .lvAll import *
 
 
 def main(page: ft.Page):
@@ -16,12 +16,17 @@ def main(page: ft.Page):
 
     lvs = []
 
-    lvs.append(Lv00("Salut !"))  # Simple instantiation class with a custom text
+    lvs.append(Lv00("Salut !"))  # Simple class with a custom text
     lvs.append(Lv01())  # Form with a text field and a button
     lvs.append(Lv02())  # 3 blocs in a row with different expand values and colors
+    lvs.append(Lv03())  # A counter
+    lvs.append(Lv04())  # 3 blocs in a stack with different expand values and colors
+    lvs.append(Lv05())  #
+    # page.add(*lvs)
+    page.add(lvs[-1])
 
-    page.add(*lvs)
-    # page.add(lvs[-2])
+    # lvs.append(Lv99())  # 3 blocs in a stack with different expand values and colors
+    # page.add(lvs[-1])
 
 
 if __name__ == "__main__":
