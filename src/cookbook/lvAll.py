@@ -20,15 +20,23 @@ class Lv99(ft.Container):
         )
 
 
-class Lv00(ft.Container):
+class Lv00(ft.Column):
 
-    def __init__(self, txt: str = "Oki"):
-        super().__init__()
+    def __init__(self, t1: str | None = None):
+        t_ready = ft.Text("Ready.")
+        t1_text = self.txt(t1)
 
-        self.txt = txt
-        print(txt)
+        controls: list[ft.Control] = [t_ready]
+        if t1_text:
+            print(t1_text.value)
+            controls.insert(0, t1_text)
 
-        self.content = ft.Column([ft.Text(self.txt), ft.Text("Ok")])
+        super().__init__(controls=controls)
+
+    def txt(self, t1: str | None = None):
+        if t1:
+            return ft.Text(t1)
+        return None
 
 
 class Lv01(ft.Container):
@@ -340,8 +348,18 @@ class Lv09(ft.Container):
     def myLv09(self):
 
         return ft.Text(
-            "#09",
-            text_align=ft.TextAlign.CENTER,
-            color=ft.Colors.AMBER,
-            size=24
+            "#09", text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=24
+        )
+
+class Lv09(ft.Container):
+
+    def __init__(self):
+        super().__init__(
+            content=self.myLv09(),
+        )
+
+    def myLv09(self):
+
+        return ft.Text(
+            "#09", text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=24
         )

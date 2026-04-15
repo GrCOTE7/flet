@@ -4,7 +4,7 @@
 
 ### 🥈 Jour 2 — State & Events
 
-* [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
+* [/] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
 
 **Cookbooks à étudier :**
 
