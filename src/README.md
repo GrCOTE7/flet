@@ -2,29 +2,6 @@
 
 ## BPL
 
-### 🥇 Jour 1 — Layout & Responsive Design
-
-* [ ] **Objectif :** maîtriser la base visuelle pour créer des interfaces propres et harmonieuses.
-
-**Cookbooks à étudier :**
-
-* [x] Layout basics (Row, Column, Container, Stack) 
-* [/] ResponsiveRow
-* [ ] Expand / Flexible / alignment / spacing
-* [ ] Padding / margin / border radius / shadows
-
-**À retenir :**
-
-* [x] `expand=1` pour gérer l’espace
-* [ ] Différence entre `alignment` et `horizontal_alignment`
-* [ ] Quand utiliser `Stack`
-* [ ] Construire des layouts fluides et responsives
-
-**À ignorer :**
-
-* [ ] Exemples trop complexes ou décoratifs
-* [ ] Styles exotiques (gradients, transforms)
-
 ### 🥈 Jour 2 — State & Events
 
 * [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
@@ -137,6 +114,29 @@
 
 À la fin du jour 10 :  
 ➡️ [ ] Tu as une app structurée, propre, scalable, prête à être vendue.
+
+### 🥇 Jour 1 — Layout & Responsive Design
+
+* [ ] **Objectif :** maîtriser la base visuelle pour créer des interfaces propres et harmonieuses.
+
+**Cookbooks à étudier :**
+
+* [x] Layout basics (Row, Column, Container, Stack)
+* [x] ResponsiveRow
+* [x] Expand / Flexible / alignment / spacing / Wraping
+* [x] Padding / margin / border radius / shadows
+
+**À retenir :**
+
+* [x] `expand=1` pour gérer l’espace
+* [x] Différence entre `alignment` (-1, -1) → (1, 1) et `horizontal_alignment` (MainAxis & CrossAxis)
+* [x] Quand utiliser `Stack`
+* [x] Construire des layouts fluides et responsives
+
+**À ignorer :**
+
+* [x] Exemples trop complexes ou décoratifs
+* [x] Styles exotiques (gradients, transforms)
 
 ## Run the doc website
 

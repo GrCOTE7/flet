@@ -24,7 +24,10 @@ def main(page: ft.Page):
     lvs.append(Lv04())  # 3 blocs in a stack with different expand values and colors
     lvs.append(Lv05())  # Row, Column, Container, Safearea, Stack
     lvs.append(Lv06())  # ResponsiveRow
-    # lvs.append(Lv06())  #
+    lvs.append(Lv07())  # Shadow & Action
+    lvs.append(Lv08())  # A container in another
+    lvs.append(Lv09())  #
+
     # page.add(*lvs)
     page.add(lvs[-1])
 
