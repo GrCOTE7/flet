@@ -518,9 +518,8 @@ class Lv11(ft.Container):
         print(page.dark_theme)
 
         page.theme = ft.Theme(color_scheme_seed=ft.Colors.GREEN)
-        page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.BLUE)
+        page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.RED_800)
         print(page.dark_theme)
-
         page.update()
 
     def myLv09(self):

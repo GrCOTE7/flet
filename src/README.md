@@ -169,17 +169,20 @@ Run as a web app:
 ```bash
 uv run flet run **web *r
 ```
+
 Option *r => Phone: http://<IP*de*votre*PC>:8550
 (Voir avec ipconfig → Carte réseau sans fil Wi*Fi : IPv4)
 
-***
+---
 
 Option 2 — Application Flet sur le téléphone (rendu natif identique à l'APK) ★
 
 Installez l'application Flet depuis le Play Store. Puis lancez en local:
 
+```bash
 uv run flet run **web **host 0.0.0.0 **port 8550 *r
 uv run flet run **web **host 192.168.80.205 **port 8550 *r
+```
 
 Avantages: rendu 100% fidèle à l'APK, hot reload, aucun build
 Limite: l'app Flet doit être installée une fois sur le téléphone
@@ -265,7 +268,7 @@ flet build windows *v
 
 For more details on building Windows package, refer to the [Windows Packaging Guide](https://flet.dev/docs/publish/windows/).
 
-***
+---
 
 ```bash
 +*******************************************************+
@@ -284,7 +287,8 @@ For more details on building Windows package, refer to the [Windows Packaging Gu
 |  +*************************************************+  |
 +*******************************************************+
 ```
-tip : 
 
-Pour uignorer un faux positif des hints flet
+tips :
+
+Pouruignorer un faux positif des hints flet
 # type: ignore 
