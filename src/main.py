@@ -9,7 +9,7 @@ from tools.screen_utils import gc7_rules as gc7
 
 
 async def main(page: ft.Page, width: int = 392):
-    gc7(page, mode="LIGHT", name="Cookbook", width=900, height=700)
+    # gc7(page, mode="LIGHT", name="Cookbook", width=900, height=700)
     # gc7(page, mode="LIGHT", width=width)
 
     # from examples.lv00_matrice import main as go
@@ -81,7 +81,7 @@ async def main(page: ft.Page, width: int = 392):
     # finalTodo(page)
 
     # * [ ] LV 12 à comprendre pour incorporer ici
-    # ⚠️  render_views prend le contrôle total de la page → ne pas mélanger avec page.add()
+    # ⚠️ render_views prend le contrôle total de la page → ne pas mélanger avec page.add()
     # from examples.lv12_todo_reactive import main as reactivTodo
     # reactivTodo(page)
     # return  # render_views incompatible avec page.controls / page.add() ci-dessous

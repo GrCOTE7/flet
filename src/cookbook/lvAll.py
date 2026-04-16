@@ -513,15 +513,21 @@ class Lv10(ft.Container):
 
 class Lv11(ft.Container):
 
-    def __init__(self):
-        super().__init__(
-            content=self.myLv09(), width=392, height=1088, bgcolor="#070021"
-        )
+    def __init__(self, page):
+        super().__init__(content=self.myLv09())
+        print(page.dark_theme)
+
+        page.theme = ft.Theme(color_scheme_seed=ft.Colors.GREEN)
+        page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.BLUE)
+        print(page.dark_theme)
+
+        page.update()
 
     def myLv09(self):
 
         return ft.Text(
-            self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
+            # self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
+            self.ct()
         )
 
     def ct(self):
