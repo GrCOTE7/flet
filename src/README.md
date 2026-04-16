@@ -2,47 +2,54 @@
 
 ## BPL
 
-### 🥈 Jour 2 — State & Events
-
-* [/] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
+### 🥈 Jour 2 — State & Events - 🥉 Jour 3 — Navigation & Routing
 
 **Cookbooks à étudier :**
 
-* [ ] State management (sans FletX)
-* [ ] on_click / on_change / on_submit
-* [ ] page.update()
-* [ ] Timers, async, futures
+* [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
 
-**À retenir :**
+* [ ] on_click / on_change / on_submit :
+  * [/] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
+  * [ ] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
+  * [ ] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
 
-* [ ] Comment Flet gère l’état
-* [ ] Pourquoi `page.update()` devient vite lourd
-* [ ] Comment organiser un minimum la logique
+* [ ] page.update() & Timers, async, futures :
+  * [ ] [Async apps](http://localhost:3000/docs/cookbook/async-apps)
+  * [ ] [Large lists](http://localhost:3000/docs/cookbook/large-lists)
 
-**À ignorer :**
+### Comment Flet gère l’état
 
-* [ ] Patterns bricolés de “global state”
-* [ ] Exemples trop verbeux
+* [ ] [PubSub](http://localhost:3000/docs/cookbook/pub-sub)
+* [ ] [Subprocess](http://localhost:3000/docs/cookbook/subprocess)
+* [ ] → Avoir compris pourquoi `page.update()` devient vite lourd
 
-### 🥉 Jour 3 — Navigation & Routing
+### Comment organiser un minimum la logique
 
-* [ ] **Objectif :** structurer une app multi*écrans.
+* [ ] [Navigation and routing](http://localhost:3000/docs/cookbook/navigation-and-routing)
+* [ ] [Adaptive apps](http://localhost:3000/docs/cookbook/adaptive-apps)
 
-**Cookbooks à étudier :**
+### À voir à l’occasion (autres cookbooks utiles)
 
-* [ ] Navigation basics
-* [ ] Routes & parameters
-* [ ] Tabs / NavigationRail / AppBar navigation
+* [x] [Expanding Controls](http://localhost:3000/docs/cookbook/expanding-controls)
+* [x] [Colors](http://localhost:3000/docs/cookbook/colors)
+* [x] [Assets](http://localhost:3000/docs/cookbook/assets)
+* [x] [Fonts](http://localhost:3000/docs/cookbook/fonts) (#09)
+* [/] [Theming](http://localhost:3000/docs/cookbook/theming)
 
-**À retenir :**
+---
 
-* [ ] `page.go("/route")`
-* [ ] Passer des paramètres
-* [ ] Structurer 2–3 pages
+* [ ] [Accessibility](http://localhost:3000/docs/cookbook/accessibility)
+* [ ] [Control Refs](http://localhost:3000/docs/cookbook/control-refs)
+* [ ] [Custom Controls](http://localhost:3000/docs/cookbook/custom-controls)
+* [ ] [Read and Write Files](http://localhost:3000/docs/cookbook/read-and-write-files)
+* [ ] [Client storage](http://localhost:3000/docs/cookbook/client-storage)
+* [ ] [Session storage](http://localhost:3000/docs/cookbook/session-storage)
+* [ ] [Logging](http://localhost:3000/docs/cookbook/logging)
+* [ ] [Authentication](http://localhost:3000/docs/cookbook/authentication)
+* [ ] [Animations](http://localhost:3000/docs/cookbook/animations)
+* [ ] [Encrypting sensitive data](http://localhost:3000/docs/cookbook/encrypting-sensitive-data)
 
-**À ignorer :**
-
-* [ ] Routing complexe (FletX le fera mieux)
+---
 
 ### 🏅 Jour 4 — Controls avancés
 

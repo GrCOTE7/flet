@@ -6,11 +6,7 @@ description = "Sport Timer"
 readme = "README.md"
 requires-python = ">=3.14"
 authors = [{ name = "Aadminli", email = "GrCOTE7@gmail.com" }]
-dependencies = [
-    "flet",
-    "pymox_kit",
-    "wcwidth>=0.6.0",
-]
+dependencies = ["flet", "pymox_kit", "wcwidth>=0.6.0"]
 
 [project.optional-dependencies]
 dev = ["flet[all]"]
@@ -28,6 +24,7 @@ build_number = 1
 
 [tool.flet.app]
 path = "src"
+assets_dir = "cookbook/assets"
 
 
 [tool.flet.android]

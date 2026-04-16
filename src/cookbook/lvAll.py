@@ -1,6 +1,6 @@
-from turtle import width
-
 import flet as ft
+import os, sys
+from pathlib import Path
 
 
 class Lv99(ft.Container):
@@ -340,26 +340,192 @@ class Lv08(ft.Container):
 
 class Lv09(ft.Container):
 
-    def __init__(self):
+    def __init__(self, page):
         super().__init__(
             content=self.myLv09(),
+        )
+
+        page.fonts = {
+            "Kanit": "https://raw.githubusercontent.com/google/fonts/master/ofl/kanit/Kanit-Bold.ttf",
+            "Open Sans": "/fonts/OpenSans-Regular.ttf",
+            "Roboto Condensed": "https://raw.githubusercontent.com/google/fonts/main/apache/robotocondensed/RobotoCondensed-Regular.ttf",
+        }
+        print(page.fonts)
+
+    def myLv09(self):
+
+        doc = ft.Column()
+
+        z = ft.Row()  # z → zône
+
+        z.controls.append(ft.Image(src="icon.png", width=50, height=50))
+
+        z.controls.append(
+            ft.Column(
+                controls=[
+                    ft.Text(
+                        "Premier texte de la leçon #09\n",
+                        text_align=ft.TextAlign.CENTER,
+                        color=ft.Colors.AMBER,
+                        size=20,
+                    ),
+                    ft.Text(
+                        "2ème texte de la leçon #09",
+                        text_align=ft.TextAlign.CENTER,
+                        color=ft.Colors.AMBER,
+                        size=20,
+                        font_family="Consolas",
+                    ),
+                ],
+                spacing=-30,
+            )
+        )
+        doc.controls.append(z)
+
+        doc.controls.append(ft.Divider(color=ft.Colors.RED_ACCENT_400))
+
+        doc.controls.append(
+            ft.Text("Kanit", font_family="Kanit", size=20, color=ft.Colors.CYAN_700)
+        )
+        doc.controls.append(
+            ft.Text(
+                "Open Sans", font_family="Open Sans", size=20, color=ft.Colors.CYAN_700
+            )
+        )
+        doc.controls.append(
+            ft.Text(
+                "Arial Gras",
+                weight=ft.FontWeight.BOLD,
+                font_family="Arial",
+                size=20,
+                color=ft.Colors.CYAN_700,
+            )
+        )
+        doc.controls.append(
+            ft.Text("Arial", font_family="Arial", size=20, color=ft.Colors.CYAN_700)
+        )
+        doc.controls.append(ft.Divider(color=ft.Colors.WHITE24))
+        doc.controls.append(
+            ft.Text(
+                "Exemples largeur / stretch",
+                size=16,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ORANGE_300,
+            )
+        )
+        doc.controls.append(
+            ft.Text(
+                "Roboto Condensed = vraie fonte plus etroite",
+                font_family="Roboto Condensed",
+                size=20,
+                color=ft.Colors.LIGHT_GREEN_300,
+            )
+        )
+        doc.controls.append(
+            ft.Text(
+                "Arial avec letter_spacing negatif (simulation compacte)",
+                size=20,
+                color=ft.Colors.CYAN_700,
+                style=ft.TextStyle(font_family="Arial", letter_spacing=-1.5),
+            )
+        )
+        doc.controls.append(
+            ft.Text(
+                "Arial avec letter_spacing positif (simulation elargie)",
+                size=20,
+                color=ft.Colors.CYAN_700,
+                style=ft.TextStyle(font_family="Arial", letter_spacing=3),
+            )
+        )
+        doc.controls.append(
+            ft.Text(
+                "Le letter_spacing change l'espacement, pas la largeur reelle des glyphes.",
+                size=14,
+                color=ft.Colors.GREY_400,
+                italic=True,
+            )
+        )
+
+        return doc
+
+
+def _read_env_value(key: str, fallback: str = "No defined") -> str:
+    """Récupère la valeur d'une clé dans les variables d'environnement ou dans un fichier .env
+    (En cherchant cette key d'abord dans src/.env, puis dans le .env à la racine du projet).
+    Args:
+        key (str): La clé à rechercher.
+        fallback (str, optional): Valeur par défaut si la clé n'est pas trouvée. Defaults to "Not defined".
+
+    Returns:
+        str: La valeur de la clé ou la valeur par défaut si la clé n'est pas trouvée.
+    """
+    value = os.environ.get(key)
+    if value is not None:
+        return value
+
+    env_candidates = [
+        Path(__file__).resolve().parents[1] / ".env",
+        Path(__file__).resolve().parents[2] / ".env",
+    ]
+
+    for env_path in env_candidates:
+        if not env_path.is_file():
+            continue
+
+        for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+
+            env_key, env_value = line.split("=", 1)
+            if env_key.strip() == key:
+                return env_value.strip().strip("\"'")
+
+    return fallback
+
+
+class Lv10(ft.Container):
+
+    def __init__(self):
+        super().__init__(
+            content=self.myLv09(), width=392, height=1088, bgcolor="#070021"
         )
 
     def myLv09(self):
 
         return ft.Text(
-            "#09", text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=24
+            self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
         )
 
-class Lv09(ft.Container):
+    def ct(self):
+
+        default_env = os.environ.get(
+            "FLET_ASSETS_DIR", "No defined"
+        )  # → D:\flet_doc\src\assets
+
+        custom_env = _read_env_value("MY_KEY")  # → MY_VALUE_SRC depuis src/.env
+
+        txt = f"oki {default_env} - {custom_env}"
+        print(txt)
+
+        return txt
+
+
+class Lv11(ft.Container):
 
     def __init__(self):
         super().__init__(
-            content=self.myLv09(),
+            content=self.myLv09(), width=392, height=1088, bgcolor="#070021"
         )
 
     def myLv09(self):
 
         return ft.Text(
-            "#09", text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=24
+            self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
         )
+
+    def ct(self):
+
+        txt = "Ready."
+
+        return txt

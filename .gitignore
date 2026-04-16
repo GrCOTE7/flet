@@ -36,3 +36,4 @@ client/devtools_options.yaml
 __pycache__/
 *.pyc
 
+.env
