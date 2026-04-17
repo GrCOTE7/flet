@@ -20,7 +20,7 @@ class Lv99(ft.Container):
         )
 
 
-class Lv00(ft.Column):
+class Lv00(ft.Column):  # Simple class with a custom text
 
     def __init__(self, t1: str | None = None):
         t_ready = ft.Text("Ready.")
@@ -39,7 +39,7 @@ class Lv00(ft.Column):
         return None
 
 
-class Lv01(ft.Container):
+class Lv01(ft.Container):  # Form with a text field and a button
 
     def myInputFieldStyle(self, txt=None, label: bool = True):
         text_kwarg = {"label" if label else "hint_text": txt} if txt else {}
@@ -75,15 +75,17 @@ class Lv01(ft.Container):
                     controls=[
                         ft.Button(
                             "Join chat",
-                            bgcolor="GREEN",
+                            bgcolor="BLACK",
+                            # border_color="GREEN",
                             style=ft.ButtonStyle(
                                 animation_duration=500,
-                                shape=ft.RoundedRectangleBorder(radius=7),
+                                shape=ft.RoundedRectangleBorder(radius=4),
                                 mouse_cursor=ft.MouseCursor.CLICK,
+                                side=ft.BorderSide(width=2, color=ft.Colors.GREEN),
                                 color={
                                     ft.ControlState.HOVERED: ft.Colors.RED,
                                     ft.ControlState.FOCUSED: ft.Colors.BLUE_800,
-                                    ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                                    ft.ControlState.DEFAULT: ft.Colors.WHITE_54,
                                 },
                             ),
                         )
@@ -93,7 +95,7 @@ class Lv01(ft.Container):
         )
 
 
-class Lv02(ft.SafeArea):
+class Lv02(ft.SafeArea):  # 3 blocs in a row with different expand values and colors
 
     def __init__(self):
         content = self.threeBlocs()
@@ -138,11 +140,12 @@ class Lv02(ft.SafeArea):
         )
 
 
-class State:
+class State:  # A counter (Imperative)
     counter = 0
 
 
-class Lv03(ft.SafeArea):
+class Lv03(ft.SafeArea):  # A counter (Imperative)
+    counter = 0
 
     def __init__(self):
         self.state = State()
@@ -186,7 +189,7 @@ class Lv03(ft.SafeArea):
         self.message.update()
 
 
-class Lv04(ft.Container):
+class Lv04(ft.Container):  # 3 blocs in a stack with different expand values and colors
     def __init__(self):
         super().__init__()
 
@@ -223,7 +226,7 @@ class Lv04(ft.Container):
         self.content = my_stack
 
 
-class Lv05(ft.Container):
+class Lv05(ft.Container):  # Row, Column, Container, Safearea, Stack
 
     def __init__(self):
         content = self.mySerie()
@@ -249,7 +252,7 @@ class Lv05(ft.Container):
         )
 
 
-class Lv06(ft.Container):
+class Lv06(ft.Container):  # ResponsiveRow
 
     def __init__(self):
         content = self.myResponsiveRow()
@@ -283,7 +286,7 @@ class Lv06(ft.Container):
         )
 
 
-class Lv07(ft.Container):
+class Lv07(ft.Container):  # Shadow & Action
 
     def __init__(self):
         self.btn = self.myShadowedBtn()
@@ -342,7 +345,7 @@ class Lv07(ft.Container):
         )
 
 
-class Lv08(ft.Container):
+class Lv08(ft.Container):  # A container in another
 
     def __init__(self):
         super().__init__(
@@ -376,7 +379,7 @@ class Lv08(ft.Container):
         )
 
 
-class Lv09(ft.Container):
+class Lv09(ft.Container):  # Fonts
 
     def __init__(self, page):
         super().__init__(
@@ -522,7 +525,7 @@ def _read_env_value(key: str, fallback: str = "No defined") -> str:
     return fallback
 
 
-class Lv10(ft.Container):
+class Lv10(ft.Container):  # .env
 
     def __init__(self):
         super().__init__(
@@ -549,7 +552,7 @@ class Lv10(ft.Container):
         return txt
 
 
-class Lv11(ft.Container):
+class Lv11(ft.Container):  # Theming
 
     def __init__(self, page):
         super().__init__(content=self.myLv11())
@@ -603,7 +606,7 @@ class Lv11(ft.Container):
         return txt
 
 
-class Lv12(ft.Container):
+class Lv12(ft.Container):  # Imperative CRUD
 
     def __init__(self, page):
         super().__init__(content=self.imperative(page))
@@ -618,7 +621,7 @@ class Lv12(ft.Container):
         return
 
 
-class Lv13(ft.Container):
+class Lv13(ft.Container):  # Declarative CRUD (uses page.render)
 
     def __init__(self, page):
         super().__init__(content=self.declarative(page))
@@ -630,3 +633,135 @@ class Lv13(ft.Container):
         declarative.main(page)
 
         return
+
+
+class Lv14(ft.Container):  # Minimalist Declarative Counter
+    def __init__(self, page):
+        super().__init__(content=self.declarative(page))
+
+    def declarative(self, page):
+
+        from cookbook.crud import minimalist
+
+        minimalist.main(page)
+
+        return
+
+
+class Lv15(ft.Container):  # Drag & Drop
+
+    def __init__(self):
+        super().__init__(content=self.dragAndDrop())
+
+    def dragAndDrop(self):
+        txt = "Drag & Drop"
+        print(txt)
+        return self.zones(txt)
+
+    def drag_accept(self, e, rows):
+        print("Accepted!")
+        # get draggable (source) control by its ID
+        src = e.page.get_control(e.src_id)
+        # update text inside draggable control
+        src.content.content.value = "0"
+        # update text inside drag target control
+        e.control.content.content.value = "1"
+        # reset border
+        e.control.content.border = None
+
+        rows.update()
+
+    def drag_will_accept(self, e):
+        # DragWillAcceptEvent exposes `accept` as a real bool.
+        accepted = e.accept
+        e.control.content.border = ft.Border.all(
+            5, ft.Colors.GREEN_ACCENT_400 if accepted else ft.Colors.RED_400
+        )
+        e.control.update()
+
+    def drag_leave(self, e):
+        e.control.content.border = None
+        e.control.update()
+
+    def zones(self, label: str):
+
+        zones = ft.Row(
+            [
+                ft.Draggable(
+                    group="Number1",
+                    content=ft.Container(
+                        width=50,
+                        height=50,
+                        bgcolor=ft.Colors.CYAN_200,
+                        border_radius=5,
+                        content=ft.Text("1", color=ft.Colors.BLACK_87, size=24),
+                        alignment=ft.Alignment.CENTER,
+                    ),
+                    content_when_dragging=ft.Container(
+                        width=50,
+                        height=50,
+                        bgcolor=ft.Colors.BLUE_GREY_200,
+                        border_radius=5,
+                    ),
+                    content_feedback=ft.Text("1"),
+                ),
+                ft.Draggable(
+                    group="Number2",
+                    content=ft.Container(
+                        width=50,
+                        height=50,
+                        bgcolor=ft.Colors.AMBER_200,
+                        border_radius=5,
+                        content=ft.Text("X", color=ft.Colors.BLACK_87, size=24),
+                        alignment=ft.Alignment.CENTER,
+                    ),
+                    content_when_dragging=ft.Container(
+                        width=50,
+                        height=50,
+                        bgcolor=ft.Colors.BLUE_GREY_200,
+                        border_radius=5,
+                    ),
+                    content_feedback=ft.Text("X"),
+                ),
+                ft.Container(width=100),
+                ft.DragTarget(
+                    group="Number1",
+                    content=ft.Container(
+                        width=50,
+                        height=50,
+                        bgcolor=ft.Colors.PINK_200,
+                        border_radius=5,
+                        content=ft.Text("0", color=ft.Colors.BLACK_87, size=24),
+                        alignment=ft.Alignment.CENTER,
+                    ),
+                    on_accept=lambda e: self.drag_accept(e, zones),
+                    on_will_accept=lambda e: self.drag_will_accept(e),
+                    on_leave=lambda e: self.drag_leave(e),
+                ),
+            ]
+        )
+
+        return ft.Container(
+            ft.Column(
+                height=1000,
+                controls=[
+                    ft.Text(
+                        "Drag & Drop Example",
+                        size=18,
+                        weight=ft.FontWeight.BOLD,
+                    ),
+                    ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2),
+                    zones,
+                ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        )
+
+
+class Lv16(ft.Container):  # Keybord Shortcuts
+    def __init__(self):
+        super().__init__(content=self.essai())
+
+    def essai(self):
+
+        return ft.Text("Ready.")

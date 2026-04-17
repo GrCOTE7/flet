@@ -34,9 +34,10 @@ def main(page: ft.Page):
     # lvs.append(Lv10())  # .env
     # lvs.append(Lv11(page))  # Theming
     # lvs.append(Lv12(page))  # Imperative CRUD
-    renderers.append(lambda: Lv13(page))  # Declarative CRUD (uses page.render)
-
-    # lvs.append(Lv14())  # State
+    # renderers.append(lambda: Lv13(page))  # Declarative CRUD (uses page.render)
+    # renderers.append(lambda: Lv14(page))  # Declarative CRUD (uses page.render)
+    # lvs.append(Lv15())  # Drag & Drop
+    lvs.append(Lv16())  # Keyboard shortcuts
 
     if renderers:
         # Keep declarative mode isolated from page.add/page.controls flow.

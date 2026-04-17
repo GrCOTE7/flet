@@ -110,13 +110,16 @@ def AddUserForm(add_user) -> ft.Control:
     return ft.Row(
         controls=[
             ft.TextField(
+                border_color=ft.Colors.BLUE_GREY_400,
+                border_width=1,
                 label="First Name",
                 value=new_first_name,
                 on_change=lambda e: set_new_first_name(e.control.value),
-                
                 expand=True,
             ),
             ft.TextField(
+                border_color=ft.Colors.BLUE_GREY_400,
+                border_width=1,
                 label="Last Name",
                 value=new_last_name,
                 on_change=lambda e: set_new_last_name(e.control.value),
@@ -125,14 +128,25 @@ def AddUserForm(add_user) -> ft.Control:
             ft.Button(
                 "Add",
                 on_click=add_user_and_clear,
-                bgcolor="GREEN",
+                height=50,
                 style=ft.ButtonStyle(
+                    side=ft.BorderSide(width=2, color=ft.Colors.GREEN),
                     animation_duration=500,
+                    shape=ft.RoundedRectangleBorder(radius=4),
                     mouse_cursor=ft.MouseCursor.CLICK,
                     color={
                         ft.ControlState.HOVERED: ft.Colors.RED,
                         ft.ControlState.FOCUSED: ft.Colors.BLUE_800,
-                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                        ft.ControlState.DEFAULT: ft.Colors.WHITE_54,
+                    },
+                    bgcolor=ft.Colors.BLACK,
+                    overlay_color={ # Effet progressif du fonds
+                        ft.ControlState.HOVERED: ft.Colors.with_opacity(
+                            0.2, ft.Colors.ORANGE
+                        ),
+                        ft.ControlState.DEFAULT: ft.Colors.with_opacity(
+                            0, ft.Colors.BLACK
+                        ),
                     },
                 ),
             ),

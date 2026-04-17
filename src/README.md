@@ -10,7 +10,7 @@
 
 * [ ] on_click / on_change / on_submit :
   * [x] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
-  * [ ] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
+  * [x] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
   * [ ] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
 
 * [ ] page.update() & Timers, async, futures :
