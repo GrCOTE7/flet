@@ -1,6 +1,7 @@
 import flet as ft
-import os, sys
+import asyncio, os, sys
 from pathlib import Path
+from typing import cast
 
 
 class Lv99(ft.Container):
@@ -759,9 +760,129 @@ class Lv15(ft.Container):  # Drag & Drop
 
 
 class Lv16(ft.Container):  # Keybord Shortcuts
-    def __init__(self):
-        super().__init__(content=self.essai())
+    def __init__(self, page):
+        super().__init__(content=self.essai(page))
 
-    def essai(self):
+    def on_keyboard(self, e: ft.KeyboardEvent, page: ft.Page):
+        page.add(
+            ft.Text(
+                f"Key: {e.key}, Shift: {e.shift}, Control: {e.ctrl}, Alt: {e.alt}, Meta: {e.meta}"
+            )
+        )
+
+    def essai(self, page):
+
+        page.on_keyboard_event = lambda e: self.on_keyboard(e, page)
+        page.add(
+            ft.Text(
+                "Press any key with a combination of CTRL, ALT, SHIFT and META keys..."
+            )
+        )
 
         return ft.Text("Ready.")
+
+
+class Lv17(ft.Container):  # Async
+    def __init__(self, page: ft.Page | None = None):
+        self.message = ft.Text(
+            "Loading...",
+            size=24,
+            color=ft.Colors.CYAN_ACCENT_200,
+            weight=ft.FontWeight.BOLD,
+        )
+        self._task_started = False
+        super().__init__(content=self.message)
+
+    def page_resize(self, page: ft.Page):
+        print(f"New page size: {page.window.width} x {page.window.height}")
+
+    def did_mount(self):
+        print("Démarrage...")
+        if self._task_started:
+            print("Task démarrée...")
+            return
+        print("Task NON démarrée...")
+        self._task_started = True
+        page = cast(ft.Page, self.page)
+        page.run_task(self.main, page)
+
+    async def main(self, page: ft.Page):
+        self.page_resize(page)
+
+        async def button_click(e):
+            print("Clicked!")
+            # await some_async_method()
+            page.add(ft.Text("Hello!"))
+            await asyncio.sleep(5)  # Delay execution
+            page.add(ft.Text("Fait !"))
+
+        page.add(ft.Button("Say hello!", on_click=button_click))
+
+        await asyncio.sleep(5)
+        page.on_resize = lambda e: self.page_resize(page)
+        self.message.value = "Ready."
+        self.message.update()
+
+
+class Countdown(ft.Text):
+    def __init__(self, seconds):
+        super().__init__()
+        self.seconds = seconds
+        self.size = 24
+        self.color = ft.Colors.CYAN_ACCENT_200
+
+    def did_mount(self):
+        self.running = True
+        page = cast(ft.Page, self.page)
+        page.run_task(self.update_timer)
+
+    def will_unmount(self):
+        self.running = False
+
+    async def update_timer(self):
+        while self.seconds + 1 and self.running:
+            mins, secs = divmod(self.seconds, 60)
+            print(secs)
+            self.value = "{:02d}:{:02d}".format(mins, secs)
+            self.update()
+            await asyncio.sleep(1)
+            self.seconds -= 1
+
+
+class Lv18(ft.Container):  # Countdown
+
+    def __init__(self):
+        self.message = ft.Text(
+            "Loading...",
+            size=24,
+            color=ft.Colors.CYAN_ACCENT_200,
+            weight=ft.FontWeight.BOLD,
+        )
+        self._started = False
+        self.countdown_120 = Countdown(30)
+        self.countdown_60 = Countdown(20)
+        super().__init__(
+            content=ft.Column(
+                controls=[
+                    self.message,
+                    ft.Row(
+                        controls=[self.countdown_120, self.countdown_60], spacing=20
+                    ),
+                ]
+            )
+        )
+
+    def did_mount(self):
+        if self._started:
+            return
+        self._started = True
+        self.message.value = "Ready."
+        self.message.update()
+
+
+if __name__ == "__main__":
+
+    def app_main(page: ft.Page):
+        page.add(Lv18())
+
+    ft.run(app_main)

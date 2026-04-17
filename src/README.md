@@ -8,10 +8,10 @@
 
 * [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
 
-* [ ] on_click / on_change / on_submit :
+* [x] on_click / on_change / on_submit :
   * [x] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
   * [x] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
-  * [ ] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
+  * [x] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
 
 * [ ] page.update() & Timers, async, futures :
   * [ ] [Async apps](http://localhost:3000/docs/cookbook/async-apps)
