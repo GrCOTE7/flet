@@ -1,4 +1,5 @@
 import flet as ft
+from typing import Callable
 
 from tools.screen_utils import gc7_rules as gc7
 from .lvAll import *
@@ -17,6 +18,7 @@ def main(page: ft.Page):
     # page.bgcolor = ft.Colors.GREEN_900
 
     lvs = []
+    renderers: list[Callable[[], object]] = []
 
     # lvs.append(Lv00("Salut !"))  # Simple class with a custom text
     # lvs.append(Lv00())  # Simple class with a custom text
@@ -32,14 +34,33 @@ def main(page: ft.Page):
     # lvs.append(Lv10())  # .env
     # lvs.append(Lv11(page))  # Theming
     # lvs.append(Lv12(page))  # Imperative CRUD
-    
-    # lvs.append(Lv14())  # State
-    # page.add(*lvs)
-    if lvs:
-        page.add(lvs[-1])
-    
-    Lv13(page)  # Declarative CRUD (uses page.render)
+    renderers.append(lambda: Lv13(page))  # Declarative CRUD (uses page.render)
 
+    # lvs.append(Lv14())  # State
+
+    if renderers:
+        # Keep declarative mode isolated from page.add/page.controls flow.
+        page.clean()
+        renderers[-1]()
+    elif lvs:
+        # page.add(*lvs)
+        page.add(lvs[-1])
+
+    elif len(page.controls) < 2:
+        page.add(
+            ft.Row(
+                alignment=ft.MainAxisAlignment.CENTER,
+                margin=ft.Margin.only(top=25),
+                controls=[
+                    ft.Text(
+                        "No content.",
+                        size=30,
+                        color=ft.Colors.RED_ACCENT_200,
+                        weight=ft.FontWeight.BOLD,
+                    )
+                ],
+            )
+        )
 
     # lvs.append(Lv99())  # 3 blocs in a stack with different expand values and colors
     # page.add(lvs[-1])
