@@ -41,16 +41,54 @@ class Lv00(ft.Column):
 
 class Lv01(ft.Container):
 
+    def myInputFieldStyle(self, txt=None, label: bool = True):
+        text_kwarg = {"label" if label else "hint_text": txt} if txt else {}
+        sizes = 18, 14
+        return ft.TextField(
+            text_size=sizes[0],
+            label_style=ft.TextStyle(size=sizes[1]),
+            hint_style=ft.TextStyle(size=sizes[1]),
+            border_color=ft.Colors.BLUE_GREY_400,
+            border_width=1,  # épaisseur
+            border_radius=7,
+            expand=True,
+            **text_kwarg,
+        )
+
     def __init__(self):
         super().__init__()
 
         self.padding = 10
         self.border = ft.Border.all(2, ft.Colors.BLUE_GREY_200)
         self.border_radius = 10
-        self.content = ft.Row(
+        self.content = ft.Column(
             controls=[
-                ft.TextField(hint_text="Enter your name", expand=True),
-                ft.Button("Join chat"),
+                ft.Row(
+                    controls=[
+                        self.myInputFieldStyle("First Name", label=False),
+                        self.myInputFieldStyle("Last Name"),
+                        self.myInputFieldStyle(),
+                    ],
+                ),
+                ft.Row(
+                    alignment=ft.MainAxisAlignment.END,
+                    controls=[
+                        ft.Button(
+                            "Join chat",
+                            bgcolor="GREEN",
+                            style=ft.ButtonStyle(
+                                animation_duration=500,
+                                shape=ft.RoundedRectangleBorder(radius=7),
+                                mouse_cursor=ft.MouseCursor.CLICK,
+                                color={
+                                    ft.ControlState.HOVERED: ft.Colors.RED,
+                                    ft.ControlState.FOCUSED: ft.Colors.BLUE_800,
+                                    ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                                },
+                            ),
+                        )
+                    ],
+                ),
             ]
         )
 
@@ -404,7 +442,7 @@ class Lv09(ft.Container):
         doc.controls.append(
             ft.Text("Arial", font_family="Arial", size=20, color=ft.Colors.CYAN_700)
         )
-        doc.controls.append(ft.Divider(color=ft.Colors.WHITE24))
+        doc.controls.append(ft.Divider(color=ft.Colors.WHITE_24))
         doc.controls.append(
             ft.Text(
                 "Exemples largeur / stretch",
@@ -488,10 +526,10 @@ class Lv10(ft.Container):
 
     def __init__(self):
         super().__init__(
-            content=self.myLv09(), width=392, height=1088, bgcolor="#070021"
+            content=self.myLv10(), width=392, height=1088, bgcolor="#070021"
         )
 
-    def myLv09(self):
+    def myLv10(self):
 
         return ft.Text(
             self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
@@ -505,7 +543,7 @@ class Lv10(ft.Container):
 
         custom_env = _read_env_value("MY_KEY")  # → MY_VALUE_SRC depuis src/.env
 
-        txt = f"oki {default_env} - {custom_env}"
+        txt = f"#10 {default_env} - {custom_env}"
         print(txt)
 
         return txt
@@ -514,15 +552,44 @@ class Lv10(ft.Container):
 class Lv11(ft.Container):
 
     def __init__(self, page):
-        super().__init__(content=self.myLv09())
+        super().__init__(content=self.myLv11())
         print(page.dark_theme)
 
         page.theme = ft.Theme(color_scheme_seed=ft.Colors.GREEN)
-        page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.RED_800)
-        print(page.dark_theme)
+        # page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.RED_800)
+        # page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.BLUE_800)
+        # print(page.dark_theme)
+
+        page.add(
+            # Page theme
+            ft.Container(
+                content=ft.Button("Page theme button"),
+                bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                padding=20,
+                width=300,
+            ),
+            # Inherited theme with primary color overridden
+            ft.Container(
+                theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.Colors.PINK)),
+                content=ft.Button("Inherited theme button"),
+                bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                padding=20,
+                width=300,
+            ),
+            # Unique always DARK theme
+            ft.Container(
+                theme=ft.Theme(color_scheme_seed=ft.Colors.INDIGO),
+                theme_mode=ft.ThemeMode.DARK,
+                content=ft.Button("Unique theme button"),
+                bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                padding=20,
+                width=300,
+            ),
+        )
+
         page.update()
 
-    def myLv09(self):
+    def myLv11(self):
 
         return ft.Text(
             # self.ct(), text_align=ft.TextAlign.CENTER, color=ft.Colors.AMBER, size=14
@@ -534,3 +601,32 @@ class Lv11(ft.Container):
         txt = "Ready."
 
         return txt
+
+
+class Lv12(ft.Container):
+
+    def __init__(self, page):
+        super().__init__(content=self.imperative(page))
+
+    def imperative(self, page):
+
+        from cookbook.crud import imperative
+
+        imperative.main(page)
+        page.controls.append(ft.Divider(color=ft.Colors.RED_ACCENT_400))
+
+        return
+
+
+class Lv13(ft.Container):
+
+    def __init__(self, page):
+        super().__init__(content=self.declarative(page))
+
+    def declarative(self, page):
+
+        from cookbook.crud import declarative
+
+        declarative.main(page)
+
+        return

@@ -9,7 +9,7 @@
 * [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
 
 * [ ] on_click / on_change / on_submit :
-  * [/] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
+  * [x] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
   * [ ] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
   * [ ] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
 
@@ -30,24 +30,24 @@
 
 ### À voir à l’occasion (autres cookbooks utiles)
 
-* [x] [Expanding Controls](http://localhost:3000/docs/cookbook/expanding-controls)
-* [x] [Colors](http://localhost:3000/docs/cookbook/colors)
-* [x] [Assets](http://localhost:3000/docs/cookbook/assets)
-* [x] [Fonts](http://localhost:3000/docs/cookbook/fonts) (#09)
-* [/] [Theming](http://localhost:3000/docs/cookbook/theming)
+* [x] Prioritaire
+  * [x] [Expanding Controls](http://localhost:3000/docs/cookbook/expanding-controls)
+  * [x] [Colors](http://localhost:3000/docs/cookbook/colors)
+  * [x] [Assets](http://localhost:3000/docs/cookbook/assets)
+  * [x] [Fonts](http://localhost:3000/docs/cookbook/fonts) (#09)
+  * [x] [Theming](http://localhost:3000/docs/cookbook/theming)
 
----
-
-* [ ] [Accessibility](http://localhost:3000/docs/cookbook/accessibility)
-* [ ] [Control Refs](http://localhost:3000/docs/cookbook/control-refs)
-* [ ] [Custom Controls](http://localhost:3000/docs/cookbook/custom-controls)
-* [ ] [Read and Write Files](http://localhost:3000/docs/cookbook/read-and-write-files)
-* [ ] [Client storage](http://localhost:3000/docs/cookbook/client-storage)
-* [ ] [Session storage](http://localhost:3000/docs/cookbook/session-storage)
-* [ ] [Logging](http://localhost:3000/docs/cookbook/logging)
-* [ ] [Authentication](http://localhost:3000/docs/cookbook/authentication)
-* [ ] [Animations](http://localhost:3000/docs/cookbook/animations)
-* [ ] [Encrypting sensitive data](http://localhost:3000/docs/cookbook/encrypting-sensitive-data)
+* [ ] Secondaire
+  * [ ] [Accessibility](http://localhost:3000/docs/cookbook/accessibility)
+  * [ ] [Control Refs](http://localhost:3000/docs/cookbook/control-refs)
+  * [ ] [Custom Controls](http://localhost:3000/docs/cookbook/custom-controls)
+  * [ ] [Read and Write Files](http://localhost:3000/docs/cookbook/read-and-write-files)
+  * [ ] [Client storage](http://localhost:3000/docs/cookbook/client-storage)
+  * [ ] [Session storage](http://localhost:3000/docs/cookbook/session-storage)
+  * [ ] [Logging](http://localhost:3000/docs/cookbook/logging)
+  * [ ] [Authentication](http://localhost:3000/docs/cookbook/authentication)
+  * [ ] [Animations](http://localhost:3000/docs/cookbook/animations)
+  * [ ] [Encrypting sensitive data](http://localhost:3000/docs/cookbook/encrypting-sensitive-data)
 
 ---
 

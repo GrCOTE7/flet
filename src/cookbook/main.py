@@ -3,15 +3,16 @@ import flet as ft
 from tools.screen_utils import gc7_rules as gc7
 from .lvAll import *
 
+
 def main(page: ft.Page):
 
-    title = "Cookbook21"
-    gc7(page, defaultColors= False)
+    title = "Cookbook"
+    gc7(page, defaultColors=False)
+    page.title = title.replace("-", "|")
     # gc7(page)
     # gc7(page, mode='LIGHT')
-    page.title = title.replace("-", "|")
-    page.scroll = ft.ScrollMode.AUTO
     page.add(ft.Text(title, size=18, weight=ft.FontWeight.BOLD))
+    page.scroll = ft.ScrollMode.AUTO
     # page.spacing = 20
     # page.bgcolor = ft.Colors.GREEN_900
 
@@ -29,13 +30,16 @@ def main(page: ft.Page):
     # lvs.append(Lv08())  # A container in another
     # lvs.append(Lv09(page))  # Fonts
     # lvs.append(Lv10())  # .env
-    lvs.append(Lv11(page))  # Theming
-
-    # lvs.append(Lv10())  # State
-
+    # lvs.append(Lv11(page))  # Theming
+    # lvs.append(Lv12(page))  # Imperative CRUD
+    
+    # lvs.append(Lv14())  # State
     # page.add(*lvs)
     if lvs:
         page.add(lvs[-1])
+    
+    Lv13(page)  # Declarative CRUD (uses page.render)
+
 
     # lvs.append(Lv99())  # 3 blocs in a stack with different expand values and colors
     # page.add(lvs[-1])
