@@ -1124,7 +1124,7 @@ class Lv21(ft.Container):  # ELarge list by batch
             self.append_batch()
 
 
-class Lv22(ft.Container):
+class Lv22(ft.Container): # Large list by batch with background loading and scroll trigger
 
     def __init__(self):
         self._loading_started = False
@@ -1196,9 +1196,6 @@ class Lv22(ft.Container):
             self.append_batch(self.scroll_batch)
 
 
-import flet as ft
-
-
 class Lv23(ft.Container):
 
     def __init__(self):
@@ -1250,7 +1247,7 @@ class Lv23(ft.Container):
         )
 
 
-class Lv24(ft.Column):  # Simple class with a custom text
+class Lv24(ft.Column):  # Subprocess Examples
 
     def __init__(self, txt: str = ""):
 
@@ -1266,42 +1263,69 @@ class Lv24(ft.Column):  # Simple class with a custom text
 
     def myProcess(self):
         import subprocess
-        import locale
+        import ctypes
 
-        # Encodage système Windows (souvent cp1252)
-        sys_enc = locale.getpreferredencoding(False)
-        print(sys_enc)
+        # Codepage OEM utilisé par cmd.exe (ex: cp850 sur Windows FR, cp437 sur EN)
+        oem_enc = f"cp{ctypes.windll.kernel32.GetOEMCP()}"
+        print(f"OEM encoding: {oem_enc}")
 
         commands = [
-            ("echo Bonjour depuis un subprocess en été !", sys_enc),
-            ("dir", sys_enc),
+            "echo Bonjour depuis un subprocess en été !",
+            "dir",
         ]
 
         outputs = []
         separator = "─" * 15
 
-        for i, (cmd, enc) in enumerate(commands, 1):
+        for i, cmd in enumerate(commands, 1):
             p = subprocess.run(
                 cmd,
                 shell=True,
                 capture_output=True,
             )
+            # IMPORTANT: when shell=True is used, the command must be passed as a single string, not a list.
 
-            # Décodage manuel
+            # Décodage avec le vrai encodage console (OEM)
             try:
-                text = p.stdout.decode(enc, errors="replace")
-            except:
-                text = p.stdout.decode("cp1252", errors="replace")
+                text = p.stdout.decode(oem_enc, errors="replace")
+            except Exception:
+                text = p.stdout.decode("cp850", errors="replace")
 
             outputs.append(f"{separator} Resultat   {i} {separator}\n\n{text}")
         print(outputs)
         return "\n".join(outputs).strip()
 
 
+class Lv25(ft.Column):  # Routing & Navigation
+
+    def __init__(self, txt: str = ''):
+
+        c = controls = [
+            ft.Row(
+                controls=[
+                    ft.Text("Routing & Navigation", weight=ft.FontWeight.BOLD, size=18),
+                    ft.Container(expand=True),  # Spacer
+                    ft.Text("Leçon # 25", size=16, italic=True, color=ft.Colors.CYAN_300),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2), # default: height=2}
+    
+            self.uuu()
+        ]
+        if txt:
+            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+
+        super().__init__(c)
+
+    def uuu(self):
+        return ft.Text('Oki')
+
+
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv24())
+        page.add(Lv25())
 
     ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     # ft.run(app_main)

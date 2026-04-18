@@ -6,7 +6,7 @@
 
 **Cookbooks à étudier :**
 
-* [ ] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
+* [x] **Objectif :** comprendre comment Flet gère l’état et pourquoi FletX sera utile.
 
 * [x] on_click / on_change / on_submit :
   * [x] [Declarative vs imperative CRUD app](http://localhost:3000/docs/cookbook/declarative-vs-imperative-crud-app)
@@ -20,8 +20,8 @@
 ### Comment Flet gère l’état
 
 * [x] [PubSub](http://localhost:3000/docs/cookbook/pub-sub)
-* [ ] [Subprocess](http://localhost:3000/docs/cookbook/subprocess)
-* [ ] → Avoir compris pourquoi `page.update()` devient vite lourd
+* [x] [Subprocess](http://localhost:3000/docs/cookbook/subprocess)
+* [x] → Avoir compris pourquoi `page.update()` devient vite lourd
 
 ### Comment organiser un minimum la logique
 
