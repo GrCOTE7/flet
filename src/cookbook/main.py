@@ -6,7 +6,7 @@ from .lvAll import *
 
 
 def main(page: ft.Page):
-
+    print(f'Dans0 src/main → {page.route = }')
     title = "Cookbook"
     gc7(page, defaultColors=False)
     page.title = title.replace("-", "|")
@@ -57,7 +57,7 @@ def main(page: ft.Page):
     # lvs.append(Lv22())  # Large list (Infinite ListView())
     # lvs.append(Lv23())  # Simple PubSUb
     # lvs.append(Lv24())  # SubProcess
-    lvs.append(Lv25())  # Routing & Navigation
+    lvs.append(Lv25(page))  # Routing & Navigation
 
     # gc7(page, mode='LIGHT')
     # gc7(page, width=500)

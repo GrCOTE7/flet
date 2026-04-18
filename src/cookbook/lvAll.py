@@ -5,7 +5,6 @@ import asyncio, os, sys
 from pathlib import Path
 from typing import cast
 
-
 class Lv99(ft.Container):
     def __init__(self):
         super().__init__()
@@ -1124,7 +1123,9 @@ class Lv21(ft.Container):  # ELarge list by batch
             self.append_batch()
 
 
-class Lv22(ft.Container): # Large list by batch with background loading and scroll trigger
+class Lv22(
+    ft.Container
+):  # Large list by batch with background loading and scroll trigger
 
     def __init__(self):
         self._loading_started = False
@@ -1298,34 +1299,38 @@ class Lv24(ft.Column):  # Subprocess Examples
 
 class Lv25(ft.Column):  # Routing & Navigation
 
-    def __init__(self, txt: str = ''):
-
+    def __init__(self, page: ft.Page, txt: str = ""):
         c = controls = [
             ft.Row(
                 controls=[
                     ft.Text("Routing & Navigation", weight=ft.FontWeight.BOLD, size=18),
                     ft.Container(expand=True),  # Spacer
-                    ft.Text("Leçon # 25", size=16, italic=True, color=ft.Colors.CYAN_300),
+                    ft.Text(
+                        "Leçon # 25", size=16, italic=True, color=ft.Colors.CYAN_300
+                    ),
                 ],
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
             ),
-            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2), # default: height=2}
-    
-            self.uuu()
+            ft.Divider(
+                color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
+            ),  # default: height=2}
+            self.uuu(page),
         ]
         if txt:
             controls.append(ft.Text(txt, size=18, color="#eeffffff"))
 
         super().__init__(c)
 
-    def uuu(self):
-        return ft.Text('Oki')
+    def uuu(self, page):
+        print("uuu called")
+        print(f"Dans App Lv25 → {page.route = }")
+        return ft.Text("Oki")
 
 
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv25())
+        page.add(Lv25(page))
 
     ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     # ft.run(app_main)
