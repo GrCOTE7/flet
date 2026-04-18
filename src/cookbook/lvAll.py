@@ -1257,17 +1257,51 @@ class Lv24(ft.Column):  # Simple class with a custom text
         c = controls = [
             ft.Text("Subprocess", size=18),
             ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2),
+            ft.Text(self.myProcess(), size=16, weight=ft.FontWeight.BOLD),
         ]
         if txt:
             controls.append(ft.Text(txt, size=18, color="#eeffffff"))
 
         super().__init__(c)
 
+    def myProcess(self):
+        import subprocess
+        import locale
+
+        # Encodage système Windows (souvent cp1252)
+        sys_enc = locale.getpreferredencoding(False)
+        print(sys_enc)
+
+        commands = [
+            ("echo Bonjour depuis un subprocess en été !", sys_enc),
+            ("dir", sys_enc),
+        ]
+
+        outputs = []
+        separator = "─" * 15
+
+        for i, (cmd, enc) in enumerate(commands, 1):
+            p = subprocess.run(
+                cmd,
+                shell=True,
+                capture_output=True,
+            )
+
+            # Décodage manuel
+            try:
+                text = p.stdout.decode(enc, errors="replace")
+            except:
+                text = p.stdout.decode("cp1252", errors="replace")
+
+            outputs.append(f"{separator} Resultat   {i} {separator}\n\n{text}")
+        print(outputs)
+        return "\n".join(outputs).strip()
+
 
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv23())
+        page.add(Lv24())
 
     ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     # ft.run(app_main)
