@@ -6,7 +6,7 @@ from .lvAll import *
 
 
 def main(page: ft.Page):
-    print(f'Dans0 src/main → {page.route = }')
+    print(f'Dans src/main → {page.route = }')
     title = "Cookbook"
     gc7(page, defaultColors=False)
     page.title = title.replace("-", "|")
