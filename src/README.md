@@ -13,9 +13,9 @@
   * [x] [Drag and drop](http://localhost:3000/docs/cookbook/drag-and-drop)
   * [x] [Keyboard shortcuts](http://localhost:3000/docs/cookbook/keyboard-shortcuts)
 
-* [ ] page.update() & Timers, async, futures :
-  * [ ] [Async apps](http://localhost:3000/docs/cookbook/async-apps)
-  * [ ] [Large lists](http://localhost:3000/docs/cookbook/large-lists)
+* [x] page.update() & Timers, async, futures :
+  * [x] [Async apps](http://localhost:3000/docs/cookbook/async-apps)
+  * [x] [Large lists](http://localhost:3000/docs/cookbook/large-lists)
 
 ### Comment Flet gère l’état
 

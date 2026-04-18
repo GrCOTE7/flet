@@ -10,10 +10,21 @@ def main(page: ft.Page):
     title = "Cookbook"
     gc7(page, defaultColors=False)
     page.title = title.replace("-", "|")
-    # gc7(page)
     # gc7(page, mode='LIGHT')
-    page.add(ft.Text(title, size=18, weight=ft.FontWeight.BOLD))
+    page.add(
+        ft.Column(
+            spacing=0,
+            controls=[
+                ft.Text(title, size=18, weight=ft.FontWeight.BOLD),
+                ft.Divider(color=ft.Colors.RED_ACCENT_400, thickness=2, height=7),
+                ft.Divider(
+                    color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2, height=7
+                )
+            ],
+        )
+    )
     page.scroll = ft.ScrollMode.AUTO
+    page.horizontal_alignment = ft.CrossAxisAlignment.STRETCH
     # page.spacing = 20
     # page.bgcolor = ft.Colors.GREEN_900
 
@@ -21,7 +32,7 @@ def main(page: ft.Page):
     renderers: list[Callable[[], object]] = []
 
     # lvs.append(Lv00("Salut !"))  # Simple class with a custom text
-    # lvs.append(Lv00())  # Simple class with a custom text
+    lvs.append(Lv00())  # Simple class with a custom text
     # lvs.append(Lv01())  # Form with a text field and a button
     # lvs.append(Lv02())  # 3 blocs in a row with different expand values and colors
     # lvs.append(Lv03())  # A counter
@@ -39,7 +50,14 @@ def main(page: ft.Page):
     # lvs.append(Lv15())  # Drag & Drop
     # lvs.append(Lv16(page)) # Keyboard Shotcuts
     # lvs.append(Lv17(page))  # Async
-    lvs.append(Lv18())  # Countdown
+    # lvs.append(Lv18())  # Countdowns
+    # lvs.append(Lv19())  # Large list
+    # lvs.append(Lv20())  # Large list - Simplier Chargement par lots)
+    # lvs.append(Lv21())  # Large list (Illimited ListView() + batch loading)
+    # lvs.append(Lv22())  # Large list (Infinite ListView())
+    # lvs.append(Lv23())  # Simple PubSUb
+
+    # gc7(page, width=500)
 
     if renderers:
         # Keep declarative mode isolated from page.add/page.controls flow.

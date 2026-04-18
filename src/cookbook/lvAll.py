@@ -1,3 +1,5 @@
+from math import e
+
 import flet as ft
 import asyncio, os, sys
 from pathlib import Path
@@ -23,21 +25,10 @@ class Lv99(ft.Container):
 
 class Lv00(ft.Column):  # Simple class with a custom text
 
-    def __init__(self, t1: str | None = None):
-        t_ready = ft.Text("Ready.")
-        t1_text = self.txt(t1)
-
-        controls: list[ft.Control] = [t_ready]
-        if t1_text:
-            print(t1_text.value)
-            controls.insert(0, t1_text)
-
-        super().__init__(controls=controls)
-
-    def txt(self, t1: str | None = None):
-        if t1:
-            return ft.Text(t1)
-        return None
+    def __init__(self):
+        super().__init__(
+            controls = [ft.Text("Ready.", size=18)]
+       )
 
 
 class Lv01(ft.Container):  # Form with a text field and a button
@@ -880,9 +871,345 @@ class Lv18(ft.Container):  # Countdown
         self.message.update()
 
 
+class Lv19(ft.Container):  # Large Lists
+    _MARGES_V = 20
+
+    os.environ["FLET_WS_MAX_MESSAGE_SIZE"] = (
+        "8000000"  # Augment WebSocket message in bytes that can be received by Flet Server rendering the page
+    )
+
+    def __init__(self):
+        super().__init__(
+            padding=ft.Padding.only(
+                top=68, left=10, right=10, bottom=self._MARGES_V + 10
+            ),  # 2ar MARGE_V top & +10 bottom
+            height=750,
+            bgcolor="#014201",
+            border=ft.Border.all(5, ft.Colors.GREEN_200),
+            border_radius=ft.BorderRadius.all(7),
+            # content=self.build_table(),
+            # content=self.list_view(),
+            # content=self.grid_view_by_rows(),
+            content=self.grid_view(),
+        )
+
+    def build_table(self):
+        rows = []
+
+        # Max 897 sauf au lancement : 10001+ sinon blocage silencieux
+        for i in range(1, 101):
+            rows.append(
+                ft.Row(
+                    spacing=10,
+                    controls=[
+                        ft.Container(
+                            width=40,
+                            alignment=ft.alignment.Alignment(-1, 0),
+                            content=ft.Text("Line", size=18),
+                        ),
+                        ft.Container(
+                            width=50,
+                            alignment=ft.alignment.Alignment(1, 0),
+                            content=ft.Text(f"{i}", size=18, font_family="monospace"),
+                        ),
+                    ],
+                )
+            )
+
+        return ft.Container(
+            expand=True,
+            height=700,
+            content=ft.Column(
+                expand=True,
+                scroll=ft.ScrollMode.AUTO,
+                spacing=4,
+                controls=rows,
+            ),
+        )
+
+    def list_view(self):
+        return ft.ListView(
+            scroll=ft.Scrollbar(
+                thumb_visibility=True,
+                track_visibility=True,
+                interactive=True,
+                thickness=10,
+            ),
+            spacing=4,
+            controls=[ft.Text(f"Line {i: >5}", size=18) for i in range(1, 101)],
+        )
+
+    def grid_view_by_rows(self):
+        cases_size = 120  # 54
+        # ecartement = 10   # 15
+        return ft.Row(
+            wrap=True,
+            expand=True,
+            scroll=ft.ScrollMode.AUTO,
+            # spacing=ecartement,
+            # run_spacing=ecartement,
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.Container(
+                    content=ft.Text(
+                        f"Item {i}",
+                        size=18,
+                        text_align=ft.TextAlign.CENTER,
+                        color=ft.Colors.BLACK_87,
+                    ),
+                    width=cases_size,
+                    height=cases_size,
+                    alignment=ft.Alignment.CENTER,
+                    bgcolor=ft.Colors.AMBER_100 if i % 2 == 0 else ft.Colors.CYAN_100,
+                    border=ft.Border.all(
+                        5, ft.Colors.AMBER_400 if i % 2 == 0 else ft.Colors.CYAN_200
+                    ),
+                    border_radius=7,
+                )
+                for i in range(1, 121)
+            ],
+        )
+
+    def grid_view(self):
+        return ft.GridView(
+            # expand=True,
+            max_extent=134,
+            child_aspect_ratio=0.99,
+            # spacing=20,
+            # run_spacing=20,
+            padding=ft.Padding.only(left=30, right=30),
+            controls=[
+                (
+                    ft.Container(
+                        content=ft.Text(
+                            f"Item {i}",
+                            size=18,
+                            text_align=ft.TextAlign.CENTER,
+                            color=ft.Colors.BLACK_87,
+                        ),
+                        alignment=ft.Alignment.CENTER,
+                        bgcolor=(
+                            ft.Colors.AMBER_100 if i % 2 == 0 else ft.Colors.CYAN_100
+                        ),
+                        border=ft.Border.all(
+                            5, ft.Colors.AMBER_400 if i % 2 == 0 else ft.Colors.CYAN_200
+                        ),
+                        border_radius=7,
+                    )
+                )
+                for i in range(1, 121)
+            ],
+            scroll=ft.ScrollMode.AUTO,
+            # scroll=ft.Scrollbar(
+            #     thumb_visibility=True,
+            #     track_visibility=True,
+            #     interactive=True,
+            #     thickness=10,
+            # ),
+        )
+
+
+class Lv20(ft.Container):  # ELarge list by batch
+
+    def __init__(self):
+
+        super().__init__(
+            padding=10,
+            expand=True,
+            bgcolor="#014201",
+            border=ft.Border.all(5, ft.Colors.GREEN_200),
+            border_radius=7,
+            content=self.simple_batch_loader(),
+        )
+
+    def simple_batch_loader(self):
+
+        class BatchList(ft.ListView):
+            def __init__(self, total=5001, batch=500):
+                super().__init__(expand=True)
+                self.total = total
+                self.batch = batch
+
+            def did_mount(self):
+                for i in range(self.total):
+                    self.controls.append(ft.Text(f"Line {i}"))
+
+                    if i % self.batch == 0:
+                        print(i)
+                        self.update()
+
+                # dernière update
+                self.update()
+
+        return BatchList()
+
+
+class Lv21(ft.Container):  # ELarge list by batch
+
+    def __init__(self):
+        self.max_rows = 10000
+        self.batch_size = 500
+        self.next_row = 1
+        self.loading_batch = False
+        self.list_view = ft.ListView(
+            expand=True,
+            spacing=4,
+            scroll=ft.Scrollbar(
+                thumb_visibility=True,
+                track_visibility=True,
+                interactive=True,
+                thickness=10,
+            ),
+            build_controls_on_demand=True,
+            item_extent=30,
+            on_scroll=self.on_list_scroll,
+        )
+        super().__init__(
+            padding=10,
+            expand=True,
+            bgcolor="#014201",
+            border=ft.Border.all(5, ft.Colors.GREEN_200),
+            border_radius=7,
+            content=self.build_table(),
+        )
+
+    def did_mount(self):
+        self.append_batch()
+
+    def build_table(self):
+        return ft.Container(
+            expand=True,
+            height=700,
+            content=self.list_view,
+        )
+
+    def make_row(self, i: int) -> ft.Row:
+        return ft.Row(
+            spacing=10,
+            controls=[
+                ft.Container(
+                    width=40,
+                    alignment=ft.alignment.Alignment(-1, 0),
+                    content=ft.Text("Line", size=18),
+                ),
+                ft.Container(
+                    width=50,
+                    alignment=ft.alignment.Alignment(1, 0),
+                    content=ft.Text(f"{i}", size=18, font_family="monospace"),
+                ),
+            ],
+        )
+
+    def append_batch(self):
+        if self.loading_batch or self.next_row > self.max_rows:
+            return
+
+        self.loading_batch = True
+        start = self.next_row
+        stop = min(start + self.batch_size, self.max_rows + 1)
+        print(stop)
+        self.list_view.controls.extend(self.make_row(i) for i in range(start, stop))
+        self.next_row = stop
+        self.loading_batch = False
+        self.list_view.update()
+
+    def on_list_scroll(self, e: ft.OnScrollEvent):
+        if e.extent_after < 300:
+            self.append_batch()
+
+
+class Lv22(ft.Container):
+
+    def __init__(self):
+        self._loading_started = False
+        self._loading_batch = False
+        self._alive = True
+        self.total_rows = 50000
+        self.next_row = 0
+        self.initial_batch = 300
+        self.background_batch = 300
+        self.scroll_batch = 1200
+        super().__init__(
+            padding=10,
+            expand=True,
+            bgcolor="#014201",
+            border=ft.Border.all(5, ft.Colors.GREEN_200),
+            border_radius=7,
+            height=700,
+        )
+
+        # On crée le ListView vide ici
+        self.lv = ft.ListView(
+            expand=True,
+            spacing=4,
+            build_controls_on_demand=True,
+            item_extent=24,
+            scroll=ft.Scrollbar(
+                thumb_visibility=True,
+                track_visibility=True,
+                interactive=True,
+                thickness=10,
+            ),
+            on_scroll=self.on_scroll,
+        )
+        self.content = self.lv
+
+    def did_mount(self):
+        if self._loading_started:
+            return
+        self._loading_started = True
+
+        # Affiche vite un premier écran de lignes.
+        self.append_batch(self.initial_batch)
+
+        page = cast(ft.Page, self.page)
+        page.run_task(self.load_items)
+
+    def will_unmount(self):
+        self._alive = False
+
+    def append_batch(self, amount: int):
+        if self._loading_batch or self.next_row >= self.total_rows:
+            return
+
+        self._loading_batch = True
+        start = self.next_row
+        stop = min(start + amount, self.total_rows)
+        self.lv.controls.extend(ft.Text(f"Line {i}") for i in range(start, stop))
+        self.next_row = stop
+        self._loading_batch = False
+        self.lv.update()
+
+    async def load_items(self):
+        while self._alive and self.next_row < self.total_rows:
+            self.append_batch(self.background_batch)
+            await asyncio.sleep(0.02)
+
+    def on_scroll(self, e: ft.OnScrollEvent):
+        if e.extent_after < 800:
+            self.append_batch(self.scroll_batch)
+
+
+class Lv23(ft.Container):
+
+    def __init__(self):
+        super().__init__(content=self.essai())
+
+    def essai(self):
+
+        return ft.Column(
+            controls=[
+                ft.Text("Pub/Sub Example", size=18, weight=ft.FontWeight.BOLD),
+                ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2),
+                ft.Text("This is a simple Pub/Sub example."),
+            ]
+        )
+
+
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv18())
+        page.add(Lv23())
 
+    # ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     ft.run(app_main)
