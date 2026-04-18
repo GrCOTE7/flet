@@ -25,10 +25,16 @@ class Lv99(ft.Container):
 
 class Lv00(ft.Column):  # Simple class with a custom text
 
-    def __init__(self):
-        super().__init__(
-            controls = [ft.Text("Ready.", size=18)]
-       )
+    def __init__(self, txt: str = None):
+
+        c = controls = [
+            ft.Text("Ready.", size=18),
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2),
+        ]
+        if txt:
+            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+
+        super().__init__(c)
 
 
 class Lv01(ft.Container):  # Form with a text field and a button
@@ -1190,20 +1196,72 @@ class Lv22(ft.Container):
             self.append_batch(self.scroll_batch)
 
 
+import flet as ft
+
+
 class Lv23(ft.Container):
 
     def __init__(self):
-        super().__init__(content=self.essai())
+        super().__init__()
 
-    def essai(self):
+        self.messages = ft.Column()
+        self.user = ft.TextField(hint_text="Your name", width=150)
+        self.message = ft.TextField(hint_text="Your message...", expand=True)
+
+        self.content = ft.Column(
+            controls=[
+                self.sub_title(),
+                self.fake_chat(),
+            ]
+        )
+
+    # ---------------------------------------------------------
+    # 1) Appelé automatiquement quand le contrôle est sur la page
+    # ---------------------------------------------------------
+    def did_mount(self):
+        self.page.pubsub.subscribe(self.on_message)
+
+    def sub_title(self):
+        return ft.Column(
+            controls=[
+                ft.Text("Pub/Sub Simple Example", size=18, weight=ft.FontWeight.BOLD),
+                ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2),
+            ]
+        )
+
+    def on_message(self, msg):
+        self.messages.controls.append(ft.Text(f"Received: {msg}"))
+        self.update()
+
+    def send_click(self, e):
+        self.page.pubsub.send_all(f"{self.user.value}: {self.message.value}")
+        self.message.value = ""
+        self.page.update()
+
+    def fake_chat(self):
+        send = ft.Button("Send", on_click=self.send_click)
 
         return ft.Column(
             controls=[
-                ft.Text("Pub/Sub Example", size=18, weight=ft.FontWeight.BOLD),
-                ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2),
-                ft.Text("This is a simple Pub/Sub example."),
+                ft.Text("Fake chat"),
+                self.messages,
+                ft.Row(controls=[self.user, self.message, send]),
             ]
         )
+
+
+class Lv24(ft.Column):  # Simple class with a custom text
+
+    def __init__(self, txt: str = ""):
+
+        c = controls = [
+            ft.Text("Subprocess", size=18),
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2),
+        ]
+        if txt:
+            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+
+        super().__init__(c)
 
 
 if __name__ == "__main__":
@@ -1211,5 +1269,5 @@ if __name__ == "__main__":
     def app_main(page: ft.Page):
         page.add(Lv23())
 
-    # ft.run(app_main, view=ft.AppView.WEB_BROWSER)
-    ft.run(app_main)
+    ft.run(app_main, view=ft.AppView.WEB_BROWSER)
+    # ft.run(app_main)

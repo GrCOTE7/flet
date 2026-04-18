@@ -19,7 +19,7 @@
 
 ### Comment Flet gère l’état
 
-* [ ] [PubSub](http://localhost:3000/docs/cookbook/pub-sub)
+* [x] [PubSub](http://localhost:3000/docs/cookbook/pub-sub)
 * [ ] [Subprocess](http://localhost:3000/docs/cookbook/subprocess)
 * [ ] → Avoir compris pourquoi `page.update()` devient vite lourd
 
