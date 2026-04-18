@@ -1323,8 +1323,9 @@ class Lv25(ft.Column):  # Routing & Navigation
 
     def uuu(self, page):
         print("uuu called")
-        print(f"Dans App Lv25 → {page.route = }")
-        return ft.Text("Oki")
+        route = f"Dans App Lv25 → {page.route = }"
+        print(route)
+        return ft.Text(route)
 
 
 if __name__ == "__main__":
