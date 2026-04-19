@@ -5,6 +5,7 @@ import asyncio, os, sys
 from pathlib import Path
 from typing import cast
 
+
 class Lv99(ft.Container):
     def __init__(self):
         super().__init__()
@@ -24,11 +25,21 @@ class Lv99(ft.Container):
 
 class Lv00(ft.Column):  # Simple class with a custom text
 
-    def __init__(self, txt: str = None):
-
+    def __init__(self, txt: str = ""):
         c = controls = [
-            ft.Text("Ready.", size=18),
-            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2),
+            ft.Row(
+                controls=[
+                    ft.Text("Titre", weight=ft.FontWeight.BOLD, size=18),
+                    ft.Container(expand=True),  # Spacer
+                    ft.Text(
+                        "Leçon # 00", size=16, italic=True, color=ft.Colors.CYAN_300
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(
+                color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
+            ),  # default: height=2}
         ]
         if txt:
             controls.append(ft.Text(txt, size=18, color="#eeffffff"))
@@ -1314,18 +1325,102 @@ class Lv25(ft.Column):  # Routing & Navigation
             ft.Divider(
                 color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
             ),  # default: height=2}
-            self.uuu(page),
+            self.route_use(page),
         ]
         if txt:
             controls.append(ft.Text(txt, size=18, color="#eeffffff"))
 
         super().__init__(c)
 
-    def uuu(self, page):
-        print("uuu called")
-        route = f"Dans App Lv25 → {page.route = }"
-        print(route)
-        return ft.Text(route)
+    def route_use(self, page):
+        route_log = ft.Column(
+            controls=[ft.Text(f"Dans App Lv25 → Initial route : {page.route = }")]
+        )
+
+        async def open_mail_setting(self, e):
+            await page.push_route("/settings/mail")
+
+        async def open_setting(self, e):
+            await page.push_route("/settings")
+
+        def route_change(e, page):
+            print(f"Route change: {page.route}")
+
+            page.views.clear()  # Clear current views
+            page.views.append(
+                ft.View(
+                    route="/",
+                    controls=[
+                        ft.SafeArea(
+                            content=ft.Column(
+                                controls=[
+                                    ft.AppBar(title=ft.Text("Flet App")),
+                                    ft.Button("Go to Settings", on_click=open_setting),
+                                ],
+                            )
+                        )
+                    ],
+                )
+            )
+            if page.route == "/settings" or page.route == "/settings/mail":
+                page.views.append(
+                    ft.View(
+                        route="/settings",
+                        controls=[
+                            ft.SafeArea(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.AppBar(
+                                            title=ft.Text("Settings"),
+                                            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                                        ),
+                                        ft.Text(
+                                            "Settings!",
+                                            theme_style=ft.TextThemeStyle.BODY_MEDIUM,
+                                        ),
+                                        ft.Button(
+                                            content="Go to mail settings",
+                                            on_click=open_mail_settings,
+                                        ),
+                                    ]
+                                )
+                            )
+                        ],
+                    )
+                )
+            if page.route == "/settings/mail":
+                page.views.append(
+                    ft.View(
+                        route="/settings/mail",
+                        controls=[
+                            ft.SafeArea(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.AppBar(
+                                            title=ft.Text("Mail Settings"),
+                                            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                                        ),
+                                        ft.Text("Mail settings!"),
+                                    ]
+                                )
+                            )
+                        ],
+                    )
+                )
+            page.update()
+        async def view_pop(e):
+            if e.view is not None:
+                print("View pop:", e.view)
+                page.views.remove(e.view)
+                top_view = page.views[-1]
+                await page.push_route(top_view.route)    
+            
+        page.on_route_change = route_change
+        page.on_view_pop = view_pop
+
+        self.route_change(e=None, page=page)  # Initialize views based on the initial route
+        
+        return route_log
 
 
 if __name__ == "__main__":
