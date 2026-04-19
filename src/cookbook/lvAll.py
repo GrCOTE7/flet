@@ -1442,12 +1442,15 @@ class Lv25(ft.Column):  # Routing & Navigation
 
 class Lv26(ft.Column):  # Routing & Navigation with separated pages
 
-    def __init__(self, page: ft.Page, txt: str = ""):
-        controls = [
-            self.route_use(page),
-            *([ft.Text(txt, size=18, color="#eeffffff")] if txt else []),
-        ]
-        super().__init__(controls=controls)
+    def __init__(
+        self, page: ft.Page, txt: str = "Page d'accueil au lancement (Uniquement)"
+    ):
+        super().__init__(
+            controls=[
+                self.route_use(page),
+                *([ft.Text(txt, size=18, color="#eeffffff")] if txt else []),
+            ]
+        )
 
     def route_use(self, page):
         route_log = ft.Column(
@@ -1455,23 +1458,23 @@ class Lv26(ft.Column):  # Routing & Navigation with separated pages
         )
 
         try:
-            from cookbook.page_lv26 import (
+            from cookbook.pages_lv26 import (
                 build_mail_settings_view,
                 build_root_view,
                 build_settings_view,
             )
         except ImportError:
-            from page_lv26 import (
+            from pages_lv26 import (
                 build_mail_settings_view,
                 build_root_view,
                 build_settings_view,
             )
 
-        async def open_mail_setting(e):
-            await page.push_route("/settings/mail")
-
         async def open_setting(e):
             await page.push_route("/settings")
+
+        async def open_mail_setting(e):
+            await page.push_route("/settings/mail")
 
         def route_change(e):
             print(f"Route change: {page.route}")
