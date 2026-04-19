@@ -33,6 +33,7 @@ def main(page: ft.Page):
 
     # lvs.append(Lv00("Salut !"))  # Simple class with a custom text
     # lvs.append(Lv00())  # Simple class with a custom text
+    #
     # lvs.append(Lv01())  # Form with a text field and a button
     # lvs.append(Lv02())  # 3 blocs in a row with different expand values and colors
     # lvs.append(Lv03())  # A counter
@@ -41,29 +42,44 @@ def main(page: ft.Page):
     # lvs.append(Lv06())  # ResponsiveRow
     # lvs.append(Lv07())  # Shadow & Action
     # lvs.append(Lv08())  # A container in another
+    #
     # lvs.append(Lv09(page))  # Fonts
+    #
     # lvs.append(Lv10())  # .env
+    #
     # lvs.append(Lv11(page))  # Theming
+    #
     # lvs.append(Lv12(page))  # Imperative CRUD
     # renderers.append(lambda: Lv13(page))  # Declarative CRUD (uses page.render)
     # renderers.append(lambda: Lv14(page))  # Declarative CRUD (uses page.render)
+    #
     # lvs.append(Lv15())  # Drag & Drop
     # lvs.append(Lv16(page)) # Keyboard Shotcuts
+    #
     # lvs.append(Lv17(page))  # Async
     # lvs.append(Lv18())  # Countdowns
+    #
     # lvs.append(Lv19())  # Large list
     # lvs.append(Lv20())  # Large list - Simplier Chargement par lots)
     # lvs.append(Lv21())  # Large list (Illimited ListView() + batch loading)
     # lvs.append(Lv22())  # Large list (Infinite ListView())
+    #
     # lvs.append(Lv23())  # Simple PubSUb
     # lvs.append(Lv24())  # SubProcess
+    #
     # lvs.append(Lv25(page))  # Routing & Navigation
     # lvs.append(Lv26(page))  # Idem Lv25 mais page dans fichiers séparés
     # lvs.append(Lv27(page))  # Confirm pop (pour back)
     # lvs.append(Lv28(page))  # Simple drawer (Menu Burger)
     # lvs.append(Lv29(page))  # Simple drawer + Navigation
     # lvs.append(Lv30(page))  # Route templates (parameterized routes)
-    lvs.append(Lv31())  # 
+    #
+    # gc7(page, mode="LIGHT", width=700)
+    # gc7(page, width=700)
+    page.adaptive = True # Optimize iOS et Android platforms
+    # lvs.append(Lv31(page))  # Adaptive apps
+    #
+    lvs.append(Lv32())  # DataTable sortable
 
     # gc7(page, mode='LIGHT')
     # gc7(page, width=500)

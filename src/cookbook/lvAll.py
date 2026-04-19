@@ -29,17 +29,15 @@ class Lv00(ft.Column):  # Simple class with a custom text
                     ft.Text("Titre", weight=ft.FontWeight.BOLD, size=18),
                     ft.Container(expand=True),  # Spacer
                     ft.Text(
-                        "Leçon # 00", size=16, italic=True, color=ft.Colors.CYAN_300
+                        "Leçon #00", size=16, italic=True, color=ft.Colors.CYAN_300
                     ),
                 ],
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
             ),
-            ft.Divider(
-                color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
-            ),  # default: height=2}
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2),
         ]
         if txt:
-            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+            controls.append(ft.Text(txt, size=18, color=ft.Colors.WHITE))
 
         super().__init__(c)
 
@@ -1551,6 +1549,7 @@ class Lv27(ft.Column):  # Routing & Navigation with separated pages
                 await mail_view.confirm_pop(False)
 
             dlg_modal = ft.AlertDialog(
+                # dlg_modal = ft.CupertinoAlertDialog(
                 title=ft.Text("Confirmer le retour"),
                 content=ft.Text(
                     "Des modifications dans Mail Settings ne sont peut-être pas encore enregistrées. Quitter cette page ?"
@@ -1559,7 +1558,7 @@ class Lv27(ft.Column):  # Routing & Navigation with separated pages
                     ft.TextButton("Oui", on_click=on_dlg_yes),
                     ft.TextButton("Non", on_click=on_dlg_no),
                 ],
-                actions_alignment=ft.MainAxisAlignment.END,
+                # actions_alignment=ft.MainAxisAlignment.END,
                 on_dismiss=lambda e: print("Confirmation de retour fermee."),
             )
 
@@ -1862,16 +1861,16 @@ class Lv30(ft.Column):  # Route templates (parameterized routes)
         self._route_change(e=None)
 
 
-class Lv31(ft.Column):  # Simple class with a custom text
+class Lv31(ft.Column):  # Adaptive apps
 
-    def __init__(self, txt: str = ""):
+    def __init__(self, page: ft.Page, txt: str = "oOo"):
         c = controls = [
             ft.Row(
                 controls=[
-                    ft.Text("Titre", weight=ft.FontWeight.BOLD, size=18),
+                    ft.Text("Adaptive apps", weight=ft.FontWeight.BOLD, size=18),
                     ft.Container(expand=True),  # Spacer
                     ft.Text(
-                        "Leçon # 31", size=16, italic=True, color=ft.Colors.CYAN_300
+                        "Leçon #31", size=16, italic=True, color=ft.Colors.CYAN_300
                     ),
                 ],
                 vertical_alignment=ft.CrossAxisAlignment.CENTER,
@@ -1879,17 +1878,112 @@ class Lv31(ft.Column):  # Simple class with a custom text
             ft.Divider(
                 color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
             ),  # default: height=2}
+            ft.Text("─" * int(self.adapt_sample(page) // 8)),
+            ft.Divider(color=ft.Colors.WHITE, thickness=2, height=1),
+            ft.Text(f"Window width: {self.adapt_sample(page)} px", size=14),
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=1),
+            ft.CupertinoCheckbox(
+                value=True,
+                label="CupertinoCheckbox",
+            ),
+            ft.Checkbox(
+                value=True,
+                label="Checkbox",
+            ),
         ]
         if txt:
-            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+            controls.append(ft.Text(txt, size=18, color=ft.Colors.WHITE_70))
 
         super().__init__(c)
+
+    def adapt_sample(self, page):
+        width = page.window.width or page.width or 800
+        print(width)
+        return width
+
+
+class Lv32(ft.Column):  # DataTable (sortable)
+
+    def __init__(self, txt: str = "Ready."):
+        self.table: ft.DataTable | None = None
+        c = controls = [
+            ft.Row(
+                controls=[
+                    ft.Text("DataTable", weight=ft.FontWeight.BOLD, size=18),
+                    ft.Container(expand=True),  # Spacer
+                    ft.Text(
+                        "Leçon #32", size=16, italic=True, color=ft.Colors.CYAN_300
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2),
+            self.myTable(),
+        ]
+        if txt:
+            controls.append(ft.Text(txt, size=18, color=ft.Colors.WHITE))
+
+        super().__init__(c)
+
+    def myTable(self):
+        self.table = ft.DataTable(
+            columns=[
+                ft.DataColumn(label=ft.Text("ID"), numeric=True),
+                ft.DataColumn(label=ft.Text("Nom")),
+                ft.DataColumn(
+                    label=ft.Text("Âge"), numeric=True, on_sort=self.sort_by_age
+                ),
+            ],
+            rows=[
+                ft.DataRow(
+                    cells=[
+                        ft.DataCell(ft.Text("1")),
+                        ft.DataCell(ft.Text("Alice")),
+                        ft.DataCell(ft.Text("3")),
+                    ]
+                ),
+                ft.DataRow(
+                    cells=[
+                        ft.DataCell(ft.Text("2")),
+                        ft.DataCell(ft.Text("Bob")),
+                        ft.DataCell(ft.Text("105")),
+                    ]
+                ),
+                ft.DataRow(
+                    cells=[
+                        ft.DataCell(ft.Text("300")),
+                        ft.DataCell(ft.Text("Charlie")),
+                        ft.DataCell(ft.Text("25")),
+                    ]
+                ),
+            ],
+        )
+
+        return self.table
+
+    def sort_by_age(self, e):
+        if self.table is None:
+            return
+
+        # Flet fournit généralement e.ascending/e.column_index dans l'event de tri.
+        ascending = bool(getattr(e, "ascending", True))
+        column_index = int(getattr(e, "column_index", 2))
+
+        def age_value(row: ft.DataRow) -> int:
+            content = row.cells[2].content
+            value = getattr(content, "value", "0")
+            return int(str(value))
+
+        self.table.rows.sort(key=age_value, reverse=not ascending)
+        self.table.sort_column_index = column_index
+        self.table.sort_ascending = ascending
+        self.table.update()
 
 
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv30(page))
+        page.add(Lv31(page))
 
     ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     # ft.run(app_main)

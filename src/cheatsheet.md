@@ -1,4 +1,4 @@
-# Flet - Tableau rapide des propriétés (SafeArea, Container, Row, Column, Stack)
+# Flet -CheatSheet des propriétés (SafeArea, Container, Row, Column, Stack)
 
 ## Légende
 - Oui : propriété directement sur le contrôle

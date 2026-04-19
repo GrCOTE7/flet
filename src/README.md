@@ -25,8 +25,8 @@
 
 ### Comment organiser un minimum la logique
 
-* [ ] [Navigation and routing](http://localhost:3000/docs/cookbook/navigation-and-routing)
-* [ ] [Adaptive apps](http://localhost:3000/docs/cookbook/adaptive-apps)
+* [x] [Navigation and routing](http://localhost:3000/docs/cookbook/navigation-and-routing)
+* [x] [Adaptive apps](http://localhost:3000/docs/cookbook/adaptive-apps)
 
 ### À voir à l’occasion (autres cookbooks utiles)
 
@@ -38,16 +38,16 @@
   * [x] [Theming](http://localhost:3000/docs/cookbook/theming)
 
 * [ ] Secondaire
+  * [ ] [Logging](http://localhost:3000/docs/cookbook/logging)
+  * [ ] [Authentication](http://localhost:3000/docs/cookbook/authentication)
+  * [ ] [Encrypting sensitive data](http://localhost:3000/docs/cookbook/encrypting-sensitive-data)
   * [ ] [Accessibility](http://localhost:3000/docs/cookbook/accessibility)
   * [ ] [Control Refs](http://localhost:3000/docs/cookbook/control-refs)
   * [ ] [Custom Controls](http://localhost:3000/docs/cookbook/custom-controls)
   * [ ] [Read and Write Files](http://localhost:3000/docs/cookbook/read-and-write-files)
   * [ ] [Client storage](http://localhost:3000/docs/cookbook/client-storage)
   * [ ] [Session storage](http://localhost:3000/docs/cookbook/session-storage)
-  * [ ] [Logging](http://localhost:3000/docs/cookbook/logging)
-  * [ ] [Authentication](http://localhost:3000/docs/cookbook/authentication)
   * [ ] [Animations](http://localhost:3000/docs/cookbook/animations)
-  * [ ] [Encrypting sensitive data](http://localhost:3000/docs/cookbook/encrypting-sensitive-data)
 
 ---
 
@@ -57,43 +57,34 @@
 
 **Cookbooks à étudier :**
 
-* [ ] ListView / GridView
+* [x] ListView / GridView
 * [ ] DataTable
 * [ ] Dialogs / Snackbars / BottomSheets
 * [ ] Tabs / ExpansionTile / NavigationRail
 
 **À retenir :**
 
-* [ ] Afficher des listes dynamiques
-* [ ] Créer des dialogues propres
-* [ ] Structurer des écrans complexes
+* [x] Afficher des listes dynamiques
+* [x] Créer des dialogues propres
+* [x] Structurer des écrans complexes
 
 **À ignorer :**
 
-* [ ] Dashboards trop avancés
-* [ ] DataTables ultra*complexes
+* [x] Dashboards trop avancés
+* [x] DataTables ultra*complexes
 
 ### 🏆 Jour 5 — Files, Storage, HTTP, Async
 
 * [ ] **Objectif :** connecter ton app au monde réel.
 
-**Cookbooks à étudier :**
+**À étudier :**
 
 * [ ] FilePicker / upload / download
 * [ ] Local storage (page.client_storage)
 * [ ] HTTP requests (GET/POST)
-* [ ] Async tasks
-
-**À retenir :**
-
 * [ ] Stockage local
 * [ ] Appels API
 * [ ] Gestion propre de l’async
-
-**À ignorer :**
-
-* [ ] Streaming avancé
-* [ ] Upload multi*fichiers complexes
 
 ---
 
@@ -292,3 +283,20 @@ tips :
 
 Pouruignorer un faux positif des hints flet
 # type: ignore 
+
+---
+
+* [ ] Sécurité APK ↔ API !
+
+Appliquer les 4 couches essentielles :
+
+✔ HTTPS
+✔ Auth utilisateur (JWT + refresh)
+✔ Vérification serveur (ownership, rôles, limites)
+✔ Rate limiting
+
+Et si pour  aller plus loin :
+
+✔ Certificate pinning
+✔ Signature HMAC des requêtes
+✔ Attestation Android (Play Integrity API)

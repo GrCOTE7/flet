@@ -13,6 +13,8 @@ def main(page: ft.Page):
     lane_width = lane_inner_width + lane_padding * 2
     travel_units = (lane_inner_width - racer_size) / racer_size
     card_animations: list = []
+    scroll_mode = ft.ScrollMode.AUTO
+    page.scroll = scroll_mode
 
     def showcase_card(curve: ft.AnimationCurve) -> ft.Container:
         state = {"forward": False}
@@ -133,6 +135,7 @@ def main(page: ft.Page):
     page.add(
         ft.SafeArea(
             content=ft.Column(
+                expand=True,
                 controls=[
                     ft.Text(
                         "Curve Lab: compare timing profiles across motion, "
@@ -159,12 +162,10 @@ def main(page: ft.Page):
                     ft.Row(
                         wrap=True,
                         spacing=12,
-                        expand=True,
-                        scroll=ft.ScrollMode.AUTO,
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[showcase_card(curve) for curve in ft.AnimationCurve],
                     ),
-                ]
+                ],
             )
         )
     )

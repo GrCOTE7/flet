@@ -6,7 +6,7 @@ import flet as ft
 
 async def main(page: ft.Page):
     def handle_slider_change(e: ft.Event[ft.Slider]):
-        message.value = f"Slider.value changed to {e.control.value}"
+        message.value = f"Slider.value changed to {e.control.value*100:.2f} %"
         message.update()
 
     page.add(
