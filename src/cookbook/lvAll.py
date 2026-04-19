@@ -1311,39 +1311,49 @@ class Lv24(ft.Column):  # Subprocess Examples
 class Lv25(ft.Column):  # Routing & Navigation
 
     def __init__(self, page: ft.Page, txt: str = ""):
-        c = controls = [
-            ft.Row(
-                controls=[
-                    ft.Text("Routing & Navigation", weight=ft.FontWeight.BOLD, size=18),
-                    ft.Container(expand=True),  # Spacer
-                    ft.Text(
-                        "Leçon # 25", size=16, italic=True, color=ft.Colors.CYAN_300
-                    ),
-                ],
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-            ),
-            ft.Divider(
-                color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
-            ),  # default: height=2}
+        controls = [
             self.route_use(page),
+            *([ft.Text(txt, size=18, color="#eeffffff")] if txt else []),
         ]
-        if txt:
-            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
-
-        super().__init__(c)
+        super().__init__(controls=controls)
 
     def route_use(self, page):
         route_log = ft.Column(
             controls=[ft.Text(f"Dans App Lv25 → Initial route : {page.route = }")]
         )
 
-        async def open_mail_setting(self, e):
+        def lesson_header_controls():
+            return [
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Routing & Navigation",
+                            weight=ft.FontWeight.BOLD,
+                            size=18,
+                        ),
+                        ft.Container(expand=True),
+                        ft.Text(
+                            "Leçon # 25",
+                            size=16,
+                            italic=True,
+                            color=ft.Colors.CYAN_300,
+                        ),
+                    ],
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                ft.Divider(color=ft.Colors.RED_ACCENT_400, thickness=2, height=0),
+                ft.Divider(
+                    color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2, height=0
+                ),
+            ]
+
+        async def open_mail_setting(e):
             await page.push_route("/settings/mail")
 
-        async def open_setting(self, e):
+        async def open_setting(e):
             await page.push_route("/settings")
 
-        def route_change(e, page):
+        def route_change(e):
             print(f"Route change: {page.route}")
 
             page.views.clear()  # Clear current views
@@ -1354,7 +1364,12 @@ class Lv25(ft.Column):  # Routing & Navigation
                         ft.SafeArea(
                             content=ft.Column(
                                 controls=[
-                                    ft.AppBar(title=ft.Text("Flet App")),
+                                    *lesson_header_controls(),
+                                    ft.AppBar(
+                                        title=ft.Text("Flet App"),
+                                        bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                                        toolbar_height=68,
+                                    ),
                                     ft.Button("Go to Settings", on_click=open_setting),
                                 ],
                             )
@@ -1370,9 +1385,11 @@ class Lv25(ft.Column):  # Routing & Navigation
                             ft.SafeArea(
                                 content=ft.Column(
                                     controls=[
+                                        *lesson_header_controls(),
                                         ft.AppBar(
                                             title=ft.Text("Settings"),
                                             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                                            toolbar_height=68,
                                         ),
                                         ft.Text(
                                             "Settings!",
@@ -1380,7 +1397,7 @@ class Lv25(ft.Column):  # Routing & Navigation
                                         ),
                                         ft.Button(
                                             content="Go to mail settings",
-                                            on_click=open_mail_settings,
+                                            on_click=open_mail_setting,
                                         ),
                                     ]
                                 )
@@ -1396,9 +1413,11 @@ class Lv25(ft.Column):  # Routing & Navigation
                             ft.SafeArea(
                                 content=ft.Column(
                                     controls=[
+                                        *lesson_header_controls(),
                                         ft.AppBar(
                                             title=ft.Text("Mail Settings"),
                                             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+                                            toolbar_height=68,
                                         ),
                                         ft.Text("Mail settings!"),
                                     ]
@@ -1408,18 +1427,19 @@ class Lv25(ft.Column):  # Routing & Navigation
                     )
                 )
             page.update()
+
         async def view_pop(e):
             if e.view is not None:
                 print("View pop:", e.view)
                 page.views.remove(e.view)
                 top_view = page.views[-1]
-                await page.push_route(top_view.route)    
-            
+                await page.push_route(top_view.route)
+
         page.on_route_change = route_change
         page.on_view_pop = view_pop
 
-        self.route_change(e=None, page=page)  # Initialize views based on the initial route
-        
+        route_change(e=None)  # Initialize views based on the initial route
+
         return route_log
 
 

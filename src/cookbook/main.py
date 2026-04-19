@@ -31,7 +31,7 @@ def main(page: ft.Page):
     lvs = []
     renderers: list[Callable[[], object]] = []
 
-    lvs.append(Lv00("Salut !"))  # Simple class with a custom text
+    # lvs.append(Lv00("Salut !"))  # Simple class with a custom text
     # lvs.append(Lv00())  # Simple class with a custom text
     # lvs.append(Lv01())  # Form with a text field and a button
     # lvs.append(Lv02())  # 3 blocs in a row with different expand values and colors
@@ -57,7 +57,7 @@ def main(page: ft.Page):
     # lvs.append(Lv22())  # Large list (Infinite ListView())
     # lvs.append(Lv23())  # Simple PubSUb
     # lvs.append(Lv24())  # SubProcess
-    # lvs.append(Lv25(page))  # Routing & Navigation
+    lvs.append(Lv25(page))  # Routing & Navigation
 
     # gc7(page, mode='LIGHT')
     # gc7(page, width=500)
