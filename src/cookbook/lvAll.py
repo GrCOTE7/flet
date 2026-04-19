@@ -1601,10 +1601,295 @@ class Lv27(ft.Column):  # Routing & Navigation with separated pages
         return route_log
 
 
+class Lv28(ft.Column):  # Routing & Navigation with separated pages
+
+    def __init__(
+        self, page: ft.Page, txt: str = "Page d'accueil au lancement (Uniquement)"
+    ):
+        self.page_ref = page
+        self.simple_drawer(page)
+
+        header_controls = [
+            ft.Row(
+                controls=[
+                    ft.Text(
+                        "Simple drawer (Menu Burger)",
+                        weight=ft.FontWeight.BOLD,
+                        size=18,
+                    ),
+                    ft.Container(expand=True),
+                    ft.Text(
+                        "Leçon # 28",
+                        size=16,
+                        italic=True,
+                        color=ft.Colors.CYAN_300,
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(color=ft.Colors.RED_ACCENT_400, thickness=2, height=0),
+            ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2, height=0),
+        ]
+
+        super().__init__(
+            controls=[
+                *header_controls,
+                self.route_use(page),
+                ft.Text(txt or "Drawer configure.", size=18, weight=ft.FontWeight.BOLD),
+                ft.FilledButton(
+                    "Ouvrir le menu",
+                    icon=ft.Icons.MENU,
+                    on_click=self.open_drawer,
+                ),
+            ]
+        )
+
+    def route_use(self, page):
+        route_log = ft.Column(
+            controls=[ft.Text(f"Dans App Lv28 → Initial route : {page.route = }")]
+        )
+
+        try:
+            from cookbook.pages_lv26 import (
+                get_page_builders,
+            )
+        except ImportError:
+            from pages_lv26 import (
+                get_page_builders,
+            )
+
+        build_root_view, build_settings_view, build_mail_settings_view = (
+            get_page_builders(lesson=28)
+        )
+
+        return route_log
+
+    async def open_drawer(self, e):
+        await self.page_ref.show_drawer()
+
+    def simple_drawer(self, page: ft.Page):
+        page.drawer = ft.NavigationDrawer(
+            controls=[
+                ft.NavigationDrawerDestination(icon=ft.Icons.HOME, label="Home"),
+                ft.NavigationDrawerDestination(
+                    icon=ft.Icons.SETTINGS, label="Settings"
+                ),
+            ],
+            on_change=lambda e: print("Index:", e.control.selected_index),
+        )
+
+
+class Lv29(ft.Column):  # Routing & Navigation with separated pages
+
+    def __init__(
+        self, page: ft.Page, txt: str = "Page d'accueil Lv29 (Lancement Uniquement)"
+    ):
+        header_controls = [
+            ft.Row(
+                controls=[
+                    ft.Text(
+                        "Simple drawer + Navigation",
+                        weight=ft.FontWeight.BOLD,
+                        size=18,
+                    ),
+                    ft.Container(expand=True),
+                    ft.Text(
+                        "Leçon # 29",
+                        size=16,
+                        italic=True,
+                        color=ft.Colors.CYAN_300,
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(color=ft.Colors.RED_ACCENT_400, thickness=2, height=0),
+            ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2, height=0),
+        ]
+
+        self.status = ft.Text(
+            "Aucune selection menu.", size=14, color=ft.Colors.WHITE_70
+        )
+        self.simple_drawer(page)
+
+        async def open_drawer(e):
+            await page.show_drawer()
+
+        super().__init__(
+            controls=[
+                *header_controls,
+                ft.Text(txt or "Drawer configure.", size=18),
+                self.status,
+                ft.FilledButton(
+                    "Ouvrir le menu",
+                    icon=ft.Icons.MENU,
+                    on_click=open_drawer,
+                ),
+            ]
+        )
+
+    async def on_drawer_change(self, page: ft.Page, e):
+        index = e.control.selected_index
+        route_map = {
+            0: ("Home", "/"),
+            1: ("Settings", "/settings"),
+        }
+
+        target = route_map.get(index)
+        if target is None:
+            print(f"[Lv29] Menu clique: index inconnu ({index})")
+            self.status.value = f"Selection inconnue: {index}"
+        else:
+            label, route = target
+            print(f"[Lv29] Menu clique: {label} ({index}) -> {route}")
+            self.status.value = f"Selection: {label} ({index}) -> {route}"
+            await page.push_route(route)
+
+        self.update()
+
+        await page.close_drawer()
+
+    def simple_drawer(self, page: ft.Page):
+        page.drawer = ft.NavigationDrawer(
+            controls=[
+                ft.NavigationDrawerDestination(icon=ft.Icons.HOME, label="Home"),
+                ft.NavigationDrawerDestination(
+                    icon=ft.Icons.SETTINGS, label="Settings"
+                ),
+            ],
+            on_change=lambda e: page.run_task(self.on_drawer_change, page, e),
+        )
+
+
+class Lv30(ft.Column):  # Route templates (parameterized routes)
+
+    def __init__(
+        self,
+        page: ft.Page,
+    ):
+        self._mounted = False
+        self.route_log = ft.Column(
+            controls=[ft.Text(f"Dans App Lv30 → Initial route : {page.route = }")]
+        )
+
+        header_controls = [
+            ft.Row(
+                controls=[
+                    ft.Text(
+                        "Parameterized routes",
+                        weight=ft.FontWeight.BOLD,
+                        size=18,
+                    ),
+                    ft.Container(expand=True),
+                    ft.Text(
+                        "Leçon #30",
+                        size=16,
+                        italic=True,
+                        color=ft.Colors.CYAN_300,
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(color=ft.Colors.RED_ACCENT_400, thickness=2, height=0),
+            ft.Divider(color=ft.Colors.LIGHT_GREEN_ACCENT_400, thickness=2, height=0),
+        ]
+
+        async def go_home(e):
+            await page.push_route("/")
+
+        async def go_book(e):
+            await page.push_route("/books/42")
+
+        async def go_order(e):
+            await page.push_route("/account/A-100/orders/O-900")
+
+        async def go_unknown(e):
+            await page.push_route("/something/else")
+
+        def route_change(e):
+            troute = ft.TemplateRoute(page.route)
+            msg_color = ft.Colors.CYAN_500
+
+            if troute.match("/books/:id"):
+                msg = f"Book ID: {getattr(troute, 'id', '')}"
+            elif troute.match("/account/:account_id/orders/:order_id"):
+                msg = (
+                    f"Account: {getattr(troute, 'account_id', '')} | "
+                    f"Order: {getattr(troute, 'order_id', '')}"
+                )
+            else:
+                msg = "Unknown route"
+                msg_color = ft.Colors.RED_400
+
+            print(f"[Lv30] {msg} | route={page.route}")
+            self.route_log.controls = [
+                ft.Text(f"Dans App Lv30 → Route courante : {page.route}"),
+                ft.Text(f"Match: {msg}", color=msg_color),
+            ]
+            if self._mounted:
+                self.update()
+
+        page.on_route_change = route_change
+        self._route_change = route_change
+
+        super().__init__(
+            controls=[
+                *header_controls,
+                ft.Text(
+                    "Templates tests: /books/:id et /account/:account_id/orders/:order_id",
+                    size=14,
+                    color=ft.Colors.WHITE_70,
+                ),
+                self.route_log,
+                ft.Row(
+                    wrap=True,
+                    spacing=8,
+                    controls=[
+                        ft.OutlinedButton("/", on_click=go_home),
+                        ft.OutlinedButton("/books/42", on_click=go_book),
+                        ft.OutlinedButton(
+                            "/account/A-100/orders/O-900", on_click=go_order
+                        ),
+                        ft.OutlinedButton("/something/else", on_click=go_unknown),
+                    ],
+                ),
+            ]
+        )
+
+        route_change(e=None)
+
+    def did_mount(self):
+        self._mounted = True
+        self._route_change(e=None)
+
+
+class Lv31(ft.Column):  # Simple class with a custom text
+
+    def __init__(self, txt: str = ""):
+        c = controls = [
+            ft.Row(
+                controls=[
+                    ft.Text("Titre", weight=ft.FontWeight.BOLD, size=18),
+                    ft.Container(expand=True),  # Spacer
+                    ft.Text(
+                        "Leçon # 31", size=16, italic=True, color=ft.Colors.CYAN_300
+                    ),
+                ],
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Divider(
+                color=ft.Colors.CYAN_ACCENT_400, thickness=2, height=2
+            ),  # default: height=2}
+        ]
+        if txt:
+            controls.append(ft.Text(txt, size=18, color="#eeffffff"))
+
+        super().__init__(c)
+
+
 if __name__ == "__main__":
 
     def app_main(page: ft.Page):
-        page.add(Lv25(page))
+        page.add(Lv30(page))
 
     ft.run(app_main, view=ft.AppView.WEB_BROWSER)
     # ft.run(app_main)

@@ -59,7 +59,11 @@ def main(page: ft.Page):
     # lvs.append(Lv24())  # SubProcess
     # lvs.append(Lv25(page))  # Routing & Navigation
     # lvs.append(Lv26(page))  # Idem Lv25 mais page dans fichiers séparés
-    lvs.append(Lv27(page))  # Confirm pop (pour back)
+    # lvs.append(Lv27(page))  # Confirm pop (pour back)
+    # lvs.append(Lv28(page))  # Simple drawer (Menu Burger)
+    # lvs.append(Lv29(page))  # Simple drawer + Navigation
+    # lvs.append(Lv30(page))  # Route templates (parameterized routes)
+    lvs.append(Lv31())  # 
 
     # gc7(page, mode='LIGHT')
     # gc7(page, width=500)
