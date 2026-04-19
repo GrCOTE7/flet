@@ -1,9 +1,6 @@
-from math import e
-
 import flet as ft
 import asyncio, os, sys
 from pathlib import Path
-from typing import cast
 
 
 class Lv99(ft.Container):
@@ -1439,6 +1436,68 @@ class Lv25(ft.Column):  # Routing & Navigation
         page.on_view_pop = view_pop
 
         route_change(e=None)  # Initialize views based on the initial route
+
+        return route_log
+
+
+class Lv26(ft.Column):  # Routing & Navigation with separated pages
+
+    def __init__(self, page: ft.Page, txt: str = ""):
+        controls = [
+            self.route_use(page),
+            *([ft.Text(txt, size=18, color="#eeffffff")] if txt else []),
+        ]
+        super().__init__(controls=controls)
+
+    def route_use(self, page):
+        route_log = ft.Column(
+            controls=[ft.Text(f"Dans App Lv26 → Initial route : {page.route = }")]
+        )
+
+        try:
+            from cookbook.page_lv26 import (
+                build_mail_settings_view,
+                build_root_view,
+                build_settings_view,
+            )
+        except ImportError:
+            from page_lv26 import (
+                build_mail_settings_view,
+                build_root_view,
+                build_settings_view,
+            )
+
+        async def open_mail_setting(e):
+            await page.push_route("/settings/mail")
+
+        async def open_setting(e):
+            await page.push_route("/settings")
+
+        def route_change(e):
+            print(f"Route change: {page.route}")
+
+            page.views.clear()
+            page.views.append(build_root_view(open_setting))
+
+            if page.route == "/settings" or page.route == "/settings/mail":
+                page.views.append(build_settings_view(open_mail_setting))
+
+            if page.route == "/settings/mail":
+                page.views.append(build_mail_settings_view())
+
+            page.update()
+
+        async def view_pop(e):
+            if e.view is not None:
+                print("View pop:", e.view)
+                page.views.remove(e.view)
+                top_view = page.views[-1]
+                await page.push_route(top_view.route)
+
+        page.on_route_change = route_change
+        page.on_view_pop = view_pop
+
+        route_change(e=None)
 
         return route_log
 

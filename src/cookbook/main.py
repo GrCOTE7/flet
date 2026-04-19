@@ -57,7 +57,8 @@ def main(page: ft.Page):
     # lvs.append(Lv22())  # Large list (Infinite ListView())
     # lvs.append(Lv23())  # Simple PubSUb
     # lvs.append(Lv24())  # SubProcess
-    lvs.append(Lv25(page))  # Routing & Navigation
+    # lvs.append(Lv25(page))  # Routing & Navigation
+    lvs.append(Lv26(page))  # Idem Lv25 mais page dans fichiers séparés
 
     # gc7(page, mode='LIGHT')
     # gc7(page, width=500)
