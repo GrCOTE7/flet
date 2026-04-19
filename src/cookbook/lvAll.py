@@ -1553,7 +1553,7 @@ class Lv27(ft.Column):  # Routing & Navigation with separated pages
             dlg_modal = ft.AlertDialog(
                 title=ft.Text("Confirmer le retour"),
                 content=ft.Text(
-                    "Des modifications dans Mail Settings ne sont pas encore enregistrees. Quitter cette page ?"
+                    "Des modifications dans Mail Settings ne sont peut-être pas encore enregistrées. Quitter cette page ?"
                 ),
                 actions=[
                     ft.TextButton("Oui", on_click=on_dlg_yes),
