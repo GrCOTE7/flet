@@ -2,7 +2,7 @@ import flet as ft
 from typing import Sequence
 
 
-def lesson_header_controls() -> list[ft.Control]:
+def lesson_header_controls(lesson: int) -> list[ft.Control]:
     return [
         ft.Row(
             controls=[
@@ -13,7 +13,7 @@ def lesson_header_controls() -> list[ft.Control]:
                 ),
                 ft.Container(expand=True),
                 ft.Text(
-                    "Leçon # 26",
+                    f"Leçon # {lesson}",
                     size=16,
                     italic=True,
                     color=ft.Colors.CYAN_300,
@@ -26,14 +26,15 @@ def lesson_header_controls() -> list[ft.Control]:
     ]
 
 
-def build_lv26_view(
+def build_lv26_et_plus_view(
     *,
     route: str,
     appbar_title: str,
+    lesson: int = 26,
     body_controls: Sequence[ft.Control] | None = None,
 ) -> ft.View:
     controls = [
-        *lesson_header_controls(),
+        *lesson_header_controls(lesson=lesson),
         ft.AppBar(
             title=ft.Text(appbar_title),
             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,

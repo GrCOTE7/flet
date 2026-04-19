@@ -1459,16 +1459,16 @@ class Lv26(ft.Column):  # Routing & Navigation with separated pages
 
         try:
             from cookbook.pages_lv26 import (
-                build_mail_settings_view,
-                build_root_view,
-                build_settings_view,
+                get_page_builders,
             )
         except ImportError:
             from pages_lv26 import (
-                build_mail_settings_view,
-                build_root_view,
-                build_settings_view,
+                get_page_builders,
             )
+
+        build_root_view, build_settings_view, build_mail_settings_view = (
+            get_page_builders(lesson=26)
+        )
 
         async def open_setting(e):
             await page.push_route("/settings")
@@ -1487,6 +1487,102 @@ class Lv26(ft.Column):  # Routing & Navigation with separated pages
 
             if page.route == "/settings/mail":
                 page.views.append(build_mail_settings_view())
+
+            page.update()
+
+        async def view_pop(e):
+            if e.view is not None:
+                print("View pop:", e.view)
+                page.views.remove(e.view)
+                top_view = page.views[-1]
+                await page.push_route(top_view.route)
+
+        page.on_route_change = route_change
+        page.on_view_pop = view_pop
+
+        route_change(e=None)
+
+        return route_log
+
+
+class Lv27(ft.Column):  # Routing & Navigation with separated pages
+
+    def __init__(
+        self, page: ft.Page, txt: str = "Page d'accueil au lancement (Uniquement)"
+    ):
+        super().__init__(
+            controls=[
+                self.route_use(page),
+                *([ft.Text(txt, size=18, color="#eeffffff")] if txt else []),
+            ]
+        )
+
+    def route_use(self, page):
+        route_log = ft.Column(
+            controls=[ft.Text(f"Dans App Lv27 → Initial route : {page.route = }")]
+        )
+
+        try:
+            from cookbook.pages_lv26 import (
+                get_page_builders,
+            )
+        except ImportError:
+            from pages_lv26 import (
+                get_page_builders,
+            )
+
+        build_root_view, build_settings_view, build_mail_settings_view = (
+            get_page_builders(lesson=27)
+        )
+
+        async def open_setting(e):
+            await page.push_route("/settings")
+
+        async def open_mail_setting(e):
+            await page.push_route("/settings/mail")
+
+        async def ask_mail_settings_pop_permission(mail_view: ft.View):
+            async def on_dlg_yes(e):
+                page.pop_dialog()
+                await mail_view.confirm_pop(True)
+
+            async def on_dlg_no(e):
+                page.pop_dialog()
+                await mail_view.confirm_pop(False)
+
+            dlg_modal = ft.AlertDialog(
+                title=ft.Text("Confirmer le retour"),
+                content=ft.Text(
+                    "Des modifications dans Mail Settings ne sont pas encore enregistrees. Quitter cette page ?"
+                ),
+                actions=[
+                    ft.TextButton("Oui", on_click=on_dlg_yes),
+                    ft.TextButton("Non", on_click=on_dlg_no),
+                ],
+                actions_alignment=ft.MainAxisAlignment.END,
+                on_dismiss=lambda e: print("Confirmation de retour fermee."),
+            )
+
+            page.show_dialog(dlg_modal)
+
+        def route_change(e):
+            print(f"Route change: {page.route}")
+
+            page.views.clear()
+            page.views.append(build_root_view(open_setting))
+
+            if page.route == "/settings" or page.route == "/settings/mail":
+                page.views.append(build_settings_view(open_mail_setting))
+
+            if page.route == "/settings/mail":
+                mail_settings_view = build_mail_settings_view()
+
+                async def confirm_mail_settings_pop(e):
+                    await ask_mail_settings_pop_permission(mail_settings_view)
+
+                mail_settings_view.can_pop = False
+                mail_settings_view.on_confirm_pop = confirm_mail_settings_pop
+                page.views.append(mail_settings_view)
 
             page.update()
 
