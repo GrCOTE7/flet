@@ -53,14 +53,14 @@
 
 ### 🏅 Jour 4 — Controls avancés
 
-* [ ] **Objectif :** donner de la valeur à ton app avec des composants puissants.
+* [x] **Objectif :** donner de la valeur à ton app avec des composants puissants.
 
 **Cookbooks à étudier :**
 
 * [x] ListView / GridView
-* [ ] DataTable
-* [ ] Dialogs / Snackbars / BottomSheets
-* [ ] Tabs / ExpansionTile / NavigationRail
+* [x] DataTable
+* [x] Dialogs / Snackbars / BottomSheets
+* [x] Tabs / ExpansionTile / NavigationRail
 
 **À retenir :**
 
@@ -79,7 +79,7 @@
 
 **À étudier :**
 
-* [ ] FilePicker / upload / download
+* [x] FilePicker / upload / download
 * [ ] Local storage (page.client_storage)
 * [ ] HTTP requests (GET/POST)
 * [ ] Stockage local
