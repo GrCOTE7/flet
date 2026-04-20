@@ -2,6 +2,186 @@
 
 ## BPL
 
+### 📘 FLETX — 1 task (~ 1 H) / J
+
+---
+
+## 🧱 SEMAINE 1 — Fondations FletX
+
+### Vidéos - Apperçu
+
+* [ ] [DotPy - 3'36](https://www.youtube.com/watch?v=BSp7TUu3Dvo&list=PLbHSAIJ-vWulhAP811ATrRKGSOZB6FoaH)
+* [ ] [Simple Routing - 11'10](https://www.youtube.com/watch?v=yYnd7uFKiYE)
+* [ ] [Dynamic Routing - 8'28 & 11'14](https://www.youtube.com/watch?v=EHDY1_GKgow&list=PLkph27k2J8WrgXT8EyGr832qfLsWs5Psy)
+* [ ] Insérer dans YT Scrap [Top PRO de Flet](https://www.youtube.com/@sriedynurcahyo3894/videos)
+
+### 🥇 Jour 1 — Architecture & Installation
+
+* [ ] [Installation](https://alldotpy.github.io/FletX/getting-started/installation/)
+* [ ] [Architecture générale](https://alldotpy.github.io/FletX/getting-started/architecture/)
+* [ ] [FletX CLI](https://alldotpy.github.io/FletX/getting-started/fletx-cli/)
+* [ ] [Sample project](https://alldotpy.github.io/FletX/getting-started/sample-project/)
+
+---
+
+### 🥈 Jour 2 — Pages
+
+* [ ] [Créer - Structure d’une page](https://alldotpy.github.io/FletX/getting-started/pages/)
+
+---
+
+### 🥉 Jour 3 — Controllers
+
+* [ ] [Créer un controller - Cycle de vie - Méthodes métier](https://alldotpy.github.io/FletX/getting-started/controllers/)
+
+---
+
+### 🏅 Jour 4 — Services & DI
+
+* [ ] [Services](https://alldotpy.github.io/FletX/getting-started/services/)
+* [ ] [Dependency Injection](https://alldotpy.github.io/FletX/getting-started/dependency-injection/)
+* [ ] [Décorateurs utiles](https://alldotpy.github.io/FletX/getting-started/decorators/)
+
+---
+
+### 🏆 Jour 5 — Mini‑projet (1 page)
+
+* [ ] APK Sport
+
+---
+
+## 🔄 SEMAINE 2 — Réactivité & État
+
+### 🥇 Jour 1 — State Management
+
+* [ ] [State management - État global - Patterns d’état](https://alldotpy.github.io/FletX/getting-started/state-management/)
+
+---
+
+### 🥈 Jour 2 — Réactivité avancée (Rx)
+
+*(Pas de page officielle → fallback GitHub AllDotPy)*  
+* [ ] [Variables réactives](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [RxList / RxMap](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Transformations Rx](https://github.com/AllDotPy/FletX/tree/master/examples)
+
+---
+
+### 🥉 Jour 3 — Controllers + État
+
+* [ ] [Controllers + état partagé](https://alldotpy.github.io/FletX/getting-started/controllers/)
+* [ ] [DI + état](https://alldotpy.github.io/FletX/getting-started/dependency-injection/)
+
+---
+
+### 🏅 Jour 4 — Services avancés
+
+* [ ] [Services API](https://alldotpy.github.io/FletX/getting-started/services/)
+* [ ] [Services + état](https://alldotpy.github.io/FletX/getting-started/services/)
+
+---
+
+### 🏆 Jour 5 — Mini‑projet (2 pages)
+
+* [ ] [HomePage](https://alldotpy.github.io/FletX/getting-started/pages/)
+* [ ] [SettingsPage](https://alldotpy.github.io/FletX/getting-started/pages/)
+* [ ] [Controllers](https://alldotpy.github.io/FletX/getting-started/controllers/)
+* [ ] [Services](https://alldotpy.github.io/FletX/getting-started/services/)
+* [ ] [Navigation simple](http://localhost:3000/docs/cookbook/navigation-and-routing)
+
+---
+
+## 🧭 SEMAINE 3 — Navigation & Routing
+
+### 🥇 Jour 1 — Routing
+
+* [ ] [Routing](https://alldotpy.github.io/FletX/getting-started/routing/)
+* [ ] [Paramètres de route](https://alldotpy.github.io/FletX/getting-started/routing/)
+* [ ] [Navigation programmatique](https://alldotpy.github.io/FletX/getting-started/routing/)
+
+---
+
+### 🥈 Jour 2 — Nested Routes
+
+*(Pas de page officielle → fallback GitHub AllDotPy)*  
+* [ ] [Nested routes](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Layout persistant](https://github.com/AllDotPy/FletX/tree/master/examples)
+
+---
+
+### 🥉 Jour 3 — Guards & Redirections
+
+*(Pas de page officielle → fallback GitHub AllDotPy)*  
+* [ ] [AuthGuard](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Redirections](https://github.com/AllDotPy/FletX/tree/master/examples)
+
+---
+
+### 🏅 Jour 4 — Navigation + État
+
+* [ ] [État + navigation](https://alldotpy.github.io/FletX/getting-started/state-management/)
+* [ ] [Controllers persistants](https://alldotpy.github.io/FletX/getting-started/controllers/)
+
+---
+
+### 🏆 Jour 5 — Mini‑projet (3 pages)
+
+* [ ] [Login](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Dashboard](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Settings](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Router complet](https://alldotpy.github.io/FletX/getting-started/routing/)
+
+---
+
+## 🚀 SEMAINE 4 — API, Storage, Performance
+
+### 🥇 Jour 1 — HTTP & API
+
+* [ ] [Requêtes HTTP](http://localhost:3000/docs/cookbook/http-requests)
+* [ ] [Services API](https://alldotpy.github.io/FletX/getting-started/services/)
+* [ ] [Gestion d’erreurs](http://localhost:3000/docs/cookbook/logging)
+
+---
+
+### 🥈 Jour 2 — Storage
+
+* [ ] [Local storage](http://localhost:3000/docs/cookbook/client-storage)
+* [ ] [Session storage](http://localhost:3000/docs/cookbook/client-storage)
+* [ ] [Persistance d’état](https://alldotpy.github.io/FletX/getting-started/state-management/)
+
+---
+
+### 🥉 Jour 3 — Fichiers
+
+* [ ] [FilePicker](http://localhost:3000/docs/cookbook/file-picker)
+* [ ] [Upload](http://localhost:3000/docs/cookbook/file-picker)
+* [ ] [Download](http://localhost:3000/docs/cookbook/file-picker)
+
+---
+
+### 🏅 Jour 4 — Performance
+
+*(Pas de page officielle → fallback GitHub AllDotPy)*  
+* [ ] [Optimisation Rx](https://github.com/AllDotPy/FletX/tree/master/examples)
+* [ ] [Architecture scalable](https://alldotpy.github.io/FletX/getting-started/architecture/)
+* [ ] [Large lists](http://localhost:3000/docs/cookbook/large-lists)
+
+---
+
+### 🏆 Jour 5 — Mini‑projet final
+
+* [ ] [Pages](https://alldotpy.github.io/FletX/getting-started/pages/)
+* [ ] [API réelle](http://localhost:3000/docs/cookbook/http-requests)
+* [ ] [Storage](http://localhost:3000/docs/cookbook/client-storage)
+* [ ] [Routing](https://alldotpy.github.io/FletX/getting-started/routing/)
+* [ ] [Architecture propre](https://alldotpy.github.io/FletX/getting-started/architecture/)
+
+---
+
+XXX
+
+---
+
 ### 🥈 Jour 2 — State & Events - 🥉 Jour 3 — Navigation & Routing
 
 **Cookbooks à étudier :**

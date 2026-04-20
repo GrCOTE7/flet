@@ -76,7 +76,7 @@ def main(page: ft.Page):
     #
     # gc7(page, mode="LIGHT", width=700)
     # gc7(page, width=700)
-    page.adaptive = True # Optimize iOS et Android platforms
+    page.adaptive = True  # Optimize iOS et Android platforms
     # lvs.append(Lv31(page))  # Adaptive apps
     #
     lvs.append(Lv32())  # DataTable sortable
