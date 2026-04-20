@@ -35,6 +35,18 @@ async def main(page: ft.Page, width: int = 392):
     # from devs.lv05_nbre_x import game as game
     # game(page)
 
+    # from cookbook.main import main as cookbook_main
+    # gc7(page, width=976)
+    # # gc7(page, "LIGHT", width=976)
+    gc7(page)
+    # cookbook_main(page)
+    #
+    #
+    # from devs.lv10_tutos import ab_btn as main  # label alternatif et btn adapté
+    from devs.lv10_tutos import tofs as main  # label alternatif et btn adapté
+
+    main(page)
+
     ################################### ToDo ###################################
 
     # from examples.lv06_todo_simple import todo_list as todo6
@@ -129,13 +141,12 @@ async def main(page: ft.Page, width: int = 392):
 
     # * [/] Solitaire general rules
     # from examples.lv39_main import main
-
-    from cookbook.main import main as cookbook_main
-
-    # gc7(page, width=976)
-    # gc7(page, "LIGHT", width=976)
-
-    cookbook_main(page)
+    #
+    # from cookbook.main import main as cookbook_main
+    # # gc7(page, width=976)
+    # # gc7(page, "LIGHT", width=976)
+    # cookbook_main(page)
+    #
 
     # ❌  Le seul qui corrige le pb de double clic → Le comprendre complètement à la fin - D:\flet_doc\sdk\python\examples\tutorials\solitaire_declarative\solitaire-final\main.py
 
