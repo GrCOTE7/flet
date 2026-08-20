@@ -10,10 +10,9 @@
 
 ### Vidéos - Apperçu
 
-* [ ] [DotPy - 3'36](https://www.youtube.com/watch?v=BSp7TUu3Dvo&list=PLbHSAIJ-vWulhAP811ATrRKGSOZB6FoaH)
-* [ ] [Simple Routing - 11'10](https://www.youtube.com/watch?v=yYnd7uFKiYE)
+* [x] [DotPy - 3'36](https://www.youtube.com/watch?v=BSp7TUu3Dvo&list=PLbHSAIJ-vWulhAP811ATrRKGSOZB6FoaH)
+* [x] Insérer dans YT Scrap [Top PRO de Flet](https://www.youtube.com/@sriedynurcahyo3894/videos)
 * [ ] [Dynamic Routing - 8'28 & 11'14](https://www.youtube.com/watch?v=EHDY1_GKgow&list=PLkph27k2J8WrgXT8EyGr832qfLsWs5Psy)
-* [ ] Insérer dans YT Scrap [Top PRO de Flet](https://www.youtube.com/@sriedynurcahyo3894/videos)
 
 ### 🥇 Jour 1 — Architecture & Installation
 

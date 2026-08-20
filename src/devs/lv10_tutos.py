@@ -2,6 +2,7 @@ import flet as ft
 
 # Réfce.: https://www.youtube.com/watch?v=wtkax34EAL8
 
+
 def ab_btn(page: ft.Page):
 
     msg = ("Hello, Flet !", "Button clicked!")
@@ -43,7 +44,7 @@ def tofs(page: ft.Page):
     page.title = "Tofs"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.scroll = ft.ScrollMode.AUTO
-    
+
     layout = ft.Row(
         # spacing=20,
         # run_spacing=20,
@@ -60,7 +61,7 @@ def tofs(page: ft.Page):
                 # L'image gardera sa proportion
                 width=100,
                 height=150,
-                border_radius=ft.BorderRadius.all(7)
+                border_radius=ft.BorderRadius.all(7),
             )
         )
 
@@ -70,3 +71,4 @@ def tofs(page: ft.Page):
 
 if __name__ == "__main__":
     ft.run(ab_btn)
+    ft.run(tofs)
