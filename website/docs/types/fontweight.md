@@ -1,6 +1,6 @@
 ---
 class_name: "flet.FontWeight"
-examples: "controls/types/font_weight"
+examples: "controls/core/types/font_weight"
 title: "FontWeight"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

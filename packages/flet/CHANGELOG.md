@@ -1,3 +1,65 @@
+## 0.86.7
+
+* `FletJS.canvasKitBaseUrl` is now `String?`. `flutter_bootstrap.js` applies `flet.canvasKitBaseUrl` and `flet.fontFallbackBaseUrl` whenever they are set rather than only when `flet.noCdn` is true, and both default to `null` in CDN mode — so a host serving its own copy of the runtime can point them anywhere without also claiming a no-CDN build. The getter has no readers in this package; the annotation now matches the value it can carry.
+
+## 0.86.6
+
+* Fix `Container` applying its `padding` twice, and confining ink/hover effects to the size of its content, when `ink` is enabled together with `animate`. `padding` and `alignment` were passed both to the outer `AnimatedContainer` and to the inner `Container` under the `InkWell`, so the effective padding doubled; the duplicated `alignment` also made the `Material`/`InkWell` shrink-wrap to the content, so splashes and the hover overlay no longer reached the container's edges even though `bgcolor` filled it. Both properties now live only on the inner container - an `AnimatedContainer` when `animate` is set, so they still animate - matching the non-animated ink path.
+
+## 0.86.5
+
+_No changes in the `flet` Dart package; version bumped for release coordination with configurable Android `gradle.properties` on the Python side ([#6733](https://github.com/flet-dev/flet/pull/6733))._
+
+## 0.86.4
+
+* Isolate per-service failures when building the page's service registry. `ServiceBinding` throws `Unknown service` for a control type no extension can build, and that exception escaping `ServiceRegistry._onServicesUpdated()` aborted the whole loop, so every service after the offending entry was silently never bound and later `invokeMethod` calls on them hung until they timed out. Each binding is now built independently and a failure is logged and skipped. Also rebuilds the registry when the `_services` control instance is replaced (not just when its uid changes), matching how the `window` service tracks its control by identity.
+
+## 0.86.3
+
+* Fix a system/edge-swipe back gesture exiting the whole host app instead of navigating back when it lands on an embedded `FletApp` (an app rendered inside another Flet app — e.g. a gallery host running example apps in-process). The embedded app's `WidgetsApp` (`MaterialApp`/`CupertinoApp`) ran the default `NavigationNotification` handler, which reported `SystemNavigator.setFrameworkHandlesBack(false)` for a nested app that couldn't pop (typically a single-view example) and swallowed the notification, so the OS finished the whole activity on back and the host never got to report that it could pop. An embedded page now lets that notification bubble to the host (which re-reports `canHandlePop`) and chains a `ChildBackButtonDispatcher` to the host Router, so a system back propagates to the host and pops the view that embeds it.
+* Fix modal controls (`AlertDialog`, `CupertinoAlertDialog`, `BottomSheet`, `CupertinoBottomSheet`) throwing "setState()/markNeedsBuild() called during build" and blanking the screen when closed in the same frame another route/overlay opens (e.g. a `SnackBar`). Each modal now tracks its own `ModalRoute` and closes it via a post-frame `closeModalRoute()` that pops that specific route; `View`'s confirm-pop pops its own route too, removing the wrong-route race between a dismissing modal and a view pop.
+
+## 0.86.2
+
+* Flutter updated to [3.44.7](https://github.com/flutter/flutter/blob/stable/CHANGELOG.md#3447).
+
+## 0.86.1
+
+_No changes in the `flet` Dart package; version bumped for release coordination with the web client's readable app-package download errors ([#6680](https://github.com/flet-dev/flet/pull/6680))._
+
+## 0.86.0
+
+_No changes in the `flet` Dart package; version bumped for release coordination with the multi-version bundled CPython support on the Python side ([#6577](https://github.com/flet-dev/flet/pull/6577))._
+
+## 0.85.3
+
+### Bug fixes
+
+* Defer pre-show window placement on Linux (`centerWindow()`, `setWindowAlignment()`) until the window first becomes visible, so `page.window.center()` / `page.window.alignment` set before `page.window.visible = True` no longer flash the window during startup. Also preserve the `focused` state when a `prevent_close` handler cancels a close attempt ([#5897](https://github.com/flet-dev/flet/issues/5897), [#5914](https://github.com/flet-dev/flet/issues/5914), [#6527](https://github.com/flet-dev/flet/pull/6527)) by @ihmily.
+
+## 0.85.2
+
+_No changes in the `flet` Dart package; version bumped for release coordination with `flet.Router` enhancements on the Python side (modal/recursive route flags, chain-based default pop)._
+
+## 0.85.1
+
+_No changes in the `flet` Dart package; version bumped for release coordination with `flet-geolocator` fixes on the Python side._
+
+## 0.85.0
+
+### New features
+
+* Add `parseControlWidget()` and `parseControlWidgets()` utilities for converting Flet controls in protocol values to Flutter widgets ([#6463](https://github.com/flet-dev/flet/pull/6463)) by @ndonkoHenri.
+
+### Bug fixes
+
+* Preserve viewport minimum constraints for short scrollable `View`, `Column`, and `Row` content so main-axis alignment still applies ([#6446](https://github.com/flet-dev/flet/issues/6446), [#6450](https://github.com/flet-dev/flet/pull/6450)) by @ndonkoHenri.
+* Handle unbounded width in `ResponsiveRow` with an explicit error and treat child controls with `col=0` as hidden at the current breakpoint ([#1951](https://github.com/flet-dev/flet/issues/1951), [#3805](https://github.com/flet-dev/flet/issues/3805), [#6354](https://github.com/flet-dev/flet/pull/6354)) by @ndonkoHenri.
+* Fix `page.window.destroy()` taking several seconds to close Windows desktop apps when `prevent_close` is enabled ([#5459](https://github.com/flet-dev/flet/issues/5459), [#6428](https://github.com/flet-dev/flet/pull/6428)) by @ndonkoHenri.
+* Fix `flet pack` desktop packaging so Windows and Linux bundles include the expected client archive, and Windows taskbar pins point to the packed app instead of the cached `flet.exe` ([#5151](https://github.com/flet-dev/flet/issues/5151), [#6403](https://github.com/flet-dev/flet/pull/6403)) by @ndonkoHenri.
+* Resolve absolute-path `src` (e.g. `Image(src="/images/foo.svg")`) against `assets_dir` on web so embedded apps mounted at non-root URLs load assets correctly, pass `data:`/`blob:` URIs through unchanged, preserve origin-relative semantics when `assets_dir` is unset, and add a `window.flet.assetsDir` JS-interop bridge so embedding hosts can supply `assets_dir` to the top-level `FletApp` ([#6470](https://github.com/flet-dev/flet/pull/6470)) by @FeodorFitsner.
+* Coerce `double` to `int` in `parseInt` so float values passed into `int`-typed protocol fields (e.g. `Duration(seconds: 2.0)`) decode correctly instead of falling back to the default ([#6478](https://github.com/flet-dev/flet/issues/6478), [#6480](https://github.com/flet-dev/flet/pull/6480)) by @FeodorFitsner.
+
 ## 0.84.0
 
 ### Improvements

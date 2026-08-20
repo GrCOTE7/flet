@@ -1,6 +1,6 @@
 ---
 class_name: "flet_audio.Audio"
-examples: "services/audio"
+examples: "extensions/audio"
 title: "Audio"
 ---
 
@@ -67,9 +67,7 @@ for installing on other Linux distributions.
 
 ## Examples
 
-### Basic example
-
-<CodeExample path={frontMatter.examples + '/example_1/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/audio_playback_controls/main.py'} language="python" />
 
 ## Description
 

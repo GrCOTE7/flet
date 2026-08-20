@@ -1,7 +1,7 @@
 ---
 class_name: "flet.NavigationDrawer"
-examples: "controls/navigation_drawer"
-example_images: "test-images/examples/material/golden/macos/navigation_drawer"
+examples: "controls/material/navigation_drawer"
+example_images: "test-images/examples/controls/material/golden/macos/navigation_drawer"
 title: "NavigationDrawer"
 ---
 
@@ -13,18 +13,20 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/navigation/navigationdrawer)
-
-### Start-aligned drawer
-
 <CodeExample path={frontMatter.examples + '/position_start/main.py'} language="python" />
 
-<Image src={frontMatter.example_images + '/position_start.gif'} alt="position-start" width="40%" />
-
-### End-aligned drawer
+<Image src={frontMatter.example_images + '/position_start.gif'} alt="Start-aligned navigation drawer example" width="40%" />
 
 <CodeExample path={frontMatter.examples + '/position_end/main.py'} language="python" />
 
-<Image src={frontMatter.example_images + '/position_end.gif'} alt="position-end" width="40%" />
+<Image src={frontMatter.example_images + '/position_end.gif'} alt="End-aligned navigation drawer example" width="40%" />
+
+<CodeExample path={frontMatter.examples + '/theming/main.py'} language="python" />
+
+<Image src={frontMatter.example_images + '/theming.gif'} alt="Themed navigation drawer example" width="40%" />
+
+<CodeExample path={frontMatter.examples + '/adaptive_navigation/main.py'} language="python" />
+
+<Image src={frontMatter.example_images + '/adaptive_navigation.gif'} alt="Adaptive navigation example switching between a navigation bar and a navigation rail with an end drawer" width="55%" />
 
 <ClassMembers name={frontMatter.class_name} />

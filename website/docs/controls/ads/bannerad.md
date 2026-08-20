@@ -1,7 +1,7 @@
 ---
 class_name: "flet_ads.banner_ad.BannerAd"
-examples: "controls/ads"
-example_images: "examples/controls/ads/media"
+examples: "extensions/ads"
+example_images: "examples/extensions/ads/media"
 title: "BannerAd"
 ---
 
@@ -11,9 +11,7 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-### Example 1
-
-<CodeExample path={frontMatter.examples + '/example_1/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/banner_ad_and_interstitial_ad/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/example_1.gif'} width="55%" />
 

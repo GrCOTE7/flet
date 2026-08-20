@@ -1,14 +1,12 @@
 ---
 class_name: "flet_permission_handler.PermissionHandler"
-examples: "services/permission_handler"
+examples: "extensions/permission_handler"
 title: "PermissionHandler"
 ---
 
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 import {ClassAll, CodeExample} from '@site/src/components/crocodocs';
-
-# Permission Handler
 
 Helps manage runtime permissions in your [Flet](https://flet.dev) apps.
 
@@ -65,7 +63,7 @@ See:
 
 ## Example
 
-<CodeExample path={frontMatter.examples + '/example_1/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/permission_handler/main.py'} language="python" />
 
 ## Description
 

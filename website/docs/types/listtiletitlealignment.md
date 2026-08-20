@@ -1,6 +1,6 @@
 ---
 class_name: "flet.ListTileTitleAlignment"
-examples: "controls/types/list_tile_title_alignment"
+examples: "controls/core/types/list_tile_title_alignment"
 title: "ListTileTitleAlignment"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

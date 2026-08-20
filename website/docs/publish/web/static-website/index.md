@@ -42,17 +42,61 @@ if sys.platform == "emscripten":
 ```
 :::
 
-There are two ways to publish a static website:
+:::note[Pyodide and Python version]
+The Python version you choose for `flet build web` / `flet publish` pins a
+specific Pyodide release — see
+[Choosing a Python version](../../index.md#choosing-a-python-version) for the
+full matrix and resolution rules. In short:
 
-- [`flet build web`](#flet-build-web) - recommended; uses Flutter and packages dependencies into the output.
-- [`flet publish`](#flet-publish) - no Flutter required; installs dependencies at runtime with micropip.
+| Python | Pyodide   |
+| ------ | --------- |
+| 3.14   | 314.0.0   |
+| 3.13   | 0.29.4    |
+| 3.12   | 0.27.7    |
+
+The matching Pyodide runtime is downloaded into the build output and cached
+under `~/.flet/pyodide/<version>/` on first use. The older `0.27.5` bundle
+that used to ship inside the build template has been removed in favour of
+this versioned per-build download.
+:::
+
+## Differences
+
+There are two ways to publish a static website: [`flet build web`](#flet-build-web) and [`flet publish`](#flet-publish).
+Both produce a static site that runs in the browser via Pyodide. They
+differ mainly in how and when Python dependencies are installed:
+
+|                               | [`flet publish`](#flet-publish)                       | [`flet build web`](#flet-build-web)                                                  |
+|-------------------------------|-------------------------------------------------------|--------------------------------------------------------------------------------------|
+| Flutter required              | No                                                    | Yes                                                                                  |
+| Dependency install            | At runtime, in the browser (`micropip`)               | At build time, on your machine (`pip`)                                               |
+| Build time                    | Faster — no Flutter compilation, no local pip install | Slower — Flutter build + local dependency install                                    |
+| Initial load time             | Slower — wheels are fetched from PyPI on page load    | Faster — dependencies are already bundled                                            |
+| Pure-Python wheels            | ✅                                                     | ✅                                                                                    |
+| Pyodide-built binary wheels   | ✅ (from Pyodide CDN)                                  | ✅ (auto-detected from Pyodide registry)                                              |
+| Source distributions (sdists) | ❌ `micropip` can't build sdists in the browser        | ✅ pure-Python sdists, opt in via [`source_packages`](../../index.md#source-packages) |
+
+### Sdist-only dependencies
+
+A common failure mode with `flet publish` is a (transitive) dependency that ships only a
+source distribution (`.tar.gz`, no wheel) — for example,
+[`docopt`](https://pypi.org/project/docopt/#files). `micropip` cannot build
+sdists, so load fails with:
+
+```
+ValueError: Can't find a pure Python 3 wheel for '<package>'
+```
+
+In such cases, we suggest switching to [`flet build web`](#flet-build-web) and
+adding the package to [`source_packages`](../../index.md#source-packages).
+**Note** that `source_packages` only works for **pure-Python** sdists. Sdists with C/Rust
+extensions (e.g. `numpy`, `cryptography`) cannot be built for Pyodide — use Pyodide's
+[built-in packages](https://pyodide.org/en/stable/usage/packages-in-pyodide.html) instead.
 
 ## `flet publish`
 
-[`flet publish`](../../../cli/flet-publish.md) is alternative to
-[`flet build web`](#flet-build-web) that does not require Flutter. It packages
-your app and installs dependencies in the browser at runtime via [micropip](https://pypi.org/project/micropip/).
-Initial load time is usually higher than `flet build web`.
+Does not require Flutter. It packages your app and installs dependencies in the
+browser at runtime via [micropip](https://pypi.org/project/micropip/).
 
 To publish an app, run:
 
@@ -80,7 +124,8 @@ folder. Assets are not packaged inside the `app.tar.gz`.
 
 ## `flet build web`
 
-Publish a static website using Flutter and Pyodide.
+Uses [Flutter](https://flutter.dev/) and [Pyodide](https://pyodide.org/en/stable/index.html).
+Dependencies are resolved and installed locally at build time (via `pip`), then bundled into the output archive.
 
 :::tip[Note]
 Complementary and more general information is available [here](../../index.md).
@@ -161,9 +206,17 @@ route_url_strategy = "hash"
 
 Selects the Flutter web renderer:
 
-- `auto` (default) - let Flutter choose the best renderer
-- `canvaskit`
-- `skwasm`
+- `canvaskit` (default) - CanvasKit renderer, with the app compiled to JavaScript
+- `skwasm` - Skia WebAssembly renderer, with the app compiled to WebAssembly
+- `auto` - let Flutter pick the renderer based on the browser
+
+:::note
+The default is `canvaskit`, not `auto`. With `auto`, Chromium-based browsers
+pick `skwasm`, where every byte buffer passed between JavaScript and Dart pays
+a costly WebAssembly boundary conversion. Flet web apps exchange bytes with
+the Python runtime on every UI update, so `canvaskit` is significantly faster
+for them.
+:::
 
 #### Resolution order
 
@@ -171,20 +224,20 @@ Its value is determined in the following order of precedence:
 
 1. [`--web-renderer`](../../../cli/flet-build.md#--web-renderer)
 2. `[tool.flet.web].renderer`
-3. `"auto"`
+3. `"canvaskit"`
 
 #### Example
 
 <Tabs groupId="flet-build--pyproject-toml">
 <TabItem value="flet-build" label="flet build">
 ```bash
-flet build web --web-renderer canvaskit
+flet build web --web-renderer skwasm
 ```
 </TabItem>
 <TabItem value="pyproject-toml" label="pyproject.toml">
 ```toml
 [tool.flet.web]
-renderer = "canvaskit"
+renderer = "skwasm"
 ```
 </TabItem>
 </Tabs>

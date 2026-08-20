@@ -15,9 +15,10 @@ import '../utils/box.dart';
 import '../utils/buttons.dart';
 import '../utils/colors.dart';
 import '../utils/edge_insets.dart';
+import '../utils/misc.dart';
 import '../utils/numbers.dart';
 import '../utils/theme.dart';
-import '../widgets/loading_page.dart';
+import '../widgets/boot_screen.dart';
 import '../widgets/page_context.dart';
 import '../widgets/page_media.dart';
 import 'app_bar.dart';
@@ -136,7 +137,7 @@ class _ViewControlState extends State<ViewControl> {
       child: column,
     );
 
-    if (control.getBool("on_scroll", false)!) {
+    if (control.hasEventHandler("scroll")) {
       child = ScrollNotificationControl(control: control, child: child);
     }
 
@@ -165,10 +166,15 @@ class _ViewControlState extends State<ViewControl> {
 
     if (overlayControls != null && dialogControls != null) {
       if (control.id == pageViews.last.id) {
-        overlayWidgets
-            .addAll(overlayControls.map((c) => ControlWidget(control: c)));
-        overlayWidgets
-            .addAll(dialogControls.map((c) => ControlWidget(control: c)));
+        // Key each ControlWidget by id so Flutter preserves Element identity
+        // when the list length changes.  Without keys, adding or removing an
+        // entry can reconstruct the AlertDialogControl Element mid-dismiss
+        // and the `!open && lastOpen` branch that calls Navigator.pop()
+        // never matches, leaving the dialog stuck open.
+        overlayWidgets.addAll(overlayControls
+            .map((c) => ControlWidget(control: c, key: ValueKey(c.id))));
+        overlayWidgets.addAll(dialogControls
+            .map((c) => ControlWidget(control: c, key: ValueKey(c.id))));
         overlayWidgets.add(PageMedia(view: widget.control.parent));
       }
     }
@@ -185,12 +191,10 @@ class _ViewControlState extends State<ViewControl> {
             ((pageData?.themeMode == null ||
                     pageData?.themeMode == ThemeMode.system) &&
                 pageData?.brightness == Brightness.light)
-        ? parseTheme(control.parent!.get("theme"), context, Brightness.light)
+        ? control.parent!.getTheme("theme", context, Brightness.light)
         : control.parent!.getString("dark_theme") != null
-            ? parseTheme(
-                control.parent!.get("dark_theme"), context, Brightness.dark)
-            : parseTheme(
-                control.parent!.get("theme"), context, Brightness.dark);
+            ? control.parent!.getTheme("dark_theme", context, Brightness.dark)
+            : control.parent!.getTheme("theme", context, Brightness.dark);
 
     Widget scaffold = Scaffold(
       key: _materialScaffoldKey,
@@ -241,22 +245,18 @@ class _ViewControlState extends State<ViewControl> {
     }
 
     var backend = FletBackend.of(context);
-    var showAppStartupScreen = backend.showAppStartupScreen ?? false;
-    var appStartupScreenMessage = backend.appStartupScreenMessage ?? "";
 
     var appStatus =
         context.select<FletBackend, ({bool isLoading, String error})>(
             (backend) => (isLoading: backend.isLoading, error: backend.error));
-    var formattedErrorMessage = backend.formatAppErrorMessage(appStatus.error);
 
     Widget? loadingPage;
-    if ((appStatus.isLoading || appStatus.error != "") &&
-        showAppStartupScreen) {
-      loadingPage = LoadingPage(
-        isLoading: appStatus.isLoading,
-        message: appStatus.isLoading
-            ? appStartupScreenMessage
-            : formattedErrorMessage,
+    if (appStatus.isLoading || appStatus.error != "") {
+      loadingPage = resolveBootScreen(
+        name: backend.bootScreenName,
+        options: backend.bootScreenOptions,
+        extensions: backend.extensions,
+        status: backend.bootStatus,
       );
     }
 
@@ -282,10 +282,15 @@ class _ViewControlState extends State<ViewControl> {
     result = PopScope(
         canPop: _allowPop || control.getBool("can_pop", true)!,
         onPopInvokedWithResult: (didPop, result) {
-          if (didPop || !control.getBool("on_confirm_pop", false)!) {
+          if (didPop || !control.hasEventHandler("confirm_pop")) {
             return;
           }
           debugPrint("Page.onPopInvokedWithResult()");
+          // Capture THIS view's route now, so the deferred pop below targets
+          // exactly this view — not whatever is topmost when it runs. Without
+          // this, a modal (dialog/bottom sheet) dismissed in the same tick
+          // could be popped instead of the view.
+          final viewRoute = ModalRoute.of(context);
           if (_popCompleter != null && !_popCompleter!.isCompleted) {
             _popCompleter!.completeError("Aborted");
           }
@@ -309,7 +314,9 @@ class _ViewControlState extends State<ViewControl> {
                     if (!mounted) {
                       return;
                     }
-                    Navigator.pop(context, true);
+                    if (viewRoute != null) {
+                      closeModalRoute(viewRoute, true);
+                    }
                     if (mounted) {
                       setState(() {
                         _allowPop = false;

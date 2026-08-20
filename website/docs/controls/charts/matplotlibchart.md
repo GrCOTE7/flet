@@ -1,8 +1,8 @@
 ---
 class_name: "flet_charts.matplotlib_chart.MatplotlibChart"
-examples: "controls/charts/matplotlib_chart"
+examples: "extensions/charts/matplotlib_chart"
 example_images: "test-images-charts/examples/golden/macos/matplotlib_chart"
-example_media: "examples/controls/charts/matplotlib_chart/media"
+example_media: "examples/extensions/charts/matplotlib_chart/media"
 title: "MatplotlibChart"
 ---
 
@@ -11,10 +11,6 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Bar chart
-
-Based on an official [Matplotlib example](https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_colors.html#sphx-glr-gallery-lines-bars-and-markers-bar-colors-py).
 
 <CodeExample path={frontMatter.examples + '/bar_chart/main.py'} language="python" />
 

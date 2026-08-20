@@ -1,6 +1,6 @@
 ---
 class_name: "flet.InteractiveViewer"
-examples: "controls/interactive_viewer"
+examples: "controls/core/interactive_viewer"
 title: "InteractiveViewer"
 ---
 
@@ -10,13 +10,7 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/utility/interactiveviewer)
-
-### Handling events
-
 <CodeExample path={frontMatter.examples + '/handling_events/main.py'} language="python" />
-
-### Programmatic transformations
 
 <CodeExample path={frontMatter.examples + '/transformations/main.py'} language="python" />
 

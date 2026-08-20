@@ -1,7 +1,7 @@
 ---
 class_name: "flet.Placeholder"
-examples: "controls/placeholder"
-example_images: "test-images/examples/core/golden/macos/placeholder"
+examples: "controls/core/placeholder"
+example_images: "test-images/examples/controls/core/golden/macos/placeholder"
 title: "Placeholder"
 ---
 
@@ -11,11 +11,7 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/layout/placeholder)
-
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/placeholder/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/basic.png'} alt="basic" width="30%" />
 

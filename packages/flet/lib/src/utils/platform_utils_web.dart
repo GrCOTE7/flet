@@ -20,6 +20,10 @@ String getFletRouteUrlStrategy() {
   return fletJS?.routeUrlStrategy ?? "";
 }
 
+String getAssetsDir() {
+  return fletJS?.assetsDir ?? "";
+}
+
 bool isPyodideMode() {
   return fletJS?.pyodide == true;
 }
@@ -50,10 +54,11 @@ extension FletJSExtension on FletJS {
   external bool get noCdn;
   external String get webSocketEndpoint;
   external String get routeUrlStrategy;
-  external String get canvasKitBaseUrl;
+  external String? get canvasKitBaseUrl;
   external String get pyodideUrl;
   external String get webRenderer;
-  external bool get appPackageUrl;
+  external String? get appPackageUrl;
+  external String? get assetsDir;
 }
 
 @JS('flet')

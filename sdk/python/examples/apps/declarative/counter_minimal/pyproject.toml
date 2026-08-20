@@ -1,5 +1,5 @@
 [project]
-name = "apps-declarative-counter-minimal"
+name = "declarative-counter-minimal"
 version = "1.0.0"
 description = "Small declarative counter showing the minimum state hook pattern for updating text."
 requires-python = ">=3.10"
@@ -11,10 +11,10 @@ dependencies = ["flet"]
 dev = ["flet-cli", "flet-desktop", "flet-web"]
 
 [tool.flet.gallery]
-categories = ["Apps/Declarative"]
+categories = ["Declarative"]
 
 [tool.flet.metadata]
-title = "Counter minimal"
+title = "Counter minimal (declarative)"
 controls = ["SafeArea", "Row", "Text", "Button"]
 layout_pattern = "inline-actions"
 complexity = "basic"

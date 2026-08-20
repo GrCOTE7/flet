@@ -1,7 +1,7 @@
 ---
 class_name: "flet.MenuItemButton"
-examples: "controls/menu_item_button"
-example_images: "test-images/examples/material/golden/macos/menu_item_button"
+examples: "controls/material/menu_item_button"
+example_images: "test-images/examples/controls/material/golden/macos/menu_item_button"
 title: "MenuItemButton"
 ---
 
@@ -11,11 +11,7 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/buttons/menuitembutton)
-
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/menu_item_button/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/basic.gif'} alt="basic" width="45%" />
 

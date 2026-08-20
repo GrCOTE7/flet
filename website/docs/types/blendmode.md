@@ -1,6 +1,6 @@
 ---
 class_name: "flet.BlendMode"
-examples: "controls/types/blend_mode"
+examples: "controls/core/types/blend_mode"
 title: "BlendMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

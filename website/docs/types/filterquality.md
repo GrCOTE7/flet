@@ -1,6 +1,6 @@
 ---
 class_name: "flet.FilterQuality"
-examples: "controls/types/filter_quality"
+examples: "controls/core/types/filter_quality"
 title: "FilterQuality"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

@@ -48,7 +48,9 @@ static void my_application_activate(GApplication* application) {
   }
 
   gtk_window_set_default_size(window, 1280, 720);
-  gtk_widget_show(GTK_WIDGET(window));
+  // Realize the native window without showing it so Dart can decide when to
+  // display and position the window.
+  gtk_widget_realize(GTK_WIDGET(window));
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);
@@ -56,6 +58,11 @@ static void my_application_activate(GApplication* application) {
   FlView* view = fl_view_new(project);
   gtk_widget_show(GTK_WIDGET(view));
   gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
+
+  // Realize the Flutter view while the top-level window is still hidden; this
+  // lets Flutter render its first frames and lets integration tests attach
+  // before Dart decides whether the app window should be shown.
+  gtk_widget_realize(GTK_WIDGET(view));
 
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));
 

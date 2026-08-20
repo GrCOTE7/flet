@@ -1,6 +1,6 @@
 ---
 class_name: "flet.DatePickerEntryMode"
-examples: "controls/types/date_picker_entry_mode"
+examples: "controls/core/types/date_picker_entry_mode"
 title: "DatePickerEntryMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

@@ -1,7 +1,7 @@
 ---
 class_name: "flet.ResponsiveRow"
-examples: "controls/responsive_row"
-example_images: "test-images/examples/core/golden/macos/responsive_row"
+examples: "controls/core/responsive_row"
+example_images: "test-images/examples/controls/core/golden/macos/responsive_row"
 title: "ResponsiveRow"
 ---
 
@@ -11,18 +11,14 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/layout/responsiverow)
-
-### ResponsiveRow
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/responsive_row/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/basic.gif'} width="80%" />
-
-### Custom breakpoints
 
 <CodeExample path={frontMatter.examples + '/custom_breakpoint/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/custom_breakpoint.gif'} width="70%" />
+
+<CodeExample path={'controls/core/responsive_row/scrollable/main.py'} language="python" />
 
 <ClassMembers name={frontMatter.class_name} />

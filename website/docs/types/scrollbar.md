@@ -1,6 +1,6 @@
 ---
 class_name: "flet.Scrollbar"
-examples: "controls/types/scroll_bar"
+examples: "controls/core/types/scroll_bar"
 title: "Scrollbar"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

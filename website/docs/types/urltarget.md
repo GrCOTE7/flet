@@ -1,6 +1,6 @@
 ---
 class_name: "flet.UrlTarget"
-examples: "controls/types/url_target"
+examples: "controls/core/types/url_target"
 title: "UrlTarget"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

@@ -1,6 +1,6 @@
 ---
 class_name: "flet.canvas.PointMode"
-examples: "controls/types/point_mode"
+examples: "controls/core/types/point_mode"
 title: "PointMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

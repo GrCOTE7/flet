@@ -30,6 +30,17 @@ class DateRangePicker(DialogControl):
 
     Depending on the :attr:`entry_mode`, it will show either a Calendar
     or an Input (text field) for picking a date range.
+
+    Example:
+    ```python
+    picker = ft.DateRangePicker()
+
+    ft.Button(
+        "Pick date range",
+        icon=ft.Icons.DATE_RANGE,
+        on_click=lambda _: page.show_dialog(picker),
+    )
+    ```
     """
 
     start_value: Optional[DateTimeValue] = None
@@ -91,7 +102,7 @@ class DateRangePicker(DialogControl):
     but does not participate in page-level locale resolution.
 
     If set to `None` (the default) or an inexistent/unsupported locale,
-    the :attr:`~flet.LocaleConfiguration.current_locale` of the
+    the :attr:`flet.LocaleConfiguration.current_locale` of the
     :attr:`flet.Page.locale_configuration` is used as fallback.
     """
 
@@ -190,6 +201,6 @@ class DateRangePicker(DialogControl):
 
     :attr:`start_value` and :attr:`end_value` are updated with selected dates.
 
-    The :attr:`~flet.Event.data` property of the event handler
+    The :attr:`flet.Event.data` property of the event handler
     argument contains the selected dates.
     """

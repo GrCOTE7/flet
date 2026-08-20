@@ -1,6 +1,6 @@
 ---
 class_name: "flet.ContextMenuTrigger"
-examples: "controls/types/context_menu_trigger"
+examples: "controls/core/types/context_menu_trigger"
 title: "ContextMenuTrigger"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

@@ -1,6 +1,6 @@
 ---
 class_name: "flet_secure_storage.SecureStorage"
-examples: "services/secure_storage"
+examples: "extensions/secure_storage"
 title: "SecureStorage"
 ---
 
@@ -51,7 +51,7 @@ pip install flet-secure-storage  # (1)!
 </Tabs>
 ## Example
 
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/secure_storage/main.py'} language="python" />
 
 ## Description
 

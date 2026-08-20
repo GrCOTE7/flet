@@ -1,6 +1,6 @@
 ---
 class_name: "flet.SnackBarBehavior"
-examples: "controls/types/snack_bar_behavior"
+examples: "controls/core/types/snack_bar_behavior"
 title: "SnackBarBehavior"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

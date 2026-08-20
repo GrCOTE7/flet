@@ -32,11 +32,11 @@ class ContainerControl extends StatelessWidget with FletStoreMixin {
     var bgColor = control.getColor("bgcolor", context);
     var content = control.buildWidget("content");
     var ink = control.getBool("ink", false)!;
-    var onClick = control.getBool("on_click", false)!;
-    var onTapDown = control.getBool("on_tap_down", false)!;
+    var onClick = control.hasEventHandler("click");
+    var onTapDown = control.hasEventHandler("tap_down");
     var url = control.getUrl("url");
-    var onLongPress = control.getBool("on_long_press", false)!;
-    var onHover = control.getBool("on_hover", false)!;
+    var onLongPress = control.hasEventHandler("long_press");
+    var onHover = control.hasEventHandler("hover");
     var ignoreInteractions = control.getBool("ignore_interactions", false)!;
     var animation = control.getAnimation("animate");
     var blur = control.getBlur("blur");
@@ -53,7 +53,7 @@ class ContainerControl extends StatelessWidget with FletStoreMixin {
     var boxDecoration = boxDecorationFromDetails(
       shape: control.getBoxShape("shape", BoxShape.rectangle)!,
       color: bgColor,
-      gradient: parseGradient(control.get("gradient"), Theme.of(context)),
+      gradient: control.getGradient("gradient", Theme.of(context)),
       borderRadius: borderRadius,
       border: control.getBorder("border", Theme.of(context),
           defaultSideColor: Colors.black),
@@ -62,15 +62,33 @@ class ContainerControl extends StatelessWidget with FletStoreMixin {
       image: decorationImage,
     );
     var boxForegroundDecoration =
-        parseBoxDecoration(control.get("foreground_decoration"), context);
+        control.getBoxDecoration("foreground_decoration", context);
     Widget? container;
 
-    var onAnimationEnd = control.getBool("on_animation_end", false)!
+    var onAnimationEnd = control.hasEventHandler("animation_end")
         ? () => control.triggerEvent("animation_end", "container")
         : null;
     if ((onClick || url != null || onLongPress || onHover || onTapDown) &&
         ink &&
         !control.disabled) {
+      // `padding` and `alignment` are applied inside the `InkWell` only, so that
+      // ink effects cover the entire area of this container.
+      var inkContent = animation == null
+          ? Container(
+              padding: padding,
+              alignment: alignment,
+              clipBehavior: Clip.none,
+              child: content,
+            )
+          : AnimatedContainer(
+              duration: animation.duration,
+              curve: animation.curve,
+              padding: padding,
+              alignment: alignment,
+              clipBehavior: Clip.none,
+              child: content,
+            );
+
       var ink = Material(
           color: Colors.transparent,
           borderRadius: boxDecoration!.borderRadius,
@@ -100,12 +118,7 @@ class ContainerControl extends StatelessWidget with FletStoreMixin {
                 : null,
             borderRadius: borderRadius,
             splashColor: control.getColor("ink_color", context),
-            child: Container(
-              padding: padding,
-              alignment: alignment,
-              clipBehavior: Clip.none,
-              child: content,
-            ),
+            child: inkContent,
           ));
 
       container = animation == null
@@ -124,8 +137,6 @@ class ContainerControl extends StatelessWidget with FletStoreMixin {
               width: width,
               height: height,
               margin: margin,
-              alignment: alignment,
-              padding: padding,
               decoration: boxDecoration,
               foregroundDecoration: boxForegroundDecoration,
               clipBehavior: clipBehavior,

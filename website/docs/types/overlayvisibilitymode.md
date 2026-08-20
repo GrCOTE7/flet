@@ -1,6 +1,6 @@
 ---
 class_name: "flet.OverlayVisibilityMode"
-examples: "controls/types/overlay_visibility_mode"
+examples: "controls/core/types/overlay_visibility_mode"
 title: "OverlayVisibilityMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

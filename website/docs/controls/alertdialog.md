@@ -1,19 +1,15 @@
 ---
 class_name: "flet.AlertDialog"
-examples: "controls/alert_dialog"
-example_images: "test-images/examples/material/golden/macos/alert_dialog"
+examples: "controls/material/alert_dialog"
+example_images: "test-images/examples/controls/material/golden/macos/alert_dialog"
 title: "AlertDialog"
 ---
 
 import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/components/crocodocs';
 
-<ClassSummary name={frontMatter.class_name} image={frontMatter.example_images + '/image_for_docs.png'} imageCaption="Basic AlertDialog" />
+<ClassSummary name={frontMatter.class_name} image={frontMatter.example_images + '/image_for_docs.png'} imageCaption="AlertDialog" />
 
 ## Examples
-
-[Live example](https://flet-controls-gallery.fly.dev/dialogs/alertdialog)
-
-### Modal and non-modal dialogs
 
 <CodeExample path={frontMatter.examples + '/modal_and_non_modal/main.py'} language="python" />
 

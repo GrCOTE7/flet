@@ -1,6 +1,6 @@
 ---
 class_name: "flet.BorderSideStrokeAlign"
-examples: "controls/types/border_side_stroke_align"
+examples: "controls/core/types/border_side_stroke_align"
 title: "BorderSideStrokeAlign"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

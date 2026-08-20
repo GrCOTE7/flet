@@ -1,7 +1,7 @@
 ---
 class_name: "flet.Radio"
-examples: "controls/radio"
-example_images: "test-images/examples/material/golden/macos/radio"
+examples: "controls/material/radio"
+example_images: "test-images/examples/controls/material/golden/macos/radio"
 title: "Radio"
 ---
 
@@ -11,22 +11,16 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/input/radio)
+<CodeExample path={frontMatter.examples + '/radio/main.py'} language="python" />
 
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
-
-<Image src={frontMatter.example_images + '/basic.png'} alt="basic" width="25%" />
-
-### Handling selection changes
+<Image src={frontMatter.example_images + '/basic.gif'} alt="basic" width="40%" />
 
 <CodeExample path={frontMatter.examples + '/handling_selection_changes/main.py'} language="python" />
 
-<Image src={frontMatter.example_images + '/handling_selection_changes.png'} alt="handling-selection-changes" width="25%" />
-
-### Styled radio buttons
+<Image src={frontMatter.example_images + '/handling_selection_changes.gif'} alt="handling-selection-changes" width="40%" />
 
 <CodeExample path={frontMatter.examples + '/styled/main.py'} language="python" />
+
+<Image src={frontMatter.example_images + '/styled.gif'} alt="styled" width="50%" />
 
 <ClassMembers name={frontMatter.class_name} />

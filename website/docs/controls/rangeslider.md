@@ -1,7 +1,7 @@
 ---
 class_name: "flet.RangeSlider"
-examples: "controls/range_slider"
-example_images: "test-images/examples/material/golden/macos/range_slider"
+examples: "controls/material/range_slider"
+example_images: "test-images/examples/controls/material/golden/macos/range_slider"
 title: "RangeSlider"
 ---
 
@@ -11,15 +11,9 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/input/rangeslider)
-
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/range_slider/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/basic.gif'} alt="basic" width="55%" />
-
-### RangeSlider with events
 
 <CodeExample path={frontMatter.examples + '/handling_change_events/main.py'} language="python" />
 

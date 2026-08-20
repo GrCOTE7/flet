@@ -1,6 +1,6 @@
 ---
 class_name: "flet.VisualDensity"
-examples: "controls/types/visual_density"
+examples: "controls/core/types/visual_density"
 title: "VisualDensity"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

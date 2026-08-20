@@ -1,6 +1,6 @@
 ---
 class_name: "flet.PopupMenuPosition"
-examples: "controls/types/popup_menu_position"
+examples: "controls/core/types/popup_menu_position"
 title: "PopupMenuPosition"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

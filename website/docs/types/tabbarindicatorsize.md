@@ -1,6 +1,6 @@
 ---
 class_name: "flet.TabBarIndicatorSize"
-examples: "controls/types/tab_bar_indicator_size"
+examples: "controls/core/types/tab_bar_indicator_size"
 title: "TabBarIndicatorSize"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

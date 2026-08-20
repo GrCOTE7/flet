@@ -1,6 +1,6 @@
 ---
 class_name: "flet.Screenshot"
-examples: "controls/screenshot"
+examples: "controls/core/screenshot"
 title: "Screenshot"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Taking control screenshot
 
 <CodeExample path={frontMatter.examples + '/taking_screenshot/main.py'} language="python" />
 

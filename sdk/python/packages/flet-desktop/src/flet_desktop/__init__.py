@@ -14,6 +14,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+from rich.progress import Progress
+
 import flet_desktop
 import flet_desktop.version
 from flet.utils import (
@@ -55,13 +57,13 @@ def get_package_bin_dir():
 
 def __get_desktop_flavor():
     """
-    Return the desktop client flavor to use: ``"full"`` or ``"light"``.
+    Return the desktop client flavor to use: `"full"` or `"light"`.
 
     Resolution order:
 
-    1. ``FLET_DESKTOP_FLAVOR`` environment variable.
-    2. ``[tool.flet].desktop_flavor`` in the project's ``pyproject.toml``.
-    3. Default: ``"light"`` on Linux, ``"full"`` elsewhere.
+    1. `FLET_DESKTOP_FLAVOR` environment variable.
+    2. `[tool.flet].desktop_flavor` in the project's `pyproject.toml`.
+    3. Default: `"light"` on Linux, `"full"` elsewhere.
     """
 
     env_flavor = os.environ.get("FLET_DESKTOP_FLAVOR", "").strip().lower()
@@ -93,9 +95,9 @@ def __get_desktop_flavor():
 
 def __get_system_glibc_version():
     """
-    Return the system glibc version as a ``(major, minor)`` tuple.
+    Return the system glibc version as a `(major, minor)` tuple.
 
-    Falls back to ``(0, 0)`` when detection fails.
+    Falls back to `(0, 0)` when detection fails.
     """
 
     try:
@@ -118,7 +120,7 @@ def __get_linux_distro_id():
 
     Uses glibc version detection to pick the best matching build target
     (highest glibc requirement that is <= system glibc).  Can be
-    overridden via the ``FLET_LINUX_DISTRO`` environment variable.
+    overridden via the `FLET_LINUX_DISTRO` environment variable.
     """
 
     override = os.environ.get("FLET_LINUX_DISTRO", "").strip()
@@ -139,13 +141,13 @@ def __get_linux_distro_id():
     return best
 
 
-def __get_artifact_filename():
+def get_artifact_filename():
     """
     Return the release artifact filename for the current platform.
 
-    Windows: ``flet-windows.zip``
-    macOS:   ``flet-macos.tar.gz``
-    Linux:   ``flet-linux-{distro}[-light]-{arch}.tar.gz``
+    Windows: `flet-windows.zip`
+    macOS:   `flet-macos.tar.gz`
+    Linux:   `flet-linux-{distro}[-light]-{arch}.tar.gz`
     """
 
     if is_windows():
@@ -165,8 +167,7 @@ def __get_client_storage_dir():
     """
     Return a versioned local directory used to store unpacked desktop client files.
 
-    The path format is:
-    ``~/.flet/client/flet-desktop-{flavor}-{version}``.
+    The path format is: `~/.flet/client/flet-desktop-{flavor}-{version}`.
     """
 
     flavor = __get_desktop_flavor()
@@ -175,16 +176,29 @@ def __get_client_storage_dir():
     )
 
 
+def __download_with_progress(url, dest_path, description):
+    """Download a file to dest_path, showing a rich progress bar."""
+    with urllib.request.urlopen(url) as response, Progress(transient=True) as progress:
+        content_length = response.headers.get("Content-Length")
+        task = progress.add_task(
+            description, total=int(content_length) if content_length else None
+        )
+        with open(dest_path, "wb") as f:
+            while chunk := response.read(8192):
+                f.write(chunk)
+                progress.update(task, advance=len(chunk))
+
+
 def __download_flet_client(file_name):
     """
     Download a Flet client archive from GitHub Releases.
 
     The download URL is constructed from the version embedded in
-    ``flet_desktop.version.version``.  It can be overridden entirely
-    via the ``FLET_CLIENT_URL`` environment variable.
+    `flet_desktop.version.version`.  It can be overridden entirely
+    via the `FLET_CLIENT_URL` environment variable.
 
     Args:
-        file_name: Archive filename to download (e.g. ``flet-macos.tar.gz``).
+        file_name: Archive filename to download (e.g. `flet-macos.tar.gz`).
 
     Returns:
         Local path to the downloaded archive.
@@ -196,7 +210,7 @@ def __download_flet_client(file_name):
     logger.info(f"Downloading Flet v{ver} from {flet_url}")
     print(f"Preparing Flet v{ver} for the first use. This is a one-time operation...")
     temp_arch = Path(tempfile.gettempdir()).joinpath(f"{file_name}.{random_string(10)}")
-    urllib.request.urlretrieve(flet_url, str(temp_arch))
+    __download_with_progress(flet_url, str(temp_arch), f"Downloading Flet v{ver}...")
     return str(temp_arch)
 
 
@@ -217,7 +231,7 @@ def ensure_client_cached():
         logger.info(f"Flet client found in cache: {cache_dir}")
         return cache_dir
 
-    artifact = __get_artifact_filename()
+    artifact = get_artifact_filename()
 
     # Check for a bundled archive (PyInstaller or legacy wheel).
     bundled = os.path.join(get_package_bin_dir(), artifact)
@@ -327,22 +341,22 @@ def __locate_and_unpack_flet_view(page_url, assets_dir, hidden):
 
     Resolution strategy (per platform):
 
-    1. Prefer app binaries produced by ``flet build`` in the current workspace.
-    2. Use ``FLET_VIEW_PATH`` when provided.
-    3. Use cached / downloaded client from ``~/.flet/client/``.
+    1. Prefer app binaries produced by `flet build` in the current workspace.
+    2. Use `FLET_VIEW_PATH` when provided.
+    3. Use cached / downloaded client from `~/.flet/client/`.
 
     Platform-specific launch commands are prepared for Windows, macOS, and Linux.
 
     Args:
         page_url: Page endpoint the desktop client should open.
         assets_dir: Optional assets directory passed to the client process.
-        hidden: Whether to set ``FLET_HIDE_WINDOW_ON_START=true`` in process env.
+        hidden: Whether to set `FLET_HIDE_WINDOW_ON_START=true` in process env.
 
     Returns:
         A tuple containing:
-            - ``list[str]``: command arguments for the desktop client.
-            - ``dict[str, str]``: environment variables for the launched process.
-            - ``str``: path to the temporary PID file.
+            - `list[str]`: command arguments for the desktop client.
+            - `dict[str, str]`: environment variables for the launched process.
+            - `str`: path to the temporary PID file.
 
     Raises:
         FileNotFoundError: If a required desktop executable or archive

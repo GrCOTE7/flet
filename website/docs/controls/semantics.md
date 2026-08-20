@@ -1,6 +1,6 @@
 ---
 class_name: "flet.Semantics"
-examples: "controls/semantics"
+examples: "controls/core/semantics"
 title: "Semantics"
 ---
 
@@ -10,8 +10,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 
 ## Examples
 
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/semantics/main.py'} language="python" />
 
 <ClassMembers name={frontMatter.class_name} />

@@ -1,5 +1,5 @@
 [project]
-name = "apps-declarative-uncontrolled-textfield"
+name = "declarative-uncontrolled-textfield"
 version = "1.0.0"
 description = "Shows how uncontrolled text fields behave in a declarative form with submit and reset actions."
 requires-python = ">=3.10"
@@ -11,7 +11,7 @@ dependencies = ["flet"]
 dev = ["flet-cli", "flet-desktop", "flet-web"]
 
 [tool.flet.gallery]
-categories = ["Apps/Declarative"]
+categories = ["Declarative"]
 
 [tool.flet.metadata]
 title = "Uncontrolled textfield"

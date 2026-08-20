@@ -1,6 +1,6 @@
 ---
 class_name: "flet.ScrollMode"
-examples: "controls/types/scroll_mode"
+examples: "controls/core/types/scroll_mode"
 title: "ScrollMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

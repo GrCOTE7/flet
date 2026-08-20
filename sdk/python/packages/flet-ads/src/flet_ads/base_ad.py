@@ -67,6 +67,7 @@ class BaseAd(ft.BaseControl):
     """
 
     def before_update(self):
+        super().before_update()
         if self.page.web or not self.page.platform.is_mobile():
             raise ft.FletUnsupportedPlatformException(
                 f"{self.__class__.__name__} is only supported on "

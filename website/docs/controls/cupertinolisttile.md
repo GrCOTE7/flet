@@ -1,20 +1,16 @@
 ---
 class_name: "flet.CupertinoListTile"
-examples: "controls/cupertino_list_tile"
-example_images: "test-images/examples/cupertino/golden/macos/cupertino_list_tile"
-example_media: "examples/controls/cupertino_list_tile/media"
+examples: "controls/cupertino/cupertino_list_tile"
+example_images: "test-images/examples/controls/cupertino/golden/macos/cupertino_list_tile"
+example_media: "examples/controls/cupertino/cupertino_list_tile/media"
 title: "CupertinoListTile"
 ---
 
 import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/components/crocodocs';
 
-<ClassSummary name={frontMatter.class_name} image={frontMatter.example_images + '/image_for_docs.png'} imageCaption="Basic CupertinoListTile" />
+<ClassSummary name={frontMatter.class_name} image={frontMatter.example_images + '/image_for_docs.png'} imageCaption="CupertinoListTile" />
 
 ## Examples
-
-[Live example](https://flet-controls-gallery.fly.dev/layout/cupertinolisttile)
-
-### Notched and non-notched list tiles
 
 <CodeExample path={frontMatter.examples + '/notched/main.py'} language="python" />
 

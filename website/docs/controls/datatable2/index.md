@@ -1,6 +1,7 @@
 ---
-examples: "controls/datatable2"
-example_media: "examples/controls/datatable2/media"
+examples: "extensions/datatable2"
+example_media: "examples/extensions/datatable2/media"
+example_images: "test-images/examples/extensions/datatable2/golden/macos/datatable2"
 title: "Overview"
 ---
 
@@ -39,17 +40,20 @@ pip install flet-datatable2  # (1)!
 1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
 </TabItem>
 </Tabs>
+
 ## Examples
 
-### Example 1
+<CodeExample path={frontMatter.examples + '/empty_state/main.py'} language="python" />
 
-<CodeExample path={frontMatter.examples + '/example_1/main.py'} language="python" />
+<Image src={frontMatter.example_images + '/empty_state.png'} width="55%" />
 
-### Example 2
+<CodeExample path={frontMatter.examples + '/sortable_and_selectable/main.py'} language="python" />
 
-<CodeExample path={frontMatter.examples + '/example_2/main.py'} language="python" />
+<Image src={frontMatter.example_media + '/sortable_and_selectable.gif'} width="65%" />
 
-<Image src={frontMatter.example_media + '/example_2.gif'} width="65%" />
+<CodeExample path={frontMatter.examples + '/column_widths/main.py'} language="python" />
+
+<Image src={frontMatter.example_images + '/column_widths.png'} width="65%" />
 
 ## Description
 

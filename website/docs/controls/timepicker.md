@@ -1,7 +1,7 @@
 ---
 class_name: "flet.TimePicker"
-examples: "controls/time_picker"
-example_images: "test-images/examples/material/golden/macos/time_picker"
+examples: "controls/material/time_picker"
+example_images: "test-images/examples/controls/material/golden/macos/time_picker"
 title: "TimePicker"
 ---
 
@@ -11,18 +11,16 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/dialogs/timepicker)
+<CodeExample path={frontMatter.examples + '/time_picker/main.py'} language="python" />
 
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
-
-<Image src={frontMatter.example_images + '/basic.png'} width="55%" />
-
-### Hour Formats
+<Image src={frontMatter.example_images + '/basic.gif'} width="55%" />
 
 <CodeExample path={frontMatter.examples + '/hour_formats/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/hour_formats.gif'} width="55%" />
+
+<CodeExample path={frontMatter.examples + '/custom_locale/main.py'} language="python" />
+
+<Image src={frontMatter.example_images + '/custom_locale.png'} width="55%" />
 
 <ClassMembers name={frontMatter.class_name} />

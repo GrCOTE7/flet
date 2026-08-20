@@ -1,6 +1,6 @@
 ---
 class_name: "flet.CupertinoTimerPickerMode"
-examples: "controls/types/cupertino_timer_picker_mode"
+examples: "controls/core/types/cupertino_timer_picker_mode"
 title: "CupertinoTimerPickerMode"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

@@ -1,6 +1,6 @@
 ---
 class_name: "flet.TransparentPointer"
-examples: "controls/transparent_pointer"
+examples: "controls/core/transparent_pointer"
 title: "TransparentPointer"
 ---
 
@@ -12,6 +12,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 
 ## Basic Example
 
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/transparent_pointer/main.py'} language="python" />
 
 <ClassMembers name={frontMatter.class_name} />

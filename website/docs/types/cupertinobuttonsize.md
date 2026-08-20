@@ -1,6 +1,6 @@
 ---
 class_name: "flet.CupertinoButtonSize"
-examples: "controls/types/cupertino_button_size"
+examples: "controls/core/types/cupertino_button_size"
 title: "CupertinoButtonSize"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

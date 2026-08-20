@@ -1,6 +1,6 @@
 ---
 class_name: "flet.ScrollDirection"
-examples: "controls/types/scroll_direction"
+examples: "controls/core/types/scroll_direction"
 title: "ScrollDirection"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

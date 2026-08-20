@@ -1,7 +1,7 @@
 ---
 class_name: "flet.RotatedBox"
-examples: "controls/rotated_box"
-example_images: "test-images/examples/core/golden/macos/rotated_box"
+examples: "controls/core/rotated_box"
+example_images: "test-images/examples/controls/core/golden/macos/rotated_box"
 title: "RotatedBox"
 ---
 
@@ -11,7 +11,7 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Example
 
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/rotated_box/main.py'} language="python" />
 
 <Image src={frontMatter.example_images + '/rotated_box.png'} width="55%" />
 

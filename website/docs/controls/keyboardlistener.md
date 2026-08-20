@@ -1,6 +1,6 @@
 ---
 class_name: "flet.KeyboardListener"
-examples: "controls/keyboard_listener"
+examples: "controls/core/keyboard_listener"
 title: "KeyboardListener"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Press any keys
 
 <CodeExample path={frontMatter.examples + '/detect_keys/main.py'} language="python" />
 

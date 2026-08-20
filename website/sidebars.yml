@@ -6,6 +6,7 @@ docs:
   - getting-started/installation.md
   - getting-started/create-flet-app.md
   - getting-started/running-app.md
+  - getting-started/integration-testing.md
   - getting-started/testing-on-mobile.md
   Tutorials:
   - Calculator: tutorials/calculator.md
@@ -25,18 +26,23 @@ docs:
     Large Lists: cookbook/large-lists.md
     Accessibility: cookbook/accessibility.md
     Navigation and Routing: cookbook/navigation-and-routing.md
+    Router: cookbook/router.md
     Control Refs: cookbook/control-refs.md
     Custom Controls: cookbook/custom-controls.md
-    Declarative vs Imperative CRUD app: cookbook/declarative-vs-imperative-crud-app.md
+    Auto-update: cookbook/auto-update.md
+    Declarative vs Imperative: cookbook/declarative-vs-imperative.md
     Async apps: cookbook/async-apps.md
     Read and Write Files: cookbook/read-and-write-files.md
     Client Storage: cookbook/client-storage.md
     Session Storage: cookbook/session-storage.md
     PubSub: cookbook/pub-sub.md
     Subprocess: cookbook/subprocess.md
+    Multiprocessing: cookbook/multiprocessing.md
     Logging: cookbook/logging.md
     Authentication: cookbook/authentication.md
     Encrypting sensitive data: cookbook/encrypting-sensitive-data.md
+    Declarative dialogs: cookbook/declarative-dialogs.md
+    Flet MCP server: cookbook/flet-mcp.md
   Publishing Flet app:
     _index: publish/index.md
     Android: publish/android.md
@@ -61,6 +67,25 @@ docs:
   Extending Flet:
   - extend/user-extensions.md
   - extend/built-in-extensions.md
+  Stay up to date:
+    _index: updates/index.md
+    Release notes: updates/release-notes.md
+    Breaking changes and deprecations:
+      _index: updates/breaking-changes/index.md
+      v0.86.0:
+        App files ship unpacked in a read-only bundle; storage dirs reworked: updates/breaking-changes/v0-86-0/app-files-unpacked-read-only-bundle.md
+        "Android: site-packages ship zipped; some packages need extract_packages": updates/breaking-changes/v0-86-0/android-extract-packages.md
+        "Android: x86 removed from target architectures": updates/breaking-changes/v0-86-0/android-x86-arch-removed.md
+        Default bundled Python version is now 3.14: updates/breaking-changes/v0-86-0/default-bundled-python-3-14.md
+        App and packages are compiled to .pyc by default: updates/breaking-changes/v0-86-0/compile-on-by-default.md
+        flet.version.pyodide_version and PYODIDE_VERSION removed: updates/breaking-changes/v0-86-0/removed-pyodide-version-export.md
+        Flet protocol framing upgraded for DataChannel support: updates/breaking-changes/v0-86-0/data-channel-protocol-upgrade.md
+        flet build --clear-cache flag deprecated: updates/breaking-changes/v0-86-0/deprecated-clear-cache-flag.md
+      v0.85.0:
+        Deprecated spacing and border helper functions removed: updates/breaking-changes/v0-85-0/removed-spacing-border-helpers.md
+        DragTargetEvent coordinate fields deprecated: updates/breaking-changes/v0-85-0/deprecated-drag-target-event-coordinates.md
+        Video control APIs deprecated: updates/breaking-changes/v0-85-0/deprecated-video-apis.md
+    Compatibility policy: updates/compatibility-policy.md
   Reference:
     _index: reference/index.md
     Controls:
@@ -72,6 +97,7 @@ docs:
         _index: controls/ads/index.md
         BannerAd: controls/ads/bannerad.md
         BaseAd: controls/ads/basead.md
+        ConsentManager: controls/ads/consentmanager.md
         InterstitialAd: controls/ads/interstitialad.md
       AlertDialog: controls/alertdialog.md
       AnimatedSwitcher: controls/animatedswitcher.md
@@ -198,6 +224,7 @@ docs:
         - controls/map/maplayer.md
         - controls/map/tilelayer.md
         - controls/map/markerlayer.md
+        - controls/map/overlayimagelayer.md
         - controls/map/circlelayer.md
         - controls/map/polygonlayer.md
         - controls/map/polylinelayer.md
@@ -206,6 +233,10 @@ docs:
         - controls/map/circlemarker.md
         - controls/map/polygonmarker.md
         - controls/map/polylinemarker.md
+        Overlays:
+        - controls/map/baseoverlayimage.md
+        - controls/map/overlayimage.md
+        - controls/map/rotatedoverlayimage.md
         Attributions:
         - controls/map/sourceattribution.md
         - controls/map/simpleattribution.md
@@ -238,22 +269,57 @@ docs:
       Radio: controls/radio.md
       RadioGroup: controls/radiogroup.md
       RangeSlider: controls/rangeslider.md
+      RawImage: controls/rawimage.md
       ReorderableDragHandle: controls/reorderabledraghandle.md
       ReorderableListView: controls/reorderablelistview.md
       ResponsiveRow: controls/responsiverow.md
       RotatedBox: controls/rotatedbox.md
+      Router: controls/router.md
       Row: controls/row.md
       Rive: controls/rive/index.md
       SafeArea: controls/safearea.md
       SearchBar: controls/searchbar.md
       SegmentedButton:
-      - controls/segmentedbutton.md
-      - controls/segment.md
+        _index: controls/segmentedbutton/index.md
+        Segment: controls/segment.md
       SelectionArea: controls/selectionarea.md
       Semantics: controls/semantics.md
       Screenshot: controls/screenshot.md
       ShaderMask: controls/shadermask.md
       Shimmer: controls/shimmer.md
+      SpinKit:
+        _index: controls/spinkit/index.md
+        ChasingDots: controls/spinkit/chasingdots.md
+        Circle: controls/spinkit/circle.md
+        CubeGrid: controls/spinkit/cubegrid.md
+        DancingSquare: controls/spinkit/dancingsquare.md
+        DoubleBounce: controls/spinkit/doublebounce.md
+        DualRing: controls/spinkit/dualring.md
+        FadingCircle: controls/spinkit/fadingcircle.md
+        FadingCube: controls/spinkit/fadingcube.md
+        FadingFour: controls/spinkit/fadingfour.md
+        FadingGrid: controls/spinkit/fadinggrid.md
+        FoldingCube: controls/spinkit/foldingcube.md
+        HourGlass: controls/spinkit/hourglass.md
+        PianoWave: controls/spinkit/pianowave.md
+        PouringHourGlass: controls/spinkit/pouringhourglass.md
+        PouringHourGlassRefined: controls/spinkit/pouringhourglassrefined.md
+        Pulse: controls/spinkit/pulse.md
+        PulsingGrid: controls/spinkit/pulsinggrid.md
+        PumpingHeart: controls/spinkit/pumpingheart.md
+        Ring: controls/spinkit/ring.md
+        Ripple: controls/spinkit/ripple.md
+        RotatingCircle: controls/spinkit/rotatingcircle.md
+        RotatingPlain: controls/spinkit/rotatingplain.md
+        SpinningCircle: controls/spinkit/spinningcircle.md
+        SpinningLines: controls/spinkit/spinninglines.md
+        SquareCircle: controls/spinkit/squarecircle.md
+        ThreeBounce: controls/spinkit/threebounce.md
+        ThreeInOut: controls/spinkit/threeinout.md
+        WanderingCubes: controls/spinkit/wanderingcubes.md
+        Wave: controls/spinkit/wave.md
+        WaveSpinner: controls/spinkit/wavespinner.md
+        WaveType: controls/spinkit/wavetype.md
       Slider: controls/slider.md
       SnackBar: controls/snackbar.md
       Stack: controls/stack.md
@@ -319,6 +385,11 @@ docs:
           GitHubOAuthProvider: types/auth/githuboauthprovider.md
           GoogleOAuthProvider: types/auth/googleoauthprovider.md
       - types/auth/user.md
+      Testing:
+      - types/testing/flettestapp.md
+      - types/testing/tester.md
+      - types/testing/finder.md
+      - types/testing/disposalmode.md
       Base Controls:
       - controls/adaptivecontrol.md
       - controls/basecontrol.md
@@ -333,6 +404,8 @@ docs:
       Classes:
       - Ads:
         - controls/ads/types/adrequest.md
+        - controls/ads/types/consentdebugsettings.md
+        - controls/ads/types/consentrequestparameters.md
       - types/alignment.md
       - types/androidbuildversion.md
       - types/animation.md
@@ -349,7 +422,10 @@ docs:
         - services/audiorecorder/types/audioencoder.md
         - services/audiorecorder/types/audiorecorderconfiguration.md
         - services/audiorecorder/types/audiorecorderstatechangeevent.md
+        - services/audiorecorder/types/audiorecorderstreamevent.md
         - services/audiorecorder/types/audiorecorderstate.md
+        - services/audiorecorder/types/audiorecorderuploadevent.md
+        - services/audiorecorder/types/audiorecorderuploadsettings.md
         - services/audiorecorder/types/inputdevice.md
         - services/audiorecorder/types/iosaudiocategoryoption.md
         - services/audiorecorder/types/iosrecorderconfiguration.md
@@ -417,6 +493,7 @@ docs:
       - types/colorfilter.md
       - types/context.md
       - types/controlstate.md
+      - types/datachannel.md
       - types/decorationimage.md
       - DeviceInfo:
           _index: types/deviceinfo/index.md
@@ -429,9 +506,7 @@ docs:
       - types/duration.md
       - types/filepickerfile.md
       - types/filepickeruploadfile.md
-      - types/finder.md
       - types/flip.md
-      - types/flettestapp.md
       - Geolocator:
         - services/geolocator/types/foregroundnotificationconfiguration.md
         - services/geolocator/types/geolocatorandroidconfiguration.md
@@ -457,6 +532,7 @@ docs:
           ValueKey: types/valuekey.md
       - types/locale.md
       - types/localeconfiguration.md
+      - types/locationinfo.md
       - Map:
         - controls/map/types/attributionalignment.md
         - controls/map/types/camera.md
@@ -532,7 +608,6 @@ docs:
       - types/size.md
       - types/strutstyle.md
       - types/templateroute.md
-      - types/tester.md
       - types/textdecoration.md
       - types/textselection.md
       - types/textspan.md
@@ -595,11 +670,24 @@ docs:
         - controls/codeeditor/types/customcodetheme.md
         - controls/codeeditor/types/gutterstyle.md
       - Video:
+        - controls/video/types/adaptivevideocontrols.md
+        - controls/video/types/materialdesktopvideocontrols.md
+        - controls/video/types/materialvideocontrols.md
         - controls/video/types/playlistmode.md
+        - controls/video/types/videobaritem.md
         - controls/video/types/videoconfiguration.md
+        - controls/video/types/videocontrols.md
+        - controls/video/types/videocontrolsmode.md
+        - controls/video/types/videofullscreenbutton.md
         - controls/video/types/videomedia.md
+        - controls/video/types/videoplayorpausebutton.md
+        - controls/video/types/videopositionindicator.md
+        - controls/video/types/videoskipnextbutton.md
+        - controls/video/types/videoskippreviousbutton.md
+        - controls/video/types/videospacer.md
         - controls/video/types/videosubtitleconfiguration.md
         - controls/video/types/videosubtitletrack.md
+        - controls/video/types/videovolumebutton.md
       - WebView:
         - controls/webview/types/requestmethod.md
         - controls/webview/types/loglevelseverity.md
@@ -613,7 +701,10 @@ docs:
       - types/value.md
       Enums:
       - Ads:
+        - controls/ads/types/consentstatus.md
+        - controls/ads/types/debuggeography.md
         - controls/ads/types/precisiontype.md
+        - controls/ads/types/privacyoptionsrequirementstatus.md
       - types/animatedswitchertransition.md
       - types/animationcurve.md
       - types/applifecyclestate.md
@@ -671,6 +762,7 @@ docs:
       - types/pointerdevicetype.md
       - types/pointmode.md
       - types/popupmenuposition.md
+      - types/route.md
       - types/routeurlstrategy.md
       - types/scrollbar.md
       - types/scrollbarorientation.md
@@ -723,6 +815,7 @@ docs:
       - types/canvasresizeevent.md
       - types/contextmenudismissevent.md
       - types/contextmenuselectevent.md
+      - types/datachannelopenevent.md
       - types/datacolumnsortevent.md
       - types/datepickerentrymodechangeevent.md
       - types/dismissibledismissevent.md
@@ -790,27 +883,44 @@ docs:
       - fastapi/fletupload.md
       Methods:
       - types/createcontext.md
+      - types/is_route_active.md
       - types/memo.md
       - types/onmounted.md
       - types/onunmounted.md
       - types/onupdated.md
+      - types/run.md
+      - types/run_async.md
       - types/usecallback.md
       - types/usecontext.md
       - types/useeffect.md
       - types/usememo.md
       - types/useref.md
+      - types/use_route_loader_data.md
+      - types/use_route_location.md
+      - types/use_route_outlet.md
+      - types/use_route_params.md
+      - types/use_view_path.md
       - types/usestate.md
     CLI:
       _index: cli/index.md
       flet build: cli/flet-build.md
+      flet clean: cli/flet-clean.md
       flet create: cli/flet-create.md
       flet debug: cli/flet-debug.md
       flet devices: cli/flet-devices.md
       flet doctor: cli/flet-doctor.md
       flet emulators: cli/flet-emulators.md
+      flet mcp: cli/flet-mcp.md
       flet pack: cli/flet-pack.md
       flet publish: cli/flet-publish.md
       flet run: cli/flet-run.md
       flet serve: cli/flet-serve.md
+      flet test: cli/flet-test.md
     Python packages built in Flet: reference/binary-packages-android-ios.md
     Environment Variables: reference/environment-variables.md
+
+studio:
+  Introduction: studio/index
+  What's new: studio/whats-new
+  Terms of Service: studio/terms-of-service
+  Privacy Policy: studio/privacy-policy

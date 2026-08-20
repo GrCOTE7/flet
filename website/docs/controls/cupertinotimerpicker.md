@@ -1,8 +1,8 @@
 ---
 class_name: "flet.CupertinoTimerPicker"
-examples: "controls/cupertino_timer_picker"
-example_media: "examples/controls/cupertino_timer_picker/media"
-example_images: "test-images/examples/cupertino/golden/macos/cupertino_timer_picker"
+examples: "controls/cupertino/cupertino_timer_picker"
+example_media: "examples/controls/cupertino/cupertino_timer_picker/media"
+example_images: "test-images/examples/controls/cupertino/golden/macos/cupertino_timer_picker"
 title: "CupertinoTimerPicker"
 ---
 
@@ -12,11 +12,7 @@ import {ClassMembers, ClassSummary, CodeExample, Image} from '@site/src/componen
 
 ## Examples
 
-[Live example](https://flet-controls-gallery.fly.dev/dialogs/cupertinotimerpicker)
-
-### Basic Example
-
-<CodeExample path={frontMatter.examples + '/basic/main.py'} language="python" />
+<CodeExample path={frontMatter.examples + '/cupertino_timer_picker/main.py'} language="python" />
 
 <Image src={frontMatter.example_media + '/basic.gif'} alt="basic" width="35%" />
 

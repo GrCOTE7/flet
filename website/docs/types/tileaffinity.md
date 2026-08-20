@@ -1,6 +1,6 @@
 ---
 class_name: "flet.TileAffinity"
-examples: "controls/types/tile_affinity"
+examples: "controls/core/types/tile_affinity"
 title: "TileAffinity"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

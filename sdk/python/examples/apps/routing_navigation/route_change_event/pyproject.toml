@@ -1,5 +1,5 @@
 [project]
-name = "apps-routing-navigation-route-change-event"
+name = "routing-navigation-route-change-event"
 version = "1.0.0"
 description = "Logs each route change by appending the new route string to the page."
 requires-python = ">=3.10"
@@ -11,7 +11,7 @@ dependencies = ["flet"]
 dev = ["flet-cli", "flet-desktop", "flet-web"]
 
 [tool.flet.gallery]
-categories = ["Apps/Navigation"]
+categories = ["Navigation/Routing"]
 
 [tool.flet.metadata]
 title = "Route change event"

@@ -1,6 +1,6 @@
 ---
 class_name: "flet.BoxShape"
-examples: "controls/types/box_shape"
+examples: "controls/core/types/box_shape"
 title: "BoxShape"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 

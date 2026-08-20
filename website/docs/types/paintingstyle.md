@@ -1,6 +1,6 @@
 ---
 class_name: "flet.PaintingStyle"
-examples: "controls/types/painting_style"
+examples: "controls/core/types/painting_style"
 title: "PaintingStyle"
 ---
 
@@ -9,8 +9,6 @@ import {ClassMembers, ClassSummary, CodeExample} from '@site/src/components/croc
 <ClassSummary name={frontMatter.class_name} />
 
 ## Examples
-
-### Showcase
 
 <CodeExample path={frontMatter.examples + '/showcase/main.py'} language="python" />
 
